@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,19 @@ public class CardDeck : MonoBehaviour
     private Stack<CardBase> discardPile = new Stack<CardBase>();
     private List<CardBase> hand = new List<CardBase>();
     private CardBase activeCard = null;
+    public RacerBase owner = null;
+    public RacerBase Owner
+    {
+        get { return owner; }
+        set {
+            if (owner != null) 
+            {
+                throw new Exception("Owner is already set and cannot be changed.");
+            }
+            owner = value;
+        }
+    }
+    
     public int Count => drawPile.Count + discardPile.Count + hand.Count + (activeCard== null ? 0 : 1);
 
     /// <summary>
