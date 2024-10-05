@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckTester : MonoBehaviour
@@ -18,17 +17,19 @@ public class DeckTester : MonoBehaviour
         BlankCard deckCard4 = gameObject.AddComponent<BlankCard>();
         deckCard4.Initialize(deck, "Card 4");
         
-        Stack<CardBase> cards = new Stack<CardBase>();
-        cards.Push(deckCard1);
-        cards.Push(deckCard2);
-        cards.Push(deckCard3);
-        cards.Push(deckCard4);
-        deck.Initialize(cards, 0);
+        deck.AddCardToDeck(deckCard1);
+        deck.AddCardToDeck(deckCard2);
+        deck.AddCardToDeck(deckCard3);
+        deck.AddCardToDeck(deckCard4, true);
         
         Debug.Log(deck.Count);
 
         deck.DebugContents();
-        deck.ReshuffleDiscardToDraw();
+        Debug.Log("Reshuffle, ignore hand.");
+        deck.ReshuffleDiscardToDraw(false);
+        deck.DebugContents();
+        Debug.Log("Reshuffle, include hand.");
+        deck.ReshuffleDiscardToDraw(true);
         deck.DebugContents();
     }
 }
