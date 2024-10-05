@@ -21,10 +21,13 @@ public class RacerBase : MonoBehaviour
     [SerializeField] private float acceleration = 1f;
 
     [Header("Boost")] 
+    [SerializeField] private ParticleSystem boostEffect;
     [SerializeField] private bool isBoosting;
+    [SerializeField] private bool isFinishingBoost;
     [SerializeField] private float boostDuration = 1f;
     [SerializeField] private float boostingMaxSpeed = 1f;
     [SerializeField] private float boostingAcceleration = 1f;
+    [SerializeField] private float boostDeceleration = 1f;
     private float boostTimeRemaining = 1f;
 
     [Header("Whiskers")] 
@@ -104,14 +107,24 @@ public class RacerBase : MonoBehaviour
         CheckSideWhisker(sideWhiskerDirectionLeft, -1);
         CheckSideWhisker(sideWhiskerDirectionRight, 1);
         
-        float accelerationToAdd = isBoosting ? boostingAcceleration : acceleration;
-        if (currentSpeed <= (isBoosting ? boostingMaxSpeed : maxSpeed))
+
+        // Boost - Finished, so decelerate to max speed.
+        if (isFinishingBoost)
         {
-            currentSpeed += accelerationToAdd * Time.fixedDeltaTime;
+            currentSpeed -= boostDeceleration * Time.fixedDeltaTime;
+            if (currentSpeed <= maxSpeed)
+            {
+                BoostFinished();
+            }
         }
-        else // Over the current speed limit. Decelerate
+        else // Acceleration
         {
-            currentSpeed -= accelerationToAdd * Time.fixedDeltaTime;
+            float accelerationToAdd = isBoosting ? boostingAcceleration : acceleration;
+
+            if (currentSpeed <= (isBoosting ? boostingMaxSpeed : maxSpeed))
+            {
+                currentSpeed += accelerationToAdd * Time.fixedDeltaTime;
+            }
         }
 
         racerRigidbody2d.MovePosition(transform.position + currentHeading * currentSpeed);
@@ -157,12 +170,28 @@ public class RacerBase : MonoBehaviour
         }
 
         isBoosting = true;
+        boostEffect.Play();
     }
 
-    private void EndBoost()
+    private void EndBoost(bool forceFinish = false)
     {
         isBoosting = false;
         boostTimeRemaining = 0f;
+
+        if (forceFinish)
+        {
+            BoostFinished();
+        }
+        else
+        {
+            isFinishingBoost = true;
+        }
+    }
+
+    private void BoostFinished()
+    {
+        isFinishingBoost = false;
+        boostEffect.Stop();
     }
     
     private void OnTriggerExit2D(Collider2D collision)
@@ -177,6 +206,12 @@ public class RacerBase : MonoBehaviour
     private IEnumerator Respawn()
     {
         isRespawning = true;
+
+        if (isBoosting)
+        {
+            EndBoost(true);
+        }
+        
         yield return new WaitForSeconds(respawnStartDelay);
         transform.position = positionOnTrackSpline;
         

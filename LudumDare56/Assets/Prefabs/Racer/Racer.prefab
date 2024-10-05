@@ -46,10 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ccfa4f0b060b494a8b70d4a9e9c04df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOfLap: 0
   distanceAlongTrack: 0
+  currentSpeed: 0
   maxSpeed: 0.5
   acceleration: 0.1
+  isBoosting: 0
+  boostDuration: 1
+  boostingMaxSpeed: 0.8
+  boostingAcceleration: 0.5
   forwardsWhiskerLength: 4
   sideWhiskerLength: 8
   sideWhiskerAngle: 30
@@ -226,7 +230,7 @@ MonoBehaviour:
   m_ShadowGroup: 0
   m_Priority: 0
   m_ComponentVersion: 5
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
@@ -254,10 +258,10 @@ MonoBehaviour:
     m_FlipY: 0
     m_InitialTrim: 0.1
   m_CastingOption: 1
-  m_PreviousTrimEdge: 0
-  m_PreviousEdgeProcessing: -1
-  m_PreviousShadowCastingSource: -1
-  m_PreviousShadowShape2DSource: {fileID: 0}
+  m_PreviousTrimEdge: 0.1
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 347207397671470165}
   references:
     version: 2
     RefIds:
