@@ -6,8 +6,8 @@ namespace _Scripts.Cards
     {
         public override void UseCard()
         {
-            base.UseCard();
             Debug.Log("Boost card used");
+            base.UseCard();
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class CardBase : MonoBehaviour
 {
-    private CardDeck associatedDeck;
+    protected CardDeck associatedDeck;
     
     public enum UseType { Instant, Conditional };
     
