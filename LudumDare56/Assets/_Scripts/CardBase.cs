@@ -4,15 +4,15 @@ public abstract class CardBase : MonoBehaviour
 {
     private CardDeck associatedDeck;
     
-    public enum UseType { INSTANT, CONDITIONAL };
+    public enum UseType { Instant, Conditional };
     
     public UseType useType;
     
-    public string name;
+    public string cardName;
 
-    public void Initialize(CardDeck associatedDeck, string name = "Untitled Card", UseType useType = UseType.INSTANT)
+    public void Initialize(CardDeck associatedDeck, string cardName = "Untitled Card", UseType useType = UseType.Instant)
     {
-        this.name = name;
+        this.cardName = cardName;
         this.useType = useType;
     }
     
@@ -23,6 +23,6 @@ public abstract class CardBase : MonoBehaviour
 
     public override string ToString()
     {
-        return name;
+        return cardName;
     }
 }
