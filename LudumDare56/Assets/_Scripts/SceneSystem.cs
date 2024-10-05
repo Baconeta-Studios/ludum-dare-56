@@ -18,3 +18,4 @@ public class SceneSystem : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 }
+ 
