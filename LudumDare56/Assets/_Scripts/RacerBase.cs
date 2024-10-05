@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,25 +10,31 @@ public class RacerBase : MonoBehaviour
     private Track track;
     private Rigidbody2D racerRigidbody2d;
     [Header("Lap Progress")]
-    [SerializeField] private float timeOfLap;
     [SerializeField] private float distanceAlongTrack;
     private Vector3 positionOnTrackSpline;
     private Vector3 tangentOnTrackSpline;
     
     [Header("Movement")]
     private Vector3 currentHeading;
-    private float currentSpeed;
+    [SerializeField] [ReadOnly] private float currentSpeed;
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float acceleration = 1f;
 
+    [Header("Boost")] 
+    [SerializeField] private bool isBoosting;
+    [SerializeField] private float boostDuration = 1f;
+    [SerializeField] private float boostingMaxSpeed = 1f;
+    [SerializeField] private float boostingAcceleration = 1f;
+    private float boostTimeRemaining = 1f;
+
     [Header("Whiskers")] 
-    private Vector3 whiskerFront;
-    private Vector3 whiskerRight;
-    private Vector3 whiskerLeft;
     [SerializeField] private float forwardsWhiskerLength;
     [SerializeField] private float sideWhiskerLength;
     [SerializeField] private float sideWhiskerAngle;
     [SerializeField] private float sideWhiskerTurnAnglePerSecond;
+    private Vector3 whiskerFront;
+    private Vector3 whiskerRight;
+    private Vector3 whiskerLeft;
 
     [Header("Alignment")] 
     [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
@@ -36,8 +43,6 @@ public class RacerBase : MonoBehaviour
     public bool isRespawning;
     public float respawnStartDelay;
     public float respawnDuration;
-    
-    
     
     [Header("Debug")]
     public float positionGizmoRadius = 1f;
@@ -57,13 +62,16 @@ public class RacerBase : MonoBehaviour
 
     private void Update()
     {
-        timeOfLap += Time.deltaTime;
-        if (timeOfLap > 1f && distanceAlongTrack <= 0.005f)
-        {
-            Debug.Log($"Lap Finished in {timeOfLap}");
-            timeOfLap = 0f;
-        }
         UpdateTrackPosition();
+
+        if (isBoosting)
+        {
+            boostTimeRemaining -= Time.deltaTime;
+            if (boostTimeRemaining <= 0)
+            {
+                EndBoost();
+            }
+        }
     }
 
     private void UpdateTrackPosition()
@@ -95,10 +103,16 @@ public class RacerBase : MonoBehaviour
         AlignWithTrack();
         CheckSideWhisker(sideWhiskerDirectionLeft, -1);
         CheckSideWhisker(sideWhiskerDirectionRight, 1);
-
         
-        currentSpeed += acceleration * Time.fixedDeltaTime;
-        currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
+        float accelerationToAdd = isBoosting ? boostingAcceleration : acceleration;
+        if (currentSpeed <= (isBoosting ? boostingMaxSpeed : maxSpeed))
+        {
+            currentSpeed += accelerationToAdd * Time.fixedDeltaTime;
+        }
+        else // Over the current speed limit. Decelerate
+        {
+            currentSpeed -= accelerationToAdd * Time.fixedDeltaTime;
+        }
 
         racerRigidbody2d.MovePosition(transform.position + currentHeading * currentSpeed);
         transform.up = currentHeading;
@@ -130,6 +144,27 @@ public class RacerBase : MonoBehaviour
         }
     }
 
+    [ContextMenu("Boost")]
+    public void StartBoost()
+    {
+        if (isBoosting)
+        {
+            boostTimeRemaining += boostDuration;
+        }
+        else
+        {
+            boostTimeRemaining = boostDuration;
+        }
+
+        isBoosting = true;
+    }
+
+    private void EndBoost()
+    {
+        isBoosting = false;
+        boostTimeRemaining = 0f;
+    }
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!isRespawning && collision.transform.CompareTag("Track"))
