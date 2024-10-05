@@ -13,11 +13,13 @@ public class Track : MonoBehaviour
     {
         trackSpline = GetComponent<SplineContainer>();
     }
-    public float GetDistanceToSpline(Vector3 position, out Vector3 nearestPointOnSpline)
+    public float GetDistanceToSpline(Vector3 position, out Vector3 nearestPointOnSpline, out Vector3 tangentOnSpline)
     {
         SplineUtility.GetNearestPoint(trackSpline.Spline, position, out float3 nearestPoint, out float distanceAlongTrack);
-        
+        tangentOnSpline = trackSpline.Spline.EvaluateTangent(distanceAlongTrack);
+        tangentOnSpline.z = 0;
         nearestPointOnSpline = nearestPoint;
+        
         return distanceAlongTrack;
     }
 }
