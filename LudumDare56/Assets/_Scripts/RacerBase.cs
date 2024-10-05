@@ -92,7 +92,7 @@ public class RacerBase : MonoBehaviour
         Vector3 sideWhiskerDirectionLeft = Vector3.RotateTowards(transform.up, transform.right * -1, Mathf.Deg2Rad * sideWhiskerAngle, 0);
         whiskerLeft = sideWhiskerDirectionLeft * sideWhiskerLength;
 
-        //AlignWithTrack();
+        AlignWithTrack();
         CheckSideWhisker(sideWhiskerDirectionLeft, -1);
         CheckSideWhisker(sideWhiskerDirectionRight, 1);
 
