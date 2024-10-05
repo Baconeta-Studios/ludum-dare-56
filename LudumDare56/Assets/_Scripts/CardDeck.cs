@@ -13,29 +13,36 @@ public class CardDeck : MonoBehaviour
     private CardBase activeCard = null;
     public int Count => drawPile.Count + discardPile.Count + hand.Count + (activeCard== null ? 0 : 1);
 
-    public void Initialize(Stack<CardBase> initialDrawPile, int startingHandSize = 0)
-    {
-        drawPile = initialDrawPile;
-        for (int i = 0; i < startingHandSize; i++)
-        {
-            DrawCard();
-        }
-    }
-
-    public void AddCardToDeck(CardBase card)
+    /// <summary>
+    /// Add a new card to the top of the draw pile.
+    /// </summary>
+    /// <param name="card">The new card to add.</param>
+    /// <param name="shuffleAfter">If the draw pile should be shuffled after adding the card.</param>
+    public void AddCardToDeck(CardBase card, bool shuffleAfter = false)
     {
         drawPile.Push(card);
+        if (shuffleAfter)
+        {
+            ShuffleDrawPile();
+        }
     }
     
+    /// <summary>
+    /// Add the top card from the draw pile into hand.
+    /// </summary>
     public void DrawCard()
     {
         hand.Add(drawPile.Pop());
     }
 
+    /// <summary>
+    /// Discard a card from hand or from the active zone. CANNOT discard a card from the draw pile!
+    /// </summary>
+    /// <param name="card"></param>
     public void DiscardCard(CardBase card)
     {
         // Discard from active zone.
-        if (activeCard.Equals(card))
+        if (activeCard != null && activeCard.Equals(card))
         {
             discardPile.Push(card);
             activeCard = null;
@@ -49,26 +56,55 @@ public class CardDeck : MonoBehaviour
             throw new Exception("Invalid discard attempt.");
         }
     }
-
-    public void DiscardPile(IEnumerable<CardBase> pile)
+    
+    /// <summary>
+    /// Move all cards from hand to the discard pile.
+    /// </summary>
+    public void DiscardHand()
     {
-        foreach (var item in pile)
-            discardPile.Push(item);
+        foreach (var item in hand)
+            DiscardCard(item);
+    }
+
+    /// <summary>
+    /// Move all cards from the draw pile to the discard pile.
+    /// </summary>
+    public void DiscardDrawPile()
+    {
+        while (drawPile.Count > 0)
+        {
+            discardPile.Push(drawPile.Pop());
+        }
     }
     
+    /// <summary>
+    /// Create a new shuffled draw pile from the discard pile.
+    /// Discards all cards currently in the draw pile before reshuffling discarded cards.
+    /// </summary>
+    /// <param name="includeHand">Discard the cards in hand and in the active zone before reshuffling.</param>
     public void ReshuffleDiscardToDraw(bool includeHand = false)
     {
         if (includeHand)
         {
-            DiscardPile(hand);
+            DiscardHand();
             DiscardCard(activeCard);
         }
-        DiscardPile(drawPile);
+        DiscardDrawPile();
         drawPile = ShuffleStack(discardPile);
         discardPile.Clear();
     }
+
+    public void ShuffleDrawPile()
+    {
+        drawPile = ShuffleStack(drawPile);
+    }
     
-    public static Stack<CardBase> ShuffleStack(Stack<CardBase> pile)
+    /// <summary>
+    /// Shuffle a stack of cards.
+    /// </summary>
+    /// <param name="pile">Stack of cards to shuffle.</param>
+    /// <returns>Shuffled cards.</returns>
+    private static Stack<CardBase> ShuffleStack(Stack<CardBase> pile)
     {
         List<CardBase> cards = pile.ToList();
         Stack<CardBase> newPile = new Stack<CardBase>();
@@ -85,6 +121,9 @@ public class CardDeck : MonoBehaviour
         return newPile;
     }
 
+    /// <summary>
+    /// Debug.Log all cards, from all piles, in order.
+    /// </summary>
     public void DebugContents()
     {
         StringBuilder sb = new StringBuilder();
