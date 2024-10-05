@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Track
+    uniqueID: 1627241187
+    locked: 0
+  - name: Racer
+    uniqueID: 3016745031
+    locked: 0
+  - name: Effects
+    uniqueID: 2772182991
+    locked: 0
+  - name: Ui
+    uniqueID: 486753509
+    locked: 0
