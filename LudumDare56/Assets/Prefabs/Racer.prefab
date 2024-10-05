@@ -54,6 +54,7 @@ MonoBehaviour:
   sideWhiskerLength: 8
   sideWhiskerAngle: 30
   sideWhiskerTurnAnglePerSecond: 90
+  alignmentTurnAnglePerSecond: 15
   isRespawning: 0
   respawnStartDelay: 0.3
   respawnDuration: 1.5
