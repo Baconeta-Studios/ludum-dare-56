@@ -85,21 +85,23 @@ public class CardDeck : MonoBehaviour
         return newPile;
     }
 
-    public string DebugContents()
+    public void DebugContents()
     {
         StringBuilder sb = new StringBuilder();
+        sb.Append("[DRAW PILE] ");
         foreach (CardBase card in drawPile)
         {
-            sb.Append("[D]");
             sb.Append(card.ToString());
             sb.Append(" ");
         }
+        sb.Append("[HAND] ");
         foreach (CardBase card in hand)
         {
             sb.Append("[D]");
             sb.Append(card.ToString());
             sb.Append(" ");
         }
+        sb.Append("[DISCARD PILE] ");
         foreach (CardBase card in discardPile)
         {
             sb.Append("[D]");
