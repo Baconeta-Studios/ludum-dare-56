@@ -27,8 +27,8 @@ public class DeckTester : MonoBehaviour
         
         Debug.Log(deck.Count);
 
-        Debug.Log(deck.DrawPileToString());
+        deck.DebugContents();
         deck.ReshuffleDiscardToDraw();
-        Debug.Log(deck.DrawPileToString());
+        deck.DebugContents();
     }
 }
