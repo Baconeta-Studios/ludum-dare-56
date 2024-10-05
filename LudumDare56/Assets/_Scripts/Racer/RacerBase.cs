@@ -1,34 +1,25 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RacerBase : MonoBehaviour
 {
     private Track track;
-    private Rigidbody2D racerRigidbody2d;
-    [Header("Lap Progress")]
-    [SerializeField] private float distanceAlongTrack;
+    private Rigidbody2D racerRigidbody2d; 
+    
+    // Card Components
+    private BoostComponent boost;
+
+    [Header("Lap Progress")] 
+    [SerializeField] [ReadOnly] private float distanceAlongTrack;
     private Vector3 positionOnTrackSpline;
     private Vector3 tangentOnTrackSpline;
     
     [Header("Movement")]
-    private Vector3 currentHeading;
     [SerializeField] [ReadOnly] private float currentSpeed;
+    private Vector3 currentHeading;
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float acceleration = 1f;
-
-    [Header("Boost")] 
-    [SerializeField] private ParticleSystem boostEffect;
-    [SerializeField] private bool isBoosting;
-    [SerializeField] private bool isFinishingBoost;
-    [SerializeField] private float boostDuration = 1f;
-    [SerializeField] private float boostingMaxSpeed = 1f;
-    [SerializeField] private float boostingAcceleration = 1f;
-    [SerializeField] private float boostDeceleration = 1f;
-    private float boostTimeRemaining = 1f;
 
     [Header("Whiskers")] 
     [SerializeField] private float forwardsWhiskerLength;
@@ -43,13 +34,18 @@ public class RacerBase : MonoBehaviour
     [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
     
     [Header("Respawning")] 
-    public bool isRespawning;
+    [ReadOnly] public bool isRespawning;
     public float respawnStartDelay;
     public float respawnDuration;
     
     [Header("Debug")]
     public float positionGizmoRadius = 1f;
-    
+
+    private void Awake()
+    {
+        boost = GetComponent<BoostComponent>();
+    }
+        
     private void Start()
     {
         track = FindFirstObjectByType<Track>();
@@ -66,15 +62,6 @@ public class RacerBase : MonoBehaviour
     private void Update()
     {
         UpdateTrackPosition();
-
-        if (isBoosting)
-        {
-            boostTimeRemaining -= Time.deltaTime;
-            if (boostTimeRemaining <= 0)
-            {
-                EndBoost();
-            }
-        }
     }
 
     private void UpdateTrackPosition()
@@ -109,19 +96,20 @@ public class RacerBase : MonoBehaviour
         
 
         // Boost - Finished, so decelerate to max speed.
-        if (isFinishingBoost)
+        if (boost.IsFinishingBoost)
         {
-            currentSpeed -= boostDeceleration * Time.fixedDeltaTime;
+            currentSpeed -= boost.BoostDeceleration * Time.fixedDeltaTime;
             if (currentSpeed <= maxSpeed)
             {
-                BoostFinished();
+                boost.BoostFinished();
             }
         }
         else // Acceleration
         {
-            float accelerationToAdd = isBoosting ? boostingAcceleration : acceleration;
+            bool isBoosting = boost.IsBoosting;
+            float accelerationToAdd = isBoosting ? boost.BoostingAcceleration : acceleration;
 
-            if (currentSpeed <= (isBoosting ? boostingMaxSpeed : maxSpeed))
+            if (currentSpeed <= (isBoosting ? boost.BoostMaxSpeed : maxSpeed))
             {
                 currentSpeed += accelerationToAdd * Time.fixedDeltaTime;
             }
@@ -156,43 +144,6 @@ public class RacerBase : MonoBehaviour
             }
         }
     }
-
-    [ContextMenu("Boost")]
-    public void StartBoost()
-    {
-        if (isBoosting)
-        {
-            boostTimeRemaining += boostDuration;
-        }
-        else
-        {
-            boostTimeRemaining = boostDuration;
-        }
-
-        isBoosting = true;
-        boostEffect.Play();
-    }
-
-    private void EndBoost(bool forceFinish = false)
-    {
-        isBoosting = false;
-        boostTimeRemaining = 0f;
-
-        if (forceFinish)
-        {
-            BoostFinished();
-        }
-        else
-        {
-            isFinishingBoost = true;
-        }
-    }
-
-    private void BoostFinished()
-    {
-        isFinishingBoost = false;
-        boostEffect.Stop();
-    }
     
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -206,11 +157,8 @@ public class RacerBase : MonoBehaviour
     private IEnumerator Respawn()
     {
         isRespawning = true;
-
-        if (isBoosting)
-        {
-            EndBoost(true);
-        }
+        
+        boost.RacerRespawned();
         
         yield return new WaitForSeconds(respawnStartDelay);
         transform.position = positionOnTrackSpline;
