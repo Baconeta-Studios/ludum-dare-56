@@ -29,6 +29,9 @@ public class RacerBase : MonoBehaviour
     [SerializeField] private float sideWhiskerAngle;
     [SerializeField] private float sideWhiskerTurnAnglePerSecond;
 
+    [Header("Alignment")] 
+    [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
+    
     [Header("Respawning")] 
     public bool isRespawning;
     public float respawnStartDelay;
@@ -89,14 +92,23 @@ public class RacerBase : MonoBehaviour
         Vector3 sideWhiskerDirectionLeft = Vector3.RotateTowards(transform.up, transform.right * -1, Mathf.Deg2Rad * sideWhiskerAngle, 0);
         whiskerLeft = sideWhiskerDirectionLeft * sideWhiskerLength;
 
+        //AlignWithTrack();
         CheckSideWhisker(sideWhiskerDirectionLeft, -1);
         CheckSideWhisker(sideWhiskerDirectionRight, 1);
 
+        
         currentSpeed += acceleration * Time.fixedDeltaTime;
         currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
 
         racerRigidbody2d.MovePosition(transform.position + currentHeading * currentSpeed);
         transform.up = currentHeading;
+    }
+
+    private void AlignWithTrack()
+    {
+        currentHeading = Vector3.RotateTowards(currentHeading, tangentOnTrackSpline,
+            (Mathf.Deg2Rad * alignmentTurnAnglePerSecond) * Time.fixedDeltaTime,
+            0);
     }
 
     private void CheckSideWhisker(Vector3 whiskerDirection, int side)
@@ -118,7 +130,7 @@ public class RacerBase : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (!isRespawning && collision.transform.CompareTag("Track"))
         {
@@ -135,6 +147,8 @@ public class RacerBase : MonoBehaviour
         
         // Face the splines tangent, and also reset the heading + speed.
         transform.up = tangentOnTrackSpline;
+        racerRigidbody2d.velocity = Vector3.zero;
+        racerRigidbody2d.angularVelocity = 0f;
         currentHeading = transform.up;
         currentSpeed = 0f;
         
