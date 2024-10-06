@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Track
   - Hand
+  - Shortcut
   layers:
   - Default
   - TransparentFX

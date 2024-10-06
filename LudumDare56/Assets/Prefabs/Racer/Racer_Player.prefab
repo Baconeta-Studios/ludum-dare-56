@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boost: {fileID: 5882442412960819051}
   brake: {fileID: 193115744124237289}
+  shortcut: {fileID: 9007600361694348324}
   distanceAlongTrack: 0
   currentSpeed: 0
   maxSpeed: 24
@@ -209,3 +210,14 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
   m_PrefabInstance: {fileID: 5620785222495627188}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9007600361694348324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3675050188292301712, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311198365944158049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e0df4d04e6d3d4e847c01bea818e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
