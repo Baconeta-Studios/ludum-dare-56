@@ -75,6 +75,7 @@ public class CardDeck : MonoBehaviour
     /// <param name="shuffleAfter">If the draw pile should be shuffled after adding the card.</param>
     public void AddCardToDeck(CardBase card, bool shuffleAfter = false)
     {
+        card.Initialize(this);
         drawPile.Push(card);
         if (shuffleAfter)
         {
@@ -226,8 +227,16 @@ public class CardDeck : MonoBehaviour
         }
 
         // Physically move the card in the desk systems
-        var handCardRef = Hand.FirstOrDefault(card => card == cardToUse);
-        
+        CardBase handCardRef = null;
+        foreach (var card in Hand)
+        {
+            if (card.Equals(cardToUse))
+            {
+                handCardRef = card;
+                break;
+            }
+        }
+
         // Find the card in the hand and move it to the play zone
         if (handCardRef != null)
         {

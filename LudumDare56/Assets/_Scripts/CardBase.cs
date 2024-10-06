@@ -13,10 +13,9 @@ public abstract class CardBase : MonoBehaviour
     
     public string cardName;
 
-    public void Initialize(CardDeck associatedDeck, string cardName = "Untitled Card", UseType useType = UseType.Instant)
+    public void Initialize(CardDeck deck)
     {
-        this.cardName = cardName;
-        this.useType = useType;
+        associatedDeck = deck;
     }
 
     /// <summary>
@@ -49,5 +48,16 @@ public abstract class CardBase : MonoBehaviour
     public override string ToString()
     {
         return cardName;
+    }
+
+    public override bool Equals(object other)
+    {
+        var otherCard = other as CardBase;
+        if (otherCard != null && cardName == otherCard.cardName)
+        {
+            return Equals(associatedDeck, otherCard.associatedDeck);
+        }
+
+        return false;
     }
 }

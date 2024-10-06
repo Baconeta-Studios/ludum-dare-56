@@ -72,6 +72,7 @@ namespace _Scripts
         public void AddCardToUI(GameObject card)
         {
             var newCard = Instantiate(card, gameObject.transform, false);
+            newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
         
         // This should probably only be used for discards so may be useless
@@ -97,13 +98,15 @@ namespace _Scripts
             else
             {
                 // This likely will need to change to delay destruction and play some pretty effects
-                Destroy(zoneUIPosition.gameObject.transform.GetComponent<CardBase>().gameObject);
+                Destroy(zoneUIPosition.GetChild(0).gameObject);
             }
         }
 
         private void ZoneCardUsed()
         {
+            playerCardDeck.DiscardCard(zoneUIPosition.GetChild(0).GetComponent<CardBase>());
             // Callback function for the PlayCard system to tell us once it has been used 
+            Destroy(zoneUIPosition.GetChild(0).gameObject);
         }
     }
 }

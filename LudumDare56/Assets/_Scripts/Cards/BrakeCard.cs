@@ -10,7 +10,7 @@ namespace _Scripts.Cards
         {
             if (bc == null)
             {
-                bc = base.associatedDeck.owner.GetComponent<BrakeComponent>();
+                bc = associatedDeck.owner.GetComponent<BrakeComponent>();
             }
             bc.StartOverride();
             Debug.Log("Brake card used");
