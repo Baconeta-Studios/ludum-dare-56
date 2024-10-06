@@ -11,6 +11,9 @@ namespace _Scripts.Managers
         private RacerProgress player;
         private List<RacerProgress> otherRacers;
         
+        public static event Action<int> OnPlayerPositionChanged;
+        public static event Action<int> OnPlayerLapChanged;
+        
         private void Start()
         {
             List<RacerBase> racers = FindObjectsByType<RacerBase>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
@@ -48,6 +51,7 @@ namespace _Scripts.Managers
             if (racer.GetType() == typeof(RacerPlayer))
             {
                 player.IncrementLapsCompleted();
+                OnPlayerLapChanged?.Invoke((int) Math.Round(player.GetRaceProgress()));
             }
             else
             {
@@ -83,7 +87,7 @@ namespace _Scripts.Managers
             lapsCompleted = 0;
             lapProgress = 0;
         }
-
+        
         public void IncrementLapsCompleted()
         {
             lapsCompleted++;
@@ -94,7 +98,7 @@ namespace _Scripts.Managers
             lapProgress = progress;
         }
         
-        private float GetRaceProgress()
+        public float GetRaceProgress()
         {
             return (lapsCompleted * 1.0F) + lapProgress;
         }
