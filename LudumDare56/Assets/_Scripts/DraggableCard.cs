@@ -1,3 +1,4 @@
+using _Scripts;
 using UnityEngine;
 
 public class DraggableCard : MonoBehaviour
@@ -57,7 +58,11 @@ public class DraggableCard : MonoBehaviour
         }
         else // Now we play the card
         {
-            // TODO play the card
+            var pos = cardTrayUIManager.zoneUIPosition;
+            GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+            GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+            gameObject.transform.SetParent(pos, true);
+            gameObject.transform.localPosition = Vector3.zero;
         }
     }
 
