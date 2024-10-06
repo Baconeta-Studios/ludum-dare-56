@@ -117,6 +117,7 @@ public class CardDeck : MonoBehaviour
         }
         else
         {
+            Debug.LogError($"{owner.gameObject.name}");
             throw new Exception("Invalid discard attempt.");
         }
     }
@@ -142,14 +143,18 @@ public class CardDeck : MonoBehaviour
             discardPile.Push(drawPile.Pop());
         }
     }
-    
-    
+
+    [ContextMenu("Reshuffle Discard Pile to Draw Pile")]
+    public void MenuDebugReshuffleDiscardToDraw()
+    {
+        ReshuffleDiscardToDraw();
+    }
+
     /// <summary>
     /// Create a new shuffled draw pile from the discard pile.
     /// Discards all cards currently in the draw pile before reshuffling discarded cards.
     /// </summary>
     /// <param name="includeHand">Discard the cards in hand and in the active zone before reshuffling.</param>
-    [ContextMenu("Reshuffle Discard Pile to Draw Pile")]
     public void ReshuffleDiscardToDraw(bool includeHand = false)
     {
         if (includeHand)
@@ -193,26 +198,28 @@ public class CardDeck : MonoBehaviour
     /// <summary>
     /// Debug.Log all cards, from all piles, in order.
     /// </summary>
+    [ContextMenu("Log Cards")]
     public void DebugContents()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("[DRAW PILE] ");
+        sb.Append($"DECK CONTENTS: {gameObject.name}\n");
+        sb.Append("[DRAW PILE]\n");
         foreach (CardBase card in drawPile)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
-        sb.Append("[HAND] ");
+        sb.Append("\n\n[HAND]\n");
         foreach (CardBase card in Hand)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
-        sb.Append("[DISCARD PILE] ");
+        sb.Append("\n\n[DISCARD PILE]\n");
         foreach (CardBase card in discardPile)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
         Debug.Log(sb.ToString());
     }

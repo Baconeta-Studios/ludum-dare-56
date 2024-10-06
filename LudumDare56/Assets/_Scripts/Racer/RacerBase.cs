@@ -11,10 +11,14 @@ namespace _Scripts.Racer
         private Collider2D collider2D;
 
         [Header("Card Components")]
+        [SerializeField] protected CardDeck deck;
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
         public CardBase triggerCard;
+
+        [Header("Cards")] 
+        [SerializeField] private int startingHand = 4;
         
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
@@ -63,12 +67,12 @@ namespace _Scripts.Racer
             currentHeading = transform.up;
             
             // Setup Racers Deck
-            var deck = GetComponent<CardDeck>();
+            deck = GetComponent<CardDeck>();
             deck?.SetupDeck();
-            deck?.DrawCard();
-            deck?.DrawCard();
-            deck?.DrawCard();
-            deck?.DrawCard();
+            for (int i = 0; i < startingHand; i++)
+            {
+                deck?.DrawCard();
+            }
         }
 
         private void Update()

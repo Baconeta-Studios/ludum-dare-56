@@ -124,6 +124,30 @@ PrefabInstance:
       propertyPath: deceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1568846843800465314}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.jumpCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.boostCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.brakeCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.sabotageCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.shortcutCards
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7081486185929337761, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Mass
       value: 2
@@ -146,6 +170,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5b800ff8b8a6cc46ad63735c66d586d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1983790180135698556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_PrefabInstance: {fileID: 6061847571237486837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599356591692427296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2575ab8427fe40588467ab4653c7f6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5441380154746699818 stripped
@@ -176,10 +211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86bcbab5f49898b4fbe24618047993ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deck: {fileID: 1983790180135698556}
   boost: {fileID: 5441380154746699818}
   brake: {fileID: 1769666033179579048}
   shortcut: {fileID: 7431049969610122085}
   triggerCard: {fileID: 0}
+  startingHand: 4
   distanceAlongTrack: 0
   currentSpeed: 0
   maxSpeed: 25
@@ -193,6 +230,8 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
+  boostRaycastDistance: 10
+  brakeRaycastDistance: 0
 --- !u!114 &7431049969610122085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3675050188292301712, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
