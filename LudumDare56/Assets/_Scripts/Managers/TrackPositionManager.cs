@@ -15,7 +15,7 @@ namespace _Scripts.Managers
             List<RacerBase> racers = FindObjectsByType<RacerBase>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
             
             // Find and extract the player racer from the list of racers.
-            foreach (var racerPlayer in racers.Where(racer => racer.GetType() == RacerPlayer.GetType()))
+            foreach (var racerPlayer in racers.Where(racer => racer.GetType() == typeof(RacerPlayer)))
             {
                 this.playerRacer = new RacerProgress((RacerPlayer) racerPlayer);
                 racers.Remove(racerPlayer);
