@@ -23,7 +23,7 @@ public abstract class CardBase : MonoBehaviour
     /// </summary>
     /// <param name="callBackOnCardUsed"></param>
     /// <returns></returns>
-    public bool TryUseCard(Action callBackOnCardUsed)
+    public bool TryUseCard(Action callBackOnCardUsed=null)
     {
         callOnCardUsed = callBackOnCardUsed;
         if (useType == UseType.Instant)
@@ -31,6 +31,8 @@ public abstract class CardBase : MonoBehaviour
             UseCard();
             return true;
         }
+        
+        SetUsableState();
         return false;
     }
 

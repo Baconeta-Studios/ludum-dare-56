@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: c004ca5efcb53924dbdf4d277c594df2
+guid: 8b4cfb321481e6d49b2edf038a108b01
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2729823407184647820
-    second: Racing slug_0
+      213: -98070244222629441
+    second: Foreground_0
+  - first:
+      213: -6723657067348311052
+    second: Foreground_1
+  - first:
+      213: 7330829005115928284
+    second: Foreground_2
+  - first:
+      213: 6377856438995678898
+    second: Foreground_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,13 +148,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Racing slug_0
+      name: Foreground_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 36
-        width: 210
-        height: 408
+        x: 0
+        y: 363
+        width: 81
+        height: 148
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +162,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 479663b0318bd1ad0800000000000000
-      internalID: -2729823407184647820
+      spriteID: fb9031ae1a593aef0800000000000000
+      internalID: -98070244222629441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Foreground_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 398
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f3c82d4585c0b2a0800000000000000
+      internalID: -6723657067348311052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Foreground_2
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 0
+        width: 399
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdea017c3265cb560800000000000000
+      internalID: 7330829005115928284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Foreground_3
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 363
+        width: 82
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b676c2d3a2b28850800000000000000
+      internalID: 6377856438995678898
       vertices: []
       indices: 
       edges: []
@@ -162,7 +234,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -170,7 +242,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Racing slug_0: -2729823407184647820
+      Foreground_0: -98070244222629441
+      Foreground_1: -6723657067348311052
+      Foreground_2: 7330829005115928284
+      Foreground_3: 6377856438995678898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

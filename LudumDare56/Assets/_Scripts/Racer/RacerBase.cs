@@ -6,21 +6,25 @@ namespace _Scripts.Racer
 {
     public class RacerBase : MonoBehaviour
     {
-        private Track track;
+        protected Track track;
         private Rigidbody2D racerRigidbody2d;
         private Collider2D collider2D;
 
         [Header("Card Components")]
+        [SerializeField] protected CardDeck deck;
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
-        public ShortcutCard triggerCard;
+        public CardBase triggerCard;
+
+        [Header("Cards")] 
+        [SerializeField] private int startingHand = 4;
         
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
         public float DistanceAlongTrack => distanceAlongTrack;
-        private Vector3 positionOnTrackSpline;
-        private Vector3 tangentOnTrackSpline;
+        protected Vector3 positionOnTrackSpline;
+        protected Vector3 tangentOnTrackSpline;
 
         [Header("Movement")]
         [SerializeField] [ReadOnly] private float currentSpeed;
@@ -63,12 +67,12 @@ namespace _Scripts.Racer
             currentHeading = transform.up;
             
             // Setup Racers Deck
-            var deck = GetComponent<CardDeck>();
+            deck = GetComponent<CardDeck>();
             deck?.SetupDeck();
-            deck?.DrawCard();
-            deck?.DrawCard();
-            deck?.DrawCard();
-            deck?.DrawCard();
+            for (int i = 0; i < startingHand; i++)
+            {
+                deck?.DrawCard();
+            }
         }
 
         private void Update()

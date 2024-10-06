@@ -1,26 +1,23 @@
 using UnityEngine;
 
-namespace _Scripts.Cards
+public class ShortcutCard : CardBase
 {
-    public class ShortcutCard : CardBase
+    private ShortcutComponent shortcutComponent;
+
+    public override void UseCard()
     {
-        private ShortcutComponent shortcutComponent;
+        Debug.Log("Shortcut card played");
+        base.UseCard();
+    }
 
-        public override void UseCard()
+    public override void SetUsableState()
+    {
+        if (shortcutComponent == null)
         {
-            Debug.Log("Shortcut card played");
-            base.UseCard();
+            shortcutComponent = associatedDeck.owner.GetComponent<ShortcutComponent>();
         }
 
-        public override void SetUsableState()
-        {
-            if (shortcutComponent == null)
-            {
-                shortcutComponent = associatedDeck.owner.GetComponent<ShortcutComponent>();
-            }
-
-            shortcutComponent.IsActive = true;
-            associatedDeck.owner.triggerCard = this;
-        }
+        shortcutComponent.IsActive = true;
+        associatedDeck.owner.triggerCard = this;
     }
 }
