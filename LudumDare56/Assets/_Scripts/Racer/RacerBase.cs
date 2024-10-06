@@ -5,25 +5,25 @@ using UnityEngine;
 public class RacerBase : MonoBehaviour
 {
     private Track track;
-    private Rigidbody2D racerRigidbody2d; 
-    
+    private Rigidbody2D racerRigidbody2d;
+
     [Header("Card Components")]
     [SerializeField] private BoostComponent boost;
     [SerializeField] private BrakeComponent brake;
 
-    [Header("Lap Progress")] 
+    [Header("Lap Progress")]
     [SerializeField] [ReadOnly] private float distanceAlongTrack;
     public float DistanceAlongTrack => distanceAlongTrack;
     private Vector3 positionOnTrackSpline;
     private Vector3 tangentOnTrackSpline;
-    
+
     [Header("Movement")]
     [SerializeField] [ReadOnly] private float currentSpeed;
     private Vector3 currentHeading;
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float acceleration = 1f;
 
-    [Header("Whiskers")] 
+    [Header("Whiskers")]
     [SerializeField] private float forwardsWhiskerLength;
     [SerializeField] private float sideWhiskerLength;
     [SerializeField] private float sideWhiskerAngle;
@@ -32,22 +32,22 @@ public class RacerBase : MonoBehaviour
     private Vector3 whiskerRight;
     private Vector3 whiskerLeft;
 
-    [Header("Alignment")] 
+    [Header("Alignment")]
     [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
-    
-    [Header("Respawning")] 
+
+    [Header("Respawning")]
     [ReadOnly] public bool isRespawning;
     public float respawnStartDelay;
     public float respawnDuration;
-    
+
     [Header("Debug")]
     public float positionGizmoRadius = 1f;
-        
+
     private void Start()
     {
         track = FindFirstObjectByType<Track>();
         racerRigidbody2d = GetComponent<Rigidbody2D>();
-        
+
         BeginRace();
     }
 
@@ -114,8 +114,11 @@ public class RacerBase : MonoBehaviour
             }
         }
 
-        racerRigidbody2d.MovePosition(transform.position + currentHeading * currentSpeed);
-        transform.up = currentHeading;
+        // Execute the move and set the cart to look in the direction of movement.
+        float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
+
+        racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * Time.fixedDeltaTime * Time.timeScale), angle - 90f);
+
     }
 
     private void AlignWithTrack()
@@ -143,7 +146,7 @@ public class RacerBase : MonoBehaviour
             }
         }
     }
-    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!isRespawning && collision.transform.CompareTag("Track"))
@@ -156,22 +159,22 @@ public class RacerBase : MonoBehaviour
     private IEnumerator Respawn()
     {
         isRespawning = true;
-        
+
         boost.RacerRespawned();
         brake.RacerRespawned();
-        
+
         yield return new WaitForSeconds(respawnStartDelay);
         transform.position = positionOnTrackSpline;
-        
+
         // Face the splines tangent, and also reset the heading + speed.
         transform.up = tangentOnTrackSpline;
         racerRigidbody2d.velocity = Vector3.zero;
         racerRigidbody2d.angularVelocity = 0f;
         currentHeading = transform.up;
         currentSpeed = 0f;
-        
+
         yield return new WaitForSeconds(respawnDuration);
-        
+
         isRespawning = false;
         yield return null;
     }
@@ -180,7 +183,7 @@ public class RacerBase : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(positionOnTrackSpline, positionGizmoRadius);
-        
+
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + (currentSpeed * currentHeading));
 

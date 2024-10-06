@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5620785222495627188
+--- !u!1001 &6061847571237486837
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,24 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_Sprite
-      value:
-      objectReference: {fileID: 2576518787264148619, guid: af6b0812c50854643bf7ffb2f424bbf7, type: 3}
-    - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.10123708
       objectReference: {fileID: 0}
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.24040921
       objectReference: {fileID: 0}
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8584906
       objectReference: {fileID: 0}
     - target: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Name
-      value: Racer_Player
+      value: Racer_Ai
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: duration
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: maxSpeed
@@ -39,18 +39,6 @@ PrefabInstance:
     - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deceleration
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -92,21 +80,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_Size.x
-      value: 1.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_Size.y
-      value: 2.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.14
-      objectReference: {fileID: 0}
     - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: maxSpeed
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: acceleration
@@ -116,60 +92,64 @@ PrefabInstance:
       propertyPath: deceleration
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: particleEffect
-      value:
-      objectReference: {fileID: 8526191286834518237}
-    m_RemovedComponents: []
+    - target: {fileID: 7081486185929337761, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 130079349287866702, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1568846843800465314}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
---- !u!114 &193115744124237289 stripped
+--- !u!114 &1769666033179579048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabInstance: {fileID: 6061847571237486837}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311198365944158049}
+  m_GameObject: {fileID: 5599356591692427296}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5b800ff8b8a6cc46ad63735c66d586d, type: 3}
   m_Name:
   m_EditorClassIdentifier:
---- !u!114 &5882442412960819051 stripped
+--- !u!114 &5441380154746699818 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabInstance: {fileID: 6061847571237486837}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311198365944158049}
+  m_GameObject: {fileID: 5599356591692427296}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20eebfc14b7646e4eaa43bc49d0e2456, type: 3}
   m_Name:
   m_EditorClassIdentifier:
---- !u!1 &6311198365944158049 stripped
+--- !u!1 &5599356591692427296 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabInstance: {fileID: 6061847571237486837}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4775466648566033861
+--- !u!114 &1568846843800465314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311198365944158049}
+  m_GameObject: {fileID: 5599356591692427296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fddd3ec104b3cc04eae8ed7402582ba2, type: 3}
+  m_Script: {fileID: 11500000, guid: 86bcbab5f49898b4fbe24618047993ea, type: 3}
   m_Name:
   m_EditorClassIdentifier:
-  boost: {fileID: 5882442412960819051}
-  brake: {fileID: 193115744124237289}
+  boost: {fileID: 5441380154746699818}
+  brake: {fileID: 1769666033179579048}
   distanceAlongTrack: 0
   currentSpeed: 0
-  maxSpeed: 21
-  acceleration: 6
+  maxSpeed: 23
+  acceleration: 5
   forwardsWhiskerLength: 4
   sideWhiskerLength: 8
   sideWhiskerAngle: 30
@@ -179,8 +159,3 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
---- !u!198 &8526191286834518237 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-  m_PrefabInstance: {fileID: 5620785222495627188}
-  m_PrefabAsset: {fileID: 0}
