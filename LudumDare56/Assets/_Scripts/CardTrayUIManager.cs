@@ -89,24 +89,30 @@ namespace _Scripts
 
         public void PlayCard(CardBase card)
         {
+            CloseTrayUI();
+
             // This UI function tells the Card Deck that we have moved a card to the active play zone
             if (playerCardDeck.PlayCard(card, ZoneCardUsed))
             {
                 // This will be true if the card was instantly
                 // played, and therefore we should trigger destruction for the game object
+                Destroy(card.gameObject);
             }
             else
             {
                 // This likely will need to change to delay destruction and play some pretty effects
-                Destroy(zoneUIPosition.GetChild(0).gameObject);
+                
             }
         }
 
-        private void ZoneCardUsed()
+        public void ZoneCardUsed()
         {
-            playerCardDeck.DiscardCard(zoneUIPosition.GetChild(0).GetComponent<CardBase>());
+            // playerCardDeck.DiscardCard(zoneUIPosition.GetChild(0).GetComponent<CardBase>());
             // Callback function for the PlayCard system to tell us once it has been used 
-            Destroy(zoneUIPosition.GetChild(0).gameObject);
+            if (zoneUIPosition.childCount > 0)
+            {
+                Destroy(zoneUIPosition.GetChild(0).gameObject);
+            }
         }
     }
 }
