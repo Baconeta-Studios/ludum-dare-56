@@ -20,16 +20,20 @@ namespace _Scripts
 
         private void OnEnable()
         {
-            if (hasBeenInit)
-            {
-                return;
-            }
             PopulateChoices();
-            hasBeenInit = true;
         }
 
         private void PopulateChoices()
         {
+            if (choiceUIFaceUpA.childCount > 0)
+            {
+                Destroy(choiceUIFaceUpA.transform.GetChild(0).gameObject);
+            }
+            if (choiceUIFaceUpB.childCount > 0)
+            {
+                Destroy(choiceUIFaceUpB.transform.GetChild(0).gameObject);
+            }
+
             var player = FindAnyObjectByType<RacerPlayer>();
             if (cardSelection == null)
             {
