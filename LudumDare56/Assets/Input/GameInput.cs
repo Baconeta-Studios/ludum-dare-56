@@ -24,12 +24,12 @@ public class GameInput : MonoBehaviour
     [SerializeField] private bool logPrimaryPosition;
     [SerializeField] private bool logPrimaryDelta;
 
-    void Awake()
+    private void Awake()
     {
         OnEnable();
     }
-    
-    void OnEnable()
+
+    private void OnEnable()
     {
         _mainCamera ??= Camera.main;
         
