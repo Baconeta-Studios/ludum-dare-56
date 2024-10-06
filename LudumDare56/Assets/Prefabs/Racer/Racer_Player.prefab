@@ -92,8 +92,17 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.14
       objectReference: {fileID: 0}
+    - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: particleEffect
+      value: 
+      objectReference: {fileID: 8526191286834518237}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+--- !u!198 &8526191286834518237 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabAsset: {fileID: 0}

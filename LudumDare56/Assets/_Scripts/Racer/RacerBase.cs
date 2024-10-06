@@ -7,11 +7,13 @@ public class RacerBase : MonoBehaviour
     private Track track;
     private Rigidbody2D racerRigidbody2d; 
     
-    // Card Components
-    private BoostComponent boost;
+    [Header("Card Components")]
+    [SerializeField] private BoostComponent boost;
+    [SerializeField] private BrakeComponent brake;
 
     [Header("Lap Progress")] 
     [SerializeField] [ReadOnly] private float distanceAlongTrack;
+    public float DistanceAlongTrack => distanceAlongTrack;
     private Vector3 positionOnTrackSpline;
     private Vector3 tangentOnTrackSpline;
     
@@ -40,11 +42,6 @@ public class RacerBase : MonoBehaviour
     
     [Header("Debug")]
     public float positionGizmoRadius = 1f;
-
-    private void Awake()
-    {
-        boost = GetComponent<BoostComponent>();
-    }
         
     private void Start()
     {
@@ -93,25 +90,27 @@ public class RacerBase : MonoBehaviour
         AlignWithTrack();
         CheckSideWhisker(sideWhiskerDirectionLeft, -1);
         CheckSideWhisker(sideWhiskerDirectionRight, 1);
-        
 
-        // Boost - Finished, so decelerate to max speed.
-        if (boost.IsFinishingBoost)
+        if (brake.IsActive && currentSpeed > brake.MaxSpeed)
         {
-            currentSpeed -= boost.BoostDeceleration * Time.fixedDeltaTime;
+            currentSpeed -= brake.Deceleration * Time.fixedDeltaTime;
+        }
+        else if (boost.IsFinishing) // Boost - Finished, so decelerate to max speed.
+        {
+            currentSpeed -= boost.Deceleration * Time.fixedDeltaTime;
             if (currentSpeed <= maxSpeed)
             {
-                boost.BoostFinished();
+                boost.OverrideFinished();
             }
         }
         else // Acceleration
         {
-            bool isBoosting = boost.IsBoosting;
-            float accelerationToAdd = isBoosting ? boost.BoostingAcceleration : acceleration;
+            bool isBoosting = boost.IsActive;
+            float accelerationChange = isBoosting ? boost.Acceleration : acceleration;
 
-            if (currentSpeed <= (isBoosting ? boost.BoostMaxSpeed : maxSpeed))
+            if (currentSpeed <= (isBoosting ? boost.MaxSpeed : maxSpeed))
             {
-                currentSpeed += accelerationToAdd * Time.fixedDeltaTime;
+                currentSpeed += accelerationChange * Time.fixedDeltaTime;
             }
         }
 
@@ -159,6 +158,7 @@ public class RacerBase : MonoBehaviour
         isRespawning = true;
         
         boost.RacerRespawned();
+        brake.RacerRespawned();
         
         yield return new WaitForSeconds(respawnStartDelay);
         transform.position = positionOnTrackSpline;
