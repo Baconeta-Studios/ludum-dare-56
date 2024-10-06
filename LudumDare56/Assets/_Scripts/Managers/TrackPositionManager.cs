@@ -8,8 +8,8 @@ namespace _Scripts.Managers
 {
     public class TrackPositionManager : MonoBehaviour
     {
-        private RacerProgress[] otherRacers;
         private RacerProgress player;
+        private List<RacerProgress> otherRacers;
         
         private void Start()
         {
@@ -26,8 +26,10 @@ namespace _Scripts.Managers
             // Save other racers, they'll all be AI.
             for (int i = 0; i < racers.Count; i++)
             {
-                otherRacers = new RacerProgress[racers.Count];
-                otherRacers[i] = new RacerProgress((RacerAi) racers[i]);
+                otherRacers = new List<RacerProgress>(racers.Count)
+                {
+                    [i] = new RacerProgress((RacerAi) racers[i])
+                };
             }
         }
         
@@ -45,31 +47,39 @@ namespace _Scripts.Managers
         {
             if (racer.GetType() == typeof(RacerPlayer))
             {
-                this.player.IncrementLapsCompleted();
+                player.IncrementLapsCompleted();
             }
             else
             {
-                // TODO
+                foreach (var racerProgress in otherRacers.Where(racerProgress => racerProgress.Racer.Equals(racer)))
+                {
+                    racerProgress.IncrementLapsCompleted();
+                }
             }
         }
         
+        /// <summary>
+        /// Returns the place that the player is in, relative to other races. 1=1st, 3=3rd, etc.
+        /// </summary>
+        /// <returns>Player's relative position in the race</returns>
         public int GetPlayerPosition() {
             List<RacerProgress> li = otherRacers.ToList();
-            li.Add(playerRacer);
+            li.Add(player);
             li.Sort();
-            return li.IndexOf(playerRacer) + 1;
+            return li.IndexOf(player) + 1;
         }
+
     }
     
     public class RacerProgress : IComparable<RacerProgress>
     {
-        private RacerBase racer;
+        public readonly RacerBase Racer;
         private int lapsCompleted;
         private float lapProgress;
 
         public RacerProgress(RacerBase racer)
         {
-            this.racer = racer;
+            this.Racer = racer;
             lapsCompleted = 0;
             lapProgress = 0;
         }
@@ -81,7 +91,7 @@ namespace _Scripts.Managers
 
         public void UpdateLapProgress(float progress)
         {
-            this.lapProgress = progress;
+            lapProgress = progress;
         }
         
         private float GetRaceProgress()
