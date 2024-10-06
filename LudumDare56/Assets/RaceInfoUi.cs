@@ -15,8 +15,8 @@ public class RaceInfoUi : MonoBehaviour
     public TextMeshProUGUI lapTime;
     public TextMeshProUGUI bestLapTime;
     public TextMeshProUGUI raceTime;
-    
-    public void SetPlacing(int newPlacing)
+
+    public void SetPlayerPlacement(int newPlacing)
     {
         string placingString = newPlacing switch
         {
@@ -29,7 +29,7 @@ public class RaceInfoUi : MonoBehaviour
         placing.text = placingString;
     }
     
-    public void SetCurrentLap(int lapNumber)
+    public void SetCurrentPlayerLap(int lapNumber)
     {
         currentLap.text = lapNumber.ToString();
     }
@@ -72,4 +72,22 @@ public class RaceInfoUi : MonoBehaviour
     }
     
     #endregion
+    
+    private void OnEnable()
+    {
+        GameTimeManager.OnRaceTimeChanged += SetRaceTime;
+        GameTimeManager.OnLapTimeChanged += SetLapTime;
+        GameTimeManager.OnFastestLapTimeChanged += SetBestTime;
+        TrackPositionManager.OnPlayerPositionChanged += SetPlayerPlacement;
+        TrackPositionManager.OnPlayerLapCompleted += SetCurrentPlayerLap;
+    }
+
+    private void OnDisable()
+    {
+        GameTimeManager.OnRaceTimeChanged -= SetRaceTime;
+        GameTimeManager.OnLapTimeChanged -= SetLapTime;
+        GameTimeManager.OnFastestLapTimeChanged -= SetBestTime;
+        TrackPositionManager.OnPlayerPositionChanged -= SetPlayerPlacement;
+        TrackPositionManager.OnPlayerLapCompleted += SetCurrentPlayerLap;
+    }
 }

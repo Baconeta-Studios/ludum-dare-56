@@ -12,7 +12,7 @@ namespace _Scripts.Managers
         private List<RacerProgress> otherRacers;
         
         public static event Action<int> OnPlayerPositionChanged;
-        public static event Action<int> OnPlayerLapChanged;
+        public static event Action<int> OnPlayerLapCompleted;
         
         private void Start()
         {
@@ -51,7 +51,7 @@ namespace _Scripts.Managers
             if (racer.GetType() == typeof(RacerPlayer))
             {
                 player.IncrementLapsCompleted();
-                OnPlayerLapChanged?.Invoke((int) Math.Round(player.GetRaceProgress()));
+                OnPlayerLapCompleted?.Invoke((int) Math.Round(player.GetRaceProgress()));
             }
             else
             {
