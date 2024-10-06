@@ -1,32 +1,67 @@
 using System;
 using System.Linq;
+using _Scripts.Racer;
 using UnityEngine;
 
 namespace _Scripts
 {
     public class CardTrayUIManager : MonoBehaviour
     {
+        public ChoiceUI choiceUIPopup;
         public Vector3 trayUIStartPosition;
         public Vector3 trayUIOpenPosition;
-        
         public RectTransform zoneUIPosition;
-    
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
-     
-        public event Action OnTrayUIOpen;
-        public event Action OnTrayUIClose;
     
         // Get Player Deck system controller
-
+        
         private void Awake()
         {
             playerCardDeck = GameObject.FindGameObjectWithTag("Player").GetComponent<CardDeck>();
         }
+        
+        public void OnEnable()
+        {
+            CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
+        }
+
+        public void OnDisable()
+        {
+            CheckPoint.OnRacerCrossCheckPoint -= OnRacerCrossCheckPoint;
+        }
+
+        private void OnRacerCrossCheckPoint(RacerBase racer)
+        {
+            if (racer.GetType() != typeof(RacerPlayer))
+            {
+                return;
+            }
+            if (isTrayUIOpen)
+            {
+                CloseTrayUI();
+            }
+            
+            Time.timeScale = 0f;
+            OpenChoiceUI();
+        }
+
+        private void OpenChoiceUI()
+        {
+            choiceUIPopup.gameObject.SetActive(true);
+        }
+
+        public void CloseChoiceUI()
+        {
+            Time.timeScale = 1f;
+            choiceUIPopup.gameObject.SetActive(false);
+        }
+        
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
+            choiceUIPopup.PopulateChoices();
         }
 
         public void ToggleTrayUI()
@@ -52,7 +87,6 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIOpenPosition;
             isTrayUIOpen = true;
-            OnTrayUIOpen?.Invoke();
 
             Time.timeScale = 0.2f;
         }
@@ -68,7 +102,6 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIStartPosition;
             isTrayUIOpen = false;
-            OnTrayUIClose?.Invoke();
         
             Time.timeScale = 1f;
         }

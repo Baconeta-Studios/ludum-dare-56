@@ -25,6 +25,8 @@ public class CardDeck : MonoBehaviour
 
     public CardBase ActiveCard { get; set; } = null;
 
+    public List<CardBase> FaceUpDeck { get; set; }
+
     public RacerBase owner = null;
     public RacerBase Owner
     {
@@ -64,6 +66,15 @@ public class CardDeck : MonoBehaviour
         }
         
         ShuffleDrawPile();
+        
+        // Put the top two cards into the face up pile
+        var card = drawPile.Pop();
+        var card2 = drawPile.Pop();
+        FaceUpDeck = new List<CardBase>
+        {
+            card,
+            card2
+        };
     }
 
     public int Count => drawPile.Count + discardPile.Count + Hand.Count + (ActiveCard== null ? 0 : 1);
@@ -90,6 +101,16 @@ public class CardDeck : MonoBehaviour
     public void DrawCard()
     {
         var card = drawPile.Pop();
+        TakeCardToHand(card);
+
+        if (drawPile.Count == 0)
+        {
+            ReshuffleDiscardToDraw();
+        }
+    }
+
+    private void TakeCardToHand(CardBase card)
+    {
         Hand.Add(card);
 
         if (owner.GetType() == typeof(RacerPlayer))
@@ -251,5 +272,22 @@ public class CardDeck : MonoBehaviour
         }
         
         return cardToUse.TryUseCard(zoneCardUsed);
+    }
+
+    /// <summary>
+    /// Gets and replaces the face-up card at the int position
+    /// </summary>
+    public void GetFaceUpCard(int index)
+    {
+        if (FaceUpDeck.Count <= index)
+        {
+            Debug.LogError("Face up deck index is out of range");
+            return;
+        }
+
+        var cardToGive = FaceUpDeck[index];
+        var replacementCard = drawPile.Pop();
+        FaceUpDeck[0] = replacementCard;
+        TakeCardToHand(cardToGive);
     }
 }
