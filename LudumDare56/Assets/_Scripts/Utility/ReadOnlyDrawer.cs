@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyDrawer : PropertyDrawer
 {
@@ -8,6 +9,7 @@ public class ReadOnlyDrawer : PropertyDrawer
     {
         GUI.enabled = false; // Disable editing
         EditorGUI.PropertyField(position, property, label);
-        GUI.enabled = true;  // Re-enable editing for other fields
+        GUI.enabled = true; // Re-enable editing for other fields
     }
 }
+#endif
