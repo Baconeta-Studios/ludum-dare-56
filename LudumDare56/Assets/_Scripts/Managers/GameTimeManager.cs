@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Racer;
 using UnityEngine;
 
 namespace _Scripts.Managers
@@ -8,24 +9,23 @@ namespace _Scripts.Managers
         private bool isRacing;
         
         private float totalRaceTimeSoFar; // Total time since the race began, updated each Update().
+        // Current Lap time.
+        private float lapTimeSoFar;
         private float lastTimeFinishLineCrossed; // Used to calculate lap times.
-        // Last Lap.
-        private float lastLapTime;
-        private TimeSpan lastLapTimeCache;
         // Fastest Lap.
         private float fastestLap;
-        private TimeSpan fastestLapCache;
         
+        public static event Action<float> OnRaceTimeChanged;
+        public static event Action<float> OnLapTimeChanged;
+        public static event Action<float> OnFastestLapTimeChanged;
         
         public void StartRaceTimer()
         {
             // Reset timer.
             totalRaceTimeSoFar = 0;
             lastTimeFinishLineCrossed = 0;
-            lastLapTime = 0;
-            lastLapTimeCache = TimeSpan.Zero;
+            lapTimeSoFar = 0;
             fastestLap = 0;
-            fastestLapCache = TimeSpan.Zero;
             
             // Start timer.
             isRacing = true;
@@ -35,45 +35,45 @@ namespace _Scripts.Managers
         {
             isRacing = false;
         }
-        
-        public TimeSpan GetRaceTime()
-        {
-            return TimeSpan.FromSeconds(fastestLap);
-        }
 
-        public TimeSpan GetLastLapTime()
+        public void HandleLapEndEvent(RacerBase racer)
         {
-            return lastLapTimeCache;
-        }
-
-        public TimeSpan GetFastestLapTime()
-        {
-            return fastestLapCache;
-        }
-
-        public void TriggerLapEndEvent()
-        {
+            if (!isRacing)
+            {
+                StartRaceTimer();
+                return;
+            }
             // Calculate last-lap time.
-            lastLapTime = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
+            lapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
             
             // Update fastest-lap time.
-            if (lastLapTime < fastestLap)
+            if (lapTimeSoFar < fastestLap)
             {
-                fastestLap = lastLapTime;
+                fastestLap = lapTimeSoFar;
             }
             
-            // Update cached times.
-            lastLapTimeCache = TimeSpan.FromSeconds(lastLapTime);
-            fastestLapCache = TimeSpan.FromSeconds(fastestLap);
+            
+            OnFastestLapTimeChanged?.Invoke(fastestLap * 1_000);
         }
 
+        private void OnEnable()
+        {
+            FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
+        }
+
+        private void OnDisable()
+        {
+            FinishLine.OnRacerCrossFinishLine -= HandleLapEndEvent;
+        }
+        
         private void Update()
         {
-            if (isRacing)
-            {
-                totalRaceTimeSoFar += Time.deltaTime;
-            }
+            if (!isRacing) return;
+            
+            totalRaceTimeSoFar += Time.deltaTime;
+            OnRaceTimeChanged?.Invoke(totalRaceTimeSoFar);
+            OnLapTimeChanged?.Invoke(lapTimeSoFar);
         }
     }
 }
