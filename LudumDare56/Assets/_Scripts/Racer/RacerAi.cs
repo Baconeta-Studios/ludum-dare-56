@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using _Scripts.Cards;
 using _Scripts.Racer;
 using UnityEngine;
 

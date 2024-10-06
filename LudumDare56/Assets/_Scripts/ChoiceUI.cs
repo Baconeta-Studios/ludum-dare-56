@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,7 +16,19 @@ namespace _Scripts
         
         [SerializeField] private CardTrayUIManager cardTrayUIManager;
 
-        public void PopulateChoices()
+        private bool hasBeenInit;
+
+        private void OnEnable()
+        {
+            if (hasBeenInit)
+            {
+                return;
+            }
+            PopulateChoices();
+            hasBeenInit = true;
+        }
+
+        private void PopulateChoices()
         {
             var player = FindAnyObjectByType<RacerPlayer>();
             if (cardSelection == null)

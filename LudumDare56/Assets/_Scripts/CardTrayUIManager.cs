@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using _Scripts.Racer;
 using UnityEngine;
@@ -43,7 +42,7 @@ namespace _Scripts
                 CloseTrayUI();
             }
             
-            Time.timeScale = 0f;
+            Time.timeScale = 0.01f;
             OpenChoiceUI();
         }
 
@@ -61,7 +60,6 @@ namespace _Scripts
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
-            choiceUIPopup.PopulateChoices();
         }
 
         public void ToggleTrayUI()
@@ -109,6 +107,7 @@ namespace _Scripts
         public void AddCardToUI(GameObject card)
         {
             var newCard = Instantiate(card, gameObject.transform, false);
+            newCard.transform.localScale = Vector3.one;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
         
