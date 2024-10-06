@@ -6,7 +6,7 @@ namespace _Scripts.Racer
 {
     public class RacerBase : MonoBehaviour
     {
-        private Track track;
+        protected Track track;
         private Rigidbody2D racerRigidbody2d;
         private Collider2D collider2D;
 
@@ -23,8 +23,8 @@ namespace _Scripts.Racer
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
         public float DistanceAlongTrack => distanceAlongTrack;
-        private Vector3 positionOnTrackSpline;
-        private Vector3 tangentOnTrackSpline;
+        protected Vector3 positionOnTrackSpline;
+        protected Vector3 tangentOnTrackSpline;
 
         [Header("Movement")]
         [SerializeField] [ReadOnly] private float currentSpeed;

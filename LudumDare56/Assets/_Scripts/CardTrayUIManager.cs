@@ -134,11 +134,6 @@ namespace _Scripts
                 // played, and therefore we should trigger destruction for the game object
                 Destroy(card.gameObject);
             }
-            else
-            {
-                // This likely will need to change to delay destruction and play some pretty effects
-                card.SetUsableState();
-            }
         }
 
         public void ZoneCardUsed()

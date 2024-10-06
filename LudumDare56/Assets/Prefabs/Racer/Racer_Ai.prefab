@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.boostCards
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.brakeCards
@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.shortcutCards
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7081486185929337761, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Mass
@@ -230,8 +230,14 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
-  boostRaycastDistance: 10
-  brakeRaycastDistance: 0
+  cardCooldownDuration: 0
+  cardCooldownFinishTime: 0
+  brakeRaycastDistance: 25
+  brakeTangentLimit: 0
+  maxDistanceForBrake: 20
+  boostRaycastDistance: 40
+  boostTangentThreshold: 0.5
+  minDistanceForBoost: 30
 --- !u!114 &7431049969610122085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3675050188292301712, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}

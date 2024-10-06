@@ -31,6 +31,8 @@ public abstract class CardBase : MonoBehaviour
             UseCard();
             return true;
         }
+        
+        SetUsableState();
         return false;
     }
 
