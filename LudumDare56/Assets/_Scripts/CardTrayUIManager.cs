@@ -19,7 +19,11 @@ namespace _Scripts
         public event Action OnTrayUIClose;
     
         // Get Player Deck system controller
-    
+
+        private void Awake()
+        {
+            playerCardDeck = GameObject.FindGameObjectWithTag("Player").GetComponent<CardDeck>();
+        }
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
