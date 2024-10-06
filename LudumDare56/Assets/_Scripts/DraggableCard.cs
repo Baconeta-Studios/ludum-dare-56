@@ -90,6 +90,7 @@ public class DraggableCard : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        Debug.Log("LEFT HAND");
         if (collision.CompareTag("Hand"))
         {
             isInHandTrigger = false;
