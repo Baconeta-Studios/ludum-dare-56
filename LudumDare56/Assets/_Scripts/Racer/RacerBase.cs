@@ -1,195 +1,197 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class RacerBase : MonoBehaviour
+namespace _Scripts.Racer
 {
-    private Track track;
-    private Rigidbody2D racerRigidbody2d;
-
-    [Header("Card Components")]
-    [SerializeField] private BoostComponent boost;
-    [SerializeField] private BrakeComponent brake;
-
-    [Header("Lap Progress")]
-    [SerializeField] [ReadOnly] private float distanceAlongTrack;
-    public float DistanceAlongTrack => distanceAlongTrack;
-    private Vector3 positionOnTrackSpline;
-    private Vector3 tangentOnTrackSpline;
-
-    [Header("Movement")]
-    [SerializeField] [ReadOnly] private float currentSpeed;
-    private Vector3 currentHeading;
-    [SerializeField] private float maxSpeed = 5f;
-    [SerializeField] private float acceleration = 1f;
-
-    [Header("Whiskers")]
-    [SerializeField] private float forwardsWhiskerLength;
-    [SerializeField] private float sideWhiskerLength;
-    [SerializeField] private float sideWhiskerAngle;
-    [SerializeField] private float sideWhiskerTurnAnglePerSecond;
-    private Vector3 whiskerFront;
-    private Vector3 whiskerRight;
-    private Vector3 whiskerLeft;
-
-    [Header("Alignment")]
-    [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
-
-    [Header("Respawning")]
-    [ReadOnly] public bool isRespawning;
-    public float respawnStartDelay;
-    public float respawnDuration;
-
-    [Header("Debug")]
-    public float positionGizmoRadius = 1f;
-
-    private void Start()
+    public class RacerBase : MonoBehaviour
     {
-        track = FindFirstObjectByType<Track>();
-        racerRigidbody2d = GetComponent<Rigidbody2D>();
+        private Track track;
+        private Rigidbody2D racerRigidbody2d;
 
-        BeginRace();
-    }
+        [Header("Card Components")]
+        [SerializeField] private BoostComponent boost;
+        [SerializeField] private BrakeComponent brake;
 
-    private void BeginRace()
-    {
-        currentHeading = transform.up;
-    }
+        [Header("Lap Progress")]
+        [SerializeField] [ReadOnly] private float distanceAlongTrack;
+        public float DistanceAlongTrack => distanceAlongTrack;
+        private Vector3 positionOnTrackSpline;
+        private Vector3 tangentOnTrackSpline;
 
-    private void Update()
-    {
-        UpdateTrackPosition();
-    }
+        [Header("Movement")]
+        [SerializeField] [ReadOnly] private float currentSpeed;
+        private Vector3 currentHeading;
+        [SerializeField] private float maxSpeed = 5f;
+        [SerializeField] private float acceleration = 1f;
 
-    private void UpdateTrackPosition()
-    {
-        distanceAlongTrack = track.GetDistanceToSpline(transform.position, out Vector3 positionOnSpline, out Vector3 tangentOnSpline);
-        positionOnTrackSpline = positionOnSpline;
-        tangentOnTrackSpline = tangentOnSpline;
-    }
+        [Header("Whiskers")]
+        [SerializeField] private float forwardsWhiskerLength;
+        [SerializeField] private float sideWhiskerLength;
+        [SerializeField] private float sideWhiskerAngle;
+        [SerializeField] private float sideWhiskerTurnAnglePerSecond;
+        private Vector3 whiskerFront;
+        private Vector3 whiskerRight;
+        private Vector3 whiskerLeft;
 
-    private void FixedUpdate()
-    {
-        if (!isRespawning)
+        [Header("Alignment")]
+        [SerializeField] private float alignmentTurnAnglePerSecond = 5f;
+
+        [Header("Respawning")]
+        [ReadOnly] public bool isRespawning;
+        public float respawnStartDelay;
+        public float respawnDuration;
+
+        [Header("Debug")]
+        public float positionGizmoRadius = 1f;
+
+        private void Start()
         {
-            MovementUpdate();
+            track = FindFirstObjectByType<Track>();
+            racerRigidbody2d = GetComponent<Rigidbody2D>();
+
+            BeginRace();
         }
-    }
 
-    private void MovementUpdate()
-    {
-        // Whiskers
-        whiskerFront = transform.up * forwardsWhiskerLength;
-        // Setup Whisker Right
-        Vector3 sideWhiskerDirectionRight = Vector3.RotateTowards(transform.up, transform.right, Mathf.Deg2Rad * sideWhiskerAngle, 0);
-        whiskerRight = sideWhiskerDirectionRight * sideWhiskerLength;
-        //Setup Whisker Left
-        Vector3 sideWhiskerDirectionLeft = Vector3.RotateTowards(transform.up, transform.right * -1, Mathf.Deg2Rad * sideWhiskerAngle, 0);
-        whiskerLeft = sideWhiskerDirectionLeft * sideWhiskerLength;
-
-        AlignWithTrack();
-        CheckSideWhisker(sideWhiskerDirectionLeft, -1);
-        CheckSideWhisker(sideWhiskerDirectionRight, 1);
-
-        if (brake.IsActive && currentSpeed > brake.MaxSpeed)
+        private void BeginRace()
         {
-            currentSpeed -= brake.Deceleration * Time.fixedDeltaTime;
+            currentHeading = transform.up;
         }
-        else if (boost.IsFinishing) // Boost - Finished, so decelerate to max speed.
+
+        private void Update()
         {
-            currentSpeed -= boost.Deceleration * Time.fixedDeltaTime;
-            if (currentSpeed <= maxSpeed)
+            UpdateTrackPosition();
+        }
+
+        private void UpdateTrackPosition()
+        {
+            distanceAlongTrack = track.GetDistanceToSpline(transform.position, out Vector3 positionOnSpline, out Vector3 tangentOnSpline);
+            positionOnTrackSpline = positionOnSpline;
+            tangentOnTrackSpline = tangentOnSpline;
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isRespawning)
             {
-                boost.OverrideFinished();
-            }
-        }
-        else // Acceleration
-        {
-            bool isBoosting = boost.IsActive;
-            float accelerationChange = isBoosting ? boost.Acceleration : acceleration;
-
-            if (currentSpeed <= (isBoosting ? boost.MaxSpeed : maxSpeed))
-            {
-                currentSpeed += accelerationChange * Time.fixedDeltaTime;
+                MovementUpdate();
             }
         }
 
-        // Execute the move and set the cart to look in the direction of movement.
-        float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
-
-        racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * Time.fixedDeltaTime * Time.timeScale), angle - 90f);
-
-    }
-
-    private void AlignWithTrack()
-    {
-        currentHeading = Vector3.RotateTowards(currentHeading, tangentOnTrackSpline,
-            (Mathf.Deg2Rad * alignmentTurnAnglePerSecond) * Time.fixedDeltaTime,
-            0);
-    }
-
-    private void CheckSideWhisker(Vector3 whiskerDirection, int side)
-    {
-        var hits = Physics2D.RaycastAll(transform.position, whiskerDirection, sideWhiskerLength);
-        if (hits.Length > 0)
+        private void MovementUpdate()
         {
-            foreach (var hit in hits)
+            // Whiskers
+            whiskerFront = transform.up * forwardsWhiskerLength;
+            // Setup Whisker Right
+            Vector3 sideWhiskerDirectionRight = Vector3.RotateTowards(transform.up, transform.right, Mathf.Deg2Rad * sideWhiskerAngle, 0);
+            whiskerRight = sideWhiskerDirectionRight * sideWhiskerLength;
+            //Setup Whisker Left
+            Vector3 sideWhiskerDirectionLeft = Vector3.RotateTowards(transform.up, transform.right * -1, Mathf.Deg2Rad * sideWhiskerAngle, 0);
+            whiskerLeft = sideWhiskerDirectionLeft * sideWhiskerLength;
+
+            AlignWithTrack();
+            CheckSideWhisker(sideWhiskerDirectionLeft, -1);
+            CheckSideWhisker(sideWhiskerDirectionRight, 1);
+
+            if (brake.IsActive && currentSpeed > brake.MaxSpeed)
             {
-                if (hit.transform.CompareTag("Track"))
+                currentSpeed -= brake.Deceleration * Time.fixedDeltaTime;
+            }
+            else if (boost.IsFinishing) // Boost - Finished, so decelerate to max speed.
+            {
+                currentSpeed -= boost.Deceleration * Time.fixedDeltaTime;
+                if (currentSpeed <= maxSpeed)
                 {
-                    // Collided with the track border.
-                    currentHeading = Vector3.RotateTowards(currentHeading, transform.right * -side,
-                        (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
-                        0);
-                    break;
+                    boost.OverrideFinished();
+                }
+            }
+            else // Acceleration
+            {
+                bool isBoosting = boost.IsActive;
+                float accelerationChange = isBoosting ? boost.Acceleration : acceleration;
+
+                if (currentSpeed <= (isBoosting ? boost.MaxSpeed : maxSpeed))
+                {
+                    currentSpeed += accelerationChange * Time.fixedDeltaTime;
+                }
+            }
+
+            // Execute the move and set the cart to look in the direction of movement.
+            float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
+
+            racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * Time.fixedDeltaTime * Time.timeScale), angle - 90f);
+
+        }
+
+        private void AlignWithTrack()
+        {
+            currentHeading = Vector3.RotateTowards(currentHeading, tangentOnTrackSpline,
+                (Mathf.Deg2Rad * alignmentTurnAnglePerSecond) * Time.fixedDeltaTime,
+                0);
+        }
+
+        private void CheckSideWhisker(Vector3 whiskerDirection, int side)
+        {
+            var hits = Physics2D.RaycastAll(transform.position, whiskerDirection, sideWhiskerLength);
+            if (hits.Length > 0)
+            {
+                foreach (var hit in hits)
+                {
+                    if (hit.transform.CompareTag("Track"))
+                    {
+                        // Collided with the track border.
+                        currentHeading = Vector3.RotateTowards(currentHeading, transform.right * -side,
+                            (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
+                            0);
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!isRespawning && collision.transform.CompareTag("Track"))
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            // We've left the track. Time to respawn.
-            StartCoroutine(Respawn());
+            if (!isRespawning && collision.transform.CompareTag("Track"))
+            {
+                // We've left the track. Time to respawn.
+                StartCoroutine(Respawn());
+            }
         }
-    }
 
-    private IEnumerator Respawn()
-    {
-        isRespawning = true;
+        private IEnumerator Respawn()
+        {
+            isRespawning = true;
 
-        boost.RacerRespawned();
-        brake.RacerRespawned();
+            boost.RacerRespawned();
+            brake.RacerRespawned();
 
-        yield return new WaitForSeconds(respawnStartDelay);
-        transform.position = positionOnTrackSpline;
+            yield return new WaitForSeconds(respawnStartDelay);
+            transform.position = positionOnTrackSpline;
 
-        // Face the splines tangent, and also reset the heading + speed.
-        transform.up = tangentOnTrackSpline;
-        racerRigidbody2d.velocity = Vector3.zero;
-        racerRigidbody2d.angularVelocity = 0f;
-        currentHeading = transform.up;
-        currentSpeed = 0f;
+            // Face the splines tangent, and also reset the heading + speed.
+            transform.up = tangentOnTrackSpline;
+            racerRigidbody2d.velocity = Vector3.zero;
+            racerRigidbody2d.angularVelocity = 0f;
+            currentHeading = transform.up;
+            currentSpeed = 0f;
 
-        yield return new WaitForSeconds(respawnDuration);
+            yield return new WaitForSeconds(respawnDuration);
 
-        isRespawning = false;
-        yield return null;
-    }
+            isRespawning = false;
+            yield return null;
+        }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(positionOnTrackSpline, positionGizmoRadius);
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawSphere(positionOnTrackSpline, positionGizmoRadius);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + (currentSpeed * currentHeading));
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + (currentSpeed * currentHeading));
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + whiskerFront);
-        Gizmos.DrawLine(transform.position , transform.position + whiskerRight);
-        Gizmos.DrawLine(transform.position, transform.position + whiskerLeft);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + whiskerFront);
+            Gizmos.DrawLine(transform.position , transform.position + whiskerRight);
+            Gizmos.DrawLine(transform.position, transform.position + whiskerLeft);
+        }
     }
 }
