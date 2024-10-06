@@ -20,14 +20,14 @@ public class RacerBase : MonoBehaviour
     [Header("Movement")]
     [SerializeField] [ReadOnly] private float currentSpeed;
     private Vector3 currentHeading;
-    [SerializeField] private float maxSpeed = 5f;
-    [SerializeField] private float acceleration = 1f;
+    [SerializeField] private float maxSpeed = 0.5f;
+    [SerializeField] private float acceleration = 0.1f;
 
     [Header("Whiskers")] 
-    [SerializeField] private float forwardsWhiskerLength;
-    [SerializeField] private float sideWhiskerLength;
-    [SerializeField] private float sideWhiskerAngle;
-    [SerializeField] private float sideWhiskerTurnAnglePerSecond;
+    [SerializeField] private float forwardsWhiskerLength = 4;
+    [SerializeField] private float sideWhiskerLength = 8;
+    [SerializeField] private float sideWhiskerAngle = 30;
+    [SerializeField] private float sideWhiskerTurnAnglePerSecond = 90;
     private Vector3 whiskerFront;
     private Vector3 whiskerRight;
     private Vector3 whiskerLeft;
@@ -37,11 +37,11 @@ public class RacerBase : MonoBehaviour
     
     [Header("Respawning")] 
     [ReadOnly] public bool isRespawning;
-    public float respawnStartDelay;
-    public float respawnDuration;
+    public float respawnStartDelay = 0.3f;
+    public float respawnDuration = 1.5f;
     
     [Header("Debug")]
-    public float positionGizmoRadius = 1f;
+    public float positionGizmoRadius = 2f;
         
     private void Start()
     {
@@ -59,6 +59,9 @@ public class RacerBase : MonoBehaviour
     private void Update()
     {
         UpdateTrackPosition();
+        float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
+        
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 
     private void UpdateTrackPosition()
@@ -114,8 +117,10 @@ public class RacerBase : MonoBehaviour
             }
         }
 
+        // Execute the move and set the cart to look in the direction of movement.
         racerRigidbody2d.MovePosition(transform.position + currentHeading * currentSpeed);
-        transform.up = currentHeading;
+        
+        
     }
 
     private void AlignWithTrack()

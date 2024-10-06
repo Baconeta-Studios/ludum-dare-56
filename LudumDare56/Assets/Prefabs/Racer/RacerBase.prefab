@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2343108882437292734}
-  - component: {fileID: 130079349287866702}
   - component: {fileID: 7081486185929337761}
   - component: {fileID: 5525670306965000797}
   - component: {fileID: 2279850917084086495}
   m_Layer: 0
-  m_Name: Racer
+  m_Name: RacerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,33 +37,6 @@ Transform:
   - {fileID: 5781570791450438942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &130079349287866702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843356639919173845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ccfa4f0b060b494a8b70d4a9e9c04df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boost: {fileID: 2279850917084086495}
-  brake: {fileID: 5525670306965000797}
-  distanceAlongTrack: 0
-  currentSpeed: 0
-  maxSpeed: 0.5
-  acceleration: 0.1
-  forwardsWhiskerLength: 4
-  sideWhiskerLength: 8
-  sideWhiskerAngle: 30
-  sideWhiskerTurnAnglePerSecond: 90
-  alignmentTurnAnglePerSecond: 5
-  isRespawning: 0
-  respawnStartDelay: 0.3
-  respawnDuration: 1.5
-  positionGizmoRadius: 2
 --- !u!50 &7081486185929337761
 Rigidbody2D:
   serializedVersion: 4
@@ -210,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.14481235, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
