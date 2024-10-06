@@ -14,7 +14,7 @@ namespace _Scripts.Racer
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
-        public ShortcutCard triggerCard;
+        public CardBase triggerCard;
         
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
