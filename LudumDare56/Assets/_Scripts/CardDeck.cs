@@ -9,8 +9,11 @@ public class CardDeck : MonoBehaviour
 {
     private Stack<CardBase> drawPile = new Stack<CardBase>();
     private Stack<CardBase> discardPile = new Stack<CardBase>();
-    private List<CardBase> hand = new List<CardBase>();
-    private CardBase activeCard = null;
+
+    public List<CardBase> Hand { get; } = new List<CardBase>();
+
+    public CardBase ActiveCard { get; set; } = null;
+
     public RacerBase owner = null;
     public RacerBase Owner
     {
@@ -24,7 +27,7 @@ public class CardDeck : MonoBehaviour
         }
     }
     
-    public int Count => drawPile.Count + discardPile.Count + hand.Count + (activeCard== null ? 0 : 1);
+    public int Count => drawPile.Count + discardPile.Count + Hand.Count + (ActiveCard== null ? 0 : 1);
 
     /// <summary>
     /// Add a new card to the top of the draw pile.
@@ -46,7 +49,7 @@ public class CardDeck : MonoBehaviour
     [ContextMenu("Draw 1")]
     public void DrawCard()
     {
-        hand.Add(drawPile.Pop());
+        Hand.Add(drawPile.Pop());
     }
 
     /// <summary>
@@ -56,14 +59,14 @@ public class CardDeck : MonoBehaviour
     public void DiscardCard(CardBase card)
     {
         // Discard from active zone.
-        if (activeCard != null && activeCard.Equals(card))
+        if (ActiveCard != null && ActiveCard.Equals(card))
         {
             discardPile.Push(card);
-            activeCard = null;
-        } else if (hand.Contains(card)) // Discard from hand.
+            ActiveCard = null;
+        } else if (Hand.Contains(card)) // Discard from hand.
         {
             discardPile.Push(card);
-            hand.Remove(card);
+            Hand.Remove(card);
         }
         else
         {
@@ -77,7 +80,7 @@ public class CardDeck : MonoBehaviour
     [ContextMenu("Discard Hand (not active card)")]
     public void DiscardHand()
     {
-        foreach (var item in hand)
+        foreach (var item in Hand)
             DiscardCard(item);
     }
 
@@ -105,7 +108,7 @@ public class CardDeck : MonoBehaviour
         if (includeHand)
         {
             DiscardHand();
-            DiscardCard(activeCard);
+            DiscardCard(ActiveCard);
         }
         DiscardDrawPile();
         drawPile = ShuffleStack(discardPile);
@@ -153,7 +156,7 @@ public class CardDeck : MonoBehaviour
             sb.Append(" ");
         }
         sb.Append("[HAND] ");
-        foreach (CardBase card in hand)
+        foreach (CardBase card in Hand)
         {
             sb.Append(card.ToString());
             sb.Append(" ");
@@ -165,5 +168,27 @@ public class CardDeck : MonoBehaviour
             sb.Append(" ");
         }
         Debug.Log(sb.ToString());
+    }
+
+    public bool PlayCard(CardBase cardToUse, Action zoneCardUsed)
+    {
+        // End card effect for card in zone and discard it if it exists
+        ActiveCard?.EndCardEffect();
+        if (ActiveCard != null)
+        {
+            DiscardCard(ActiveCard);
+        }
+
+        // Physically move the card in the desk systems
+        var handCardRef = Hand.FirstOrDefault(card => card == cardToUse);
+        
+        // Find the card in the hand and move it to the play zone
+        if (handCardRef != null)
+        {
+            Hand.Remove(handCardRef);
+            ActiveCard = handCardRef;
+        }
+        
+        return cardToUse.TryUseCard(zoneCardUsed);
     }
 }
