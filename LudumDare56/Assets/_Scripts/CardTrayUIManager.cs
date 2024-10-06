@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CardTrayUIManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class CardTrayUIManager : MonoBehaviour
     public Vector3 trayUIOpenPosition;
     
     private bool isTrayUIOpen = false;
+    
+    public event Action OnTrayUIOpen;
+    public event Action OnTrayUIClose;
     
     // Get Player Deck system controller
     
@@ -26,7 +30,7 @@ public class CardTrayUIManager : MonoBehaviour
         }
     }
 
-    public void OpenTrayUI()
+    private void OpenTrayUI()
     {
         Debug.Log("Opening Tray UI");
         if (isTrayUIOpen)
@@ -37,9 +41,12 @@ public class CardTrayUIManager : MonoBehaviour
 
         gameObject.transform.localPosition = trayUIOpenPosition;
         isTrayUIOpen = true;
+        OnTrayUIOpen?.Invoke();
+
+        Time.timeScale = 0f;
     }
-    
-    public void CloseTrayUI()
+
+    private void CloseTrayUI()
     {
         Debug.Log("Closing Tray UI");
         if (!isTrayUIOpen)
@@ -50,5 +57,8 @@ public class CardTrayUIManager : MonoBehaviour
 
         gameObject.transform.localPosition = trayUIStartPosition;
         isTrayUIOpen = false;
+        OnTrayUIClose?.Invoke();
+        
+        Time.timeScale = 1f;
     }
 }

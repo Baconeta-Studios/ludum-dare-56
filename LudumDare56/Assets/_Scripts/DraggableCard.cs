@@ -1,3 +1,4 @@
+using _Scripts;
 using UnityEngine;
 
 public class DraggableCard : MonoBehaviour
@@ -5,11 +6,17 @@ public class DraggableCard : MonoBehaviour
     public Camera mainCamera;
     private bool isDragging = false;
     private Vector3 offset;
+    private GameInput gameInputSystem;
+    private Canvas gameCanvas;
+    private Rect rect;
 
     // Start is called before the first frame update
     private void Start()
     {
         mainCamera = Camera.main;
+        gameInputSystem = FindFirstObjectByType<GameInput>();
+        gameCanvas = FindFirstObjectByType<Canvas>();
+        rect = gameCanvas.GetComponent<RectTransform>().rect;
     }
 
     // Update is called once per frame
@@ -40,13 +47,20 @@ public class DraggableCard : MonoBehaviour
 
     private Vector3 GetMouseWorldPosition()
     {
-        //Vector3 mousePoint = FindObjectsByType<GameInput>().
+        var mousePoint = gameInputSystem.GetPrimaryPositionScreen;
+        if (gameCanvas == null)
+        {
+            Debug.LogError("No canvas found");
+            return new Vector3();
+        }
 
-        // Set z-coordinate to match the object's z-position
-        //mousePoint.z = Mathf.Abs(mainCamera.transform.position.z - transform.position.z);
+        var mousePosInViewPointCoords = mainCamera.ScreenToViewportPoint(mousePoint);
+        mousePosInViewPointCoords.x *= rect.width * gameCanvas.scaleFactor;
+        mousePosInViewPointCoords.y *= rect.height * gameCanvas.scaleFactor;
 
-        //return mainCamera.ScreenToWorldPoint(mousePoint);
+        var mouseScreenPointWithDepth = new Vector3(mousePosInViewPointCoords.x, mousePosInViewPointCoords.y,
+            Mathf.Abs(mainCamera.transform.position.z - transform.position.z));
 
-        return new Vector3(0, 0, 0);
+        return mouseScreenPointWithDepth;
     }
 }
