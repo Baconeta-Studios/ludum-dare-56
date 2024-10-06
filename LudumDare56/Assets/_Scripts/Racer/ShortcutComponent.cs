@@ -14,7 +14,12 @@ public class ShortcutComponent : MonoBehaviour
     [SerializeField] private float sizeCurveDuration;
     [SerializeField] private AnimationCurve sizeCurve;
     
-    public bool IsActive => isActive;
+    public bool IsActive
+    {
+        get => isActive;
+        set => isActive = value;
+    }
+
     public bool IsInShortcut => isInShortcut;
 
     private void Awake()

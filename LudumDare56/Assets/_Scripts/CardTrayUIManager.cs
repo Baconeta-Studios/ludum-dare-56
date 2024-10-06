@@ -101,7 +101,7 @@ namespace _Scripts
             else
             {
                 // This likely will need to change to delay destruction and play some pretty effects
-                
+                card.SetUsableState();
             }
         }
 

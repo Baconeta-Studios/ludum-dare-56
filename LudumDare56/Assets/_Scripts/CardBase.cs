@@ -60,4 +60,8 @@ public abstract class CardBase : MonoBehaviour
 
         return false;
     }
+
+    public virtual void SetUsableState()
+    {
+    }
 }
