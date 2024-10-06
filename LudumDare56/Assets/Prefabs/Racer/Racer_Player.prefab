@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 2576518787264148619, guid: af6b0812c50854643bf7ffb2f424bbf7, type: 3}
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.b
@@ -118,12 +118,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: particleEffect
-      value:
+      value: 
       objectReference: {fileID: 8526191286834518237}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4775466648566033861}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
 --- !u!114 &193115744124237289 stripped
 MonoBehaviour:
@@ -134,8 +137,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5b800ff8b8a6cc46ad63735c66d586d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5882442412960819051 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
@@ -145,8 +148,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20eebfc14b7646e4eaa43bc49d0e2456, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6311198365944158049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
@@ -162,18 +165,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fddd3ec104b3cc04eae8ed7402582ba2, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   boost: {fileID: 5882442412960819051}
   brake: {fileID: 193115744124237289}
   distanceAlongTrack: 0
   currentSpeed: 0
-  maxSpeed: 21
-  acceleration: 6
+  maxSpeed: 24
+  acceleration: 5
   forwardsWhiskerLength: 4
-  sideWhiskerLength: 8
+  sideWhiskerLength: 10
   sideWhiskerAngle: 30
-  sideWhiskerTurnAnglePerSecond: 90
+  sideWhiskerTurnAnglePerSecond: 70
   alignmentTurnAnglePerSecond: 10
   isRespawning: 0
   respawnStartDelay: 0.3
