@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using _Scripts.Racer;
 using UnityEngine;
 
 public class CardDeck : MonoBehaviour
