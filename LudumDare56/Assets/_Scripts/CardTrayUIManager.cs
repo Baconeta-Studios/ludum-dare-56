@@ -43,7 +43,7 @@ public class CardTrayUIManager : MonoBehaviour
         isTrayUIOpen = true;
         OnTrayUIOpen?.Invoke();
 
-        Time.timeScale = 0f;
+        Time.timeScale = 0.2f;
     }
 
     private void CloseTrayUI()

@@ -1,4 +1,6 @@
-﻿namespace _Scripts
+﻿using UnityEngine;
+
+namespace _Scripts
 {
     public class Utilities
     {
