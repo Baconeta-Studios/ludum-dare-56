@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,8 +16,24 @@ namespace _Scripts
         
         [SerializeField] private CardTrayUIManager cardTrayUIManager;
 
-        public void PopulateChoices()
+        private bool hasBeenInit;
+
+        private void OnEnable()
         {
+            PopulateChoices();
+        }
+
+        private void PopulateChoices()
+        {
+            if (choiceUIFaceUpA.childCount > 0)
+            {
+                Destroy(choiceUIFaceUpA.transform.GetChild(0).gameObject);
+            }
+            if (choiceUIFaceUpB.childCount > 0)
+            {
+                Destroy(choiceUIFaceUpB.transform.GetChild(0).gameObject);
+            }
+
             var player = FindAnyObjectByType<RacerPlayer>();
             if (cardSelection == null)
             {

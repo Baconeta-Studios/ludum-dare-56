@@ -18,10 +18,10 @@ public struct NumberOfEachCard
 
 public class CardDeck : MonoBehaviour
 {
-    private Stack<CardBase> drawPile = new Stack<CardBase>();
-    private Stack<CardBase> discardPile = new Stack<CardBase>();
+    private Stack<CardBase> drawPile = new();
+    private Stack<CardBase> discardPile = new();
 
-    public List<CardBase> Hand { get; } = new List<CardBase>();
+    public List<CardBase> Hand { get; } = new();
 
     public CardBase ActiveCard { get; set; } = null;
 
@@ -44,25 +44,35 @@ public class CardDeck : MonoBehaviour
 
     public void SetupDeck()
     {
-        for (int i = 0; i < deckSetup.boostCards; i++)
+        for (var i = 0; i < deckSetup.boostCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.boostCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.boostCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.brakeCards; i++)
+        for (var i = 0; i < deckSetup.brakeCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.brakeCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.brakeCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.jumpCards; i++)
+        for (var i = 0; i < deckSetup.jumpCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.jumpCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.jumpCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.sabotageCards; i++)
+        for (var i = 0; i < deckSetup.sabotageCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.sabotageCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.sabotageCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.shortcutCards; i++)
+        for (var i = 0; i < deckSetup.shortcutCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.shortcutCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.shortcutCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
         
         ShuffleDrawPile();
