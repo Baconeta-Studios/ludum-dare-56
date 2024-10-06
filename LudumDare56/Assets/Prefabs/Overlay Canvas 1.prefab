@@ -387,6 +387,10 @@ PrefabInstance:
       propertyPath: choiceUIPopup
       value: 
       objectReference: {fileID: 8164198229240106561}
+    - target: {fileID: 3439920434589296787, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: trayUIStartPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4329917526224113208, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: m_Name
       value: CardTrayUI
@@ -469,6 +473,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915114592876804727, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316949892681361604, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316949892681361604, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316949892681361604, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
