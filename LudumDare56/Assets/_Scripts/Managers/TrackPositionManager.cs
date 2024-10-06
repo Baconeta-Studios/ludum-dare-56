@@ -8,8 +8,8 @@ namespace _Scripts.Managers
 {
     public class TrackPositionManager : MonoBehaviour
     {
-        private RacerProgress playerRacer;
         private RacerProgress[] otherRacers;
+        private RacerProgress player;
         
         private void Start()
         {
@@ -18,7 +18,7 @@ namespace _Scripts.Managers
             // Find and extract the player racer from the list of racers.
             foreach (var racerPlayer in racers.Where(racer => racer.GetType() == typeof(RacerPlayer)))
             {
-                this.playerRacer = new RacerProgress((RacerPlayer) racerPlayer);
+                this.player = new RacerProgress((RacerPlayer) racerPlayer);
                 racers.Remove(racerPlayer);
                 break;
             }
@@ -28,6 +28,28 @@ namespace _Scripts.Managers
             {
                 otherRacers = new RacerProgress[racers.Count];
                 otherRacers[i] = new RacerProgress((RacerAi) racers[i]);
+            }
+        }
+        
+        private void OnEnable()
+        {
+            FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
+        }
+
+        private void OnDisable()
+        {
+            FinishLine.OnRacerCrossFinishLine -= HandleLapEndEvent;
+        }
+        
+        private void HandleLapEndEvent(RacerBase racer)
+        {
+            if (racer.GetType() == typeof(RacerPlayer))
+            {
+                this.player.IncrementLapsCompleted();
+            }
+            else
+            {
+                // TODO
             }
         }
         

@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Racer;
 using UnityEngine;
 
 namespace _Scripts.Managers
@@ -51,8 +52,13 @@ namespace _Scripts.Managers
             return fastestLapCache;
         }
 
-        public void TriggerLapEndEvent()
+        public void HandleLapEndEvent(RacerBase racer)
         {
+            if (!isRacing)
+            {
+                StartRaceTimer();
+                return;
+            }
             // Calculate last-lap time.
             lastLapTime = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
@@ -68,6 +74,16 @@ namespace _Scripts.Managers
             fastestLapCache = TimeSpan.FromSeconds(fastestLap);
         }
 
+        private void OnEnable()
+        {
+            FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
+        }
+
+        private void OnDisable()
+        {
+            FinishLine.OnRacerCrossFinishLine -= HandleLapEndEvent;
+        }
+        
         private void Update()
         {
             if (isRacing)
