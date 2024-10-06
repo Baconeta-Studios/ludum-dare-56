@@ -35,11 +35,6 @@ namespace _Scripts.Managers
         {
             isRacing = false;
         }
-        
-        public TimeSpan GetRaceTime()
-        {
-            return TimeSpan.FromSeconds(fastestLap);
-        }
 
         public void HandleLapEndEvent(RacerBase racer)
         {
