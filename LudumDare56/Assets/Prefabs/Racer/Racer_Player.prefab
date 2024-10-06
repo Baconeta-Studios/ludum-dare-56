@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Racer_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: maxSpeed
       value: 35
@@ -128,6 +132,30 @@ PrefabInstance:
       propertyPath: deceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 4775466648566033861}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.jumpCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.boostCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.brakeCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.sabotageCards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.shortcutCards
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: particleEffect
       value: 
@@ -139,9 +167,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4775466648566033861}
-    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2765832405885284045}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
 --- !u!114 &193115744124237289 stripped
 MonoBehaviour:
@@ -199,25 +224,6 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
---- !u!114 &2765832405885284045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311198365944158049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2575ab8427fe40588467ab4653c7f6d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 4775466648566033861}
-  deckSetup:
-    boostCards: 5
-    brakeCards: 4
-    jumpCards: 3
-    sabotageCards: 2
-    shortcutCards: 1
 --- !u!198 &8526191286834518237 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
