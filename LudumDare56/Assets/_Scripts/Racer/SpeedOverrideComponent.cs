@@ -36,7 +36,7 @@ public class SpeedOverrideComponent : MonoBehaviour
     }
     
     [ContextMenu("Activate Override")]
-    public void StartOverride()
+    public virtual void StartOverride()
     {
         if (isActive)
         {
