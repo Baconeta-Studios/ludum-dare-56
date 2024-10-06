@@ -7,8 +7,8 @@ namespace _Scripts.Managers
 {
     public class TrackPositionManager : MonoBehaviour
     {
-        private RacerProgress<RacerPlayer> playerRacer;
-        private RacerProgress<AiRacer>[] otherRacers;
+        private RacerProgress playerRacer;
+        private RacerProgress[] otherRacers;
         
         private void Start()
         {
@@ -17,7 +17,7 @@ namespace _Scripts.Managers
             // Find and extract the player racer from the list of racers.
             foreach (var racerPlayer in racers.Where(racer => racer.GetType() == RacerPlayer.GetType()))
             {
-                this.playerRacer = new RacerProgress<RacerPlayer>((RacerPlayer) racerPlayer);
+                this.playerRacer = new RacerProgress((RacerPlayer) racerPlayer);
                 racers.Remove(racerPlayer);
                 break;
             }
@@ -25,19 +25,26 @@ namespace _Scripts.Managers
             // Save other racers, they'll all be AI.
             for (int i = 0; i < racers.Count; i++)
             {
-                otherRacers = new RacerProgress<AiRacer>[racers.Count];
-                otherRacers[i] = new RacerProgress<AiRacer>((AiRacer) racers[i]);
+                otherRacers = new RacerProgress[racers.Count];
+                otherRacers[i] = new RacerProgress((RacerAi) racers[i]);
             }
         }
+        
+        public int GetPlayerPosition() {
+            List<RacerProgress> li = otherRacers.ToList();
+            li.Add(playerRacer);
+            li.Sort();
+            return li.IndexOf(playerRacer) + 1;
+        }
     }
-
-    public class RacerProgress<T> : IComparable<RacerProgress<T>>
+    
+    public class RacerProgress : IComparable<RacerProgress>
     {
-        private T racer;
+        private RacerBase racer;
         private int lapsCompleted;
         private float lapProgress;
 
-        public RacerProgress(T racer)
+        public RacerProgress(RacerBase racer)
         {
             this.racer = racer;
             lapsCompleted = 0;
@@ -59,7 +66,7 @@ namespace _Scripts.Managers
             return (lapsCompleted * 1.0F) + lapProgress;
         }
         
-        public int CompareTo(RacerProgress<T> other)
+        public int CompareTo(RacerProgress other)
         {
             if (Mathf.Approximately(this.GetRaceProgress(), other.GetRaceProgress()))
             {
