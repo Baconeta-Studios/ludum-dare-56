@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SpeedOverrideComponent : MonoBehaviour
 {
@@ -39,7 +36,7 @@ public class SpeedOverrideComponent : MonoBehaviour
     }
     
     [ContextMenu("Activate Override")]
-    public void StartOverride()
+    public virtual void StartOverride()
     {
         if (isActive)
         {

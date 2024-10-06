@@ -1,4 +1,5 @@
 using System.Collections;
+using _Scripts.Cards;
 using UnityEngine;
 
 namespace _Scripts.Racer
@@ -7,11 +8,14 @@ namespace _Scripts.Racer
     {
         private Track track;
         private Rigidbody2D racerRigidbody2d;
+        private Collider2D collider2D;
 
         [Header("Card Components")]
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
-
+        [SerializeField] private ShortcutComponent shortcut;
+        public ShortcutCard triggerCard;
+        
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
         public float DistanceAlongTrack => distanceAlongTrack;
@@ -20,6 +24,7 @@ namespace _Scripts.Racer
 
         [Header("Movement")]
         [SerializeField] [ReadOnly] private float currentSpeed;
+        public float CurrentSpeed => currentSpeed;
         private Vector3 currentHeading;
         [SerializeField] private float maxSpeed = 5f;
         [SerializeField] private float acceleration = 1f;
@@ -48,6 +53,7 @@ namespace _Scripts.Racer
         {
             track = FindFirstObjectByType<Track>();
             racerRigidbody2d = GetComponent<Rigidbody2D>();
+            collider2D = GetComponentInChildren<Collider2D>();
 
             BeginRace();
         }
@@ -55,6 +61,14 @@ namespace _Scripts.Racer
         private void BeginRace()
         {
             currentHeading = transform.up;
+            
+            // Setup Racers Deck
+            var deck = GetComponent<CardDeck>();
+            deck?.SetupDeck();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
         }
 
         private void Update()
@@ -71,7 +85,7 @@ namespace _Scripts.Racer
 
         private void FixedUpdate()
         {
-            if (!isRespawning)
+            if (!shortcut.IsInShortcut && !isRespawning)
             {
                 MovementUpdate();
             }
@@ -150,7 +164,7 @@ namespace _Scripts.Racer
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (!isRespawning && collision.transform.CompareTag("Track"))
+            if (!shortcut.IsInShortcut && !isRespawning && collision.transform.CompareTag("Track"))
             {
                 // We've left the track. Time to respawn.
                 StartCoroutine(Respawn());
@@ -192,6 +206,27 @@ namespace _Scripts.Racer
             Gizmos.DrawLine(transform.position, transform.position + whiskerFront);
             Gizmos.DrawLine(transform.position , transform.position + whiskerRight);
             Gizmos.DrawLine(transform.position, transform.position + whiskerLeft);
+        }
+
+        public void EnteredShortcut()
+        {
+            racerRigidbody2d.isKinematic = true;
+            collider2D.enabled = false;
+            
+            triggerCard?.UseCard();
+        }
+
+        public void ExitedShortcut(Vector2 heading)
+        {
+            currentHeading = heading;
+            racerRigidbody2d.isKinematic = false;
+            StartCoroutine((EnableCollisionAfterDuration()));
+        }
+
+        private IEnumerator EnableCollisionAfterDuration()
+        {
+            yield return new WaitForSeconds(1f);
+            collider2D.enabled = true;
         }
     }
 }
