@@ -9,16 +9,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2729823407184647820, guid: c004ca5efcb53924dbdf4d277c594df2, type: 3}
+    - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.b
-      value: 0.10123708
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.g
-      value: 0.24040921
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 347207397671470165, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Color.r
-      value: 0.8584906
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Name
@@ -42,15 +46,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.9459257
+      value: 1.7499999
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.9459257
+      value: 1.7499999
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.9459257
+      value: 1.7499999
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -91,6 +95,22 @@ PrefabInstance:
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6313332
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Size.y
+      value: 3.8168318
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.028059551
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867390347499494738, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.01052257
       objectReference: {fileID: 0}
     - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: maxSpeed
@@ -159,6 +179,7 @@ MonoBehaviour:
   boost: {fileID: 5441380154746699818}
   brake: {fileID: 1769666033179579048}
   shortcut: {fileID: 7431049969610122085}
+  triggerCard: {fileID: 0}
   distanceAlongTrack: 0
   currentSpeed: 0
   maxSpeed: 25

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 928861530007988324}
   - component: {fileID: 2812573845973171769}
   - component: {fileID: 714821333926993066}
+  - component: {fileID: 7204495493607337186}
   m_Layer: 5
   m_Name: CardTray
   m_TagString: Hand
@@ -39,8 +40,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 124.7}
-  m_SizeDelta: {x: 600, y: 250}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3439920434589296787
 MonoBehaviour:
@@ -55,7 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trayUIStartPosition: {x: 0, y: -75, z: 0}
-  trayUIOpenPosition: {x: 0, y: 125, z: 0}
+  trayUIOpenPosition: {x: 0, y: 256, z: 0}
   zoneUIPosition: {fileID: 5163733039465576858}
   playerCardDeck: {fileID: 0}
 --- !u!114 &8902760737458573215
@@ -142,9 +143,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 3387146032810981470, guid: 307909e30a05a9c4d99739802f085a0f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -165,16 +166,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
+    m_Left: 50
+    m_Right: 50
+    m_Top: 120
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -80
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: -90
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -222,7 +223,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 800, y: 300}
+  m_Size: {x: 1000, y: 530}
   m_EdgeRadius: 0
 --- !u!50 &714821333926993066
 Rigidbody2D:
@@ -251,6 +252,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7204495493607337186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314913513039789294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1ae765da1941079b6f24e123ad008c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutGroup: {fileID: 928861530007988324}
+  dotWidth: 240
+  lengthRectTransform: {fileID: 8316949892681361604}
 --- !u!1 &1755708590437355959
 GameObject:
   m_ObjectHideFlags: 0
