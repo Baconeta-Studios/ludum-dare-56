@@ -1,4 +1,5 @@
 using System.Collections;
+using _Scripts.Cards;
 using UnityEngine;
 
 namespace _Scripts.Racer
@@ -13,6 +14,7 @@ namespace _Scripts.Racer
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
+        public ShortcutCard triggerCard;
         
         [Header("Lap Progress")]
         [SerializeField] [ReadOnly] private float distanceAlongTrack;
@@ -59,6 +61,14 @@ namespace _Scripts.Racer
         private void BeginRace()
         {
             currentHeading = transform.up;
+            
+            // Setup Racers Deck
+            var deck = GetComponent<CardDeck>();
+            deck?.SetupDeck();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
         }
 
         private void Update()
@@ -202,6 +212,8 @@ namespace _Scripts.Racer
         {
             racerRigidbody2d.isKinematic = true;
             collider2D.enabled = false;
+            
+            triggerCard?.UseCard();
         }
 
         public void ExitedShortcut(Vector2 heading)
