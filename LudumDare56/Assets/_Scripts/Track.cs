@@ -18,6 +18,8 @@ public class Track : MonoBehaviour
         SplineUtility.GetNearestPoint(trackSpline.Spline, position, out float3 nearestPoint, out float distanceAlongTrack);
         tangentOnSpline = trackSpline.Spline.EvaluateTangent(distanceAlongTrack);
         tangentOnSpline.z = 0;
+        tangentOnSpline.Normalize();
+        
         nearestPointOnSpline = nearestPoint;
         
         return distanceAlongTrack;
