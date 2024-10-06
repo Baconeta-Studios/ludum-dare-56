@@ -1,25 +1,62 @@
-using System;
 using System.Linq;
+using _Scripts.Racer;
 using UnityEngine;
 
 namespace _Scripts
 {
     public class CardTrayUIManager : MonoBehaviour
     {
+        public ChoiceUI choiceUIPopup;
         public Vector3 trayUIStartPosition;
         public Vector3 trayUIOpenPosition;
-        
         public RectTransform zoneUIPosition;
-    
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
-     
-        public event Action OnTrayUIOpen;
-        public event Action OnTrayUIClose;
     
         // Get Player Deck system controller
-    
+        
+        private void Awake()
+        {
+            playerCardDeck = GameObject.FindGameObjectWithTag("Player").GetComponent<CardDeck>();
+        }
+        
+        public void OnEnable()
+        {
+            CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
+        }
+
+        public void OnDisable()
+        {
+            CheckPoint.OnRacerCrossCheckPoint -= OnRacerCrossCheckPoint;
+        }
+
+        private void OnRacerCrossCheckPoint(RacerBase racer)
+        {
+            if (racer.GetType() != typeof(RacerPlayer))
+            {
+                return;
+            }
+            if (isTrayUIOpen)
+            {
+                CloseTrayUI();
+            }
+            
+            Time.timeScale = 0.01f;
+            OpenChoiceUI();
+        }
+
+        private void OpenChoiceUI()
+        {
+            choiceUIPopup.gameObject.SetActive(true);
+        }
+
+        public void CloseChoiceUI()
+        {
+            Time.timeScale = 1f;
+            choiceUIPopup.gameObject.SetActive(false);
+        }
+        
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
@@ -48,7 +85,6 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIOpenPosition;
             isTrayUIOpen = true;
-            OnTrayUIOpen?.Invoke();
 
             Time.timeScale = 0.2f;
         }
@@ -64,7 +100,6 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIStartPosition;
             isTrayUIOpen = false;
-            OnTrayUIClose?.Invoke();
         
             Time.timeScale = 1f;
         }
@@ -72,6 +107,7 @@ namespace _Scripts
         public void AddCardToUI(GameObject card)
         {
             var newCard = Instantiate(card, gameObject.transform, false);
+            newCard.transform.localScale = Vector3.one;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
         
@@ -97,11 +133,6 @@ namespace _Scripts
                 // This will be true if the card was instantly
                 // played, and therefore we should trigger destruction for the game object
                 Destroy(card.gameObject);
-            }
-            else
-            {
-                // This likely will need to change to delay destruction and play some pretty effects
-                card.SetUsableState();
             }
         }
 

@@ -1,25 +1,24 @@
 using UnityEngine;
 
-namespace _Scripts.Cards
+
+public class BrakeCard : CardBase
 {
-    public class BrakeCard : CardBase
+    private BrakeComponent bc = null;
+
+    public override void UseCard()
     {
-        private BrakeComponent bc = null;
-        
-        public override void UseCard()
+        if (bc == null)
         {
-            if (bc == null)
-            {
-                bc = associatedDeck.owner.GetComponent<BrakeComponent>();
-            }
-            bc.StartOverride();
-            Debug.Log("Brake card used");
-            base.UseCard();
+            bc = associatedDeck.owner.GetComponent<BrakeComponent>();
         }
 
-        private void OnDisable()
-        {
-            bc = null;
-        }
+        bc.StartOverride();
+        Debug.Log("Brake card used");
+        base.UseCard();
+    }
+
+    private void OnDisable()
+    {
+        bc = null;
     }
 }

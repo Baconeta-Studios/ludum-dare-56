@@ -128,6 +128,10 @@ PrefabInstance:
       propertyPath: deceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 4775466648566033861}
     - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: particleEffect
       value: 
@@ -142,7 +146,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2765832405885284045}
+    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7246832095280553673}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+--- !u!114 &119027588522092349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_PrefabInstance: {fileID: 5620785222495627188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311198365944158049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2575ab8427fe40588467ab4653c7f6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &193115744124237289 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
@@ -182,10 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddd3ec104b3cc04eae8ed7402582ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deck: {fileID: 119027588522092349}
   boost: {fileID: 5882442412960819051}
   brake: {fileID: 193115744124237289}
   shortcut: {fileID: 9007600361694348324}
   triggerCard: {fileID: 0}
+  startingHand: 4
   distanceAlongTrack: 0
   currentSpeed: 0
   maxSpeed: 24
@@ -218,6 +238,19 @@ MonoBehaviour:
     jumpCards: 3
     sabotageCards: 2
     shortcutCards: 1
+--- !u!114 &7246832095280553673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311198365944158049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52966299a90fa44ebb459eed7ef3bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDeck: {fileID: 2765832405885284045}
 --- !u!198 &8526191286834518237 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}

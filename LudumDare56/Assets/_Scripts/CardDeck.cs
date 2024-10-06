@@ -18,12 +18,14 @@ public struct NumberOfEachCard
 
 public class CardDeck : MonoBehaviour
 {
-    private Stack<CardBase> drawPile = new Stack<CardBase>();
-    private Stack<CardBase> discardPile = new Stack<CardBase>();
+    private Stack<CardBase> drawPile = new();
+    private Stack<CardBase> discardPile = new();
 
-    public List<CardBase> Hand { get; } = new List<CardBase>();
+    public List<CardBase> Hand { get; } = new();
 
     public CardBase ActiveCard { get; set; } = null;
+
+    public List<CardBase> FaceUpDeck { get; set; }
 
     public RacerBase owner = null;
     public RacerBase Owner
@@ -42,28 +44,47 @@ public class CardDeck : MonoBehaviour
 
     public void SetupDeck()
     {
-        for (int i = 0; i < deckSetup.boostCards; i++)
+        for (var i = 0; i < deckSetup.boostCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.boostCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.boostCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.brakeCards; i++)
+        for (var i = 0; i < deckSetup.brakeCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.brakeCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.brakeCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.jumpCards; i++)
+        for (var i = 0; i < deckSetup.jumpCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.jumpCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.jumpCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.sabotageCards; i++)
+        for (var i = 0; i < deckSetup.sabotageCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.sabotageCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.sabotageCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
-        for (int i = 0; i < deckSetup.shortcutCards; i++)
+        for (var i = 0; i < deckSetup.shortcutCards; i++)
         {
-            AddCardToDeck(CardPrefabManager.Instance.shortcutCard);
+            var cardObject = Instantiate(CardPrefabManager.Instance.shortcutCard.gameObject, transform);
+            cardObject.transform.localScale = Vector3.zero;
+            AddCardToDeck(cardObject.GetComponent<CardBase>());
         }
         
         ShuffleDrawPile();
+        
+        // Put the top two cards into the face up pile
+        var card = drawPile.Pop();
+        var card2 = drawPile.Pop();
+        FaceUpDeck = new List<CardBase>
+        {
+            card,
+            card2
+        };
     }
 
     public int Count => drawPile.Count + discardPile.Count + Hand.Count + (ActiveCard== null ? 0 : 1);
@@ -90,6 +111,16 @@ public class CardDeck : MonoBehaviour
     public void DrawCard()
     {
         var card = drawPile.Pop();
+        TakeCardToHand(card);
+
+        if (drawPile.Count == 0)
+        {
+            ReshuffleDiscardToDraw();
+        }
+    }
+
+    private void TakeCardToHand(CardBase card)
+    {
         Hand.Add(card);
 
         if (owner.GetType() == typeof(RacerPlayer))
@@ -117,7 +148,7 @@ public class CardDeck : MonoBehaviour
         }
         else
         {
-            throw new Exception("Invalid discard attempt.");
+            throw new Exception($"Invalid discard attempt by {owner.gameObject.name}.");
         }
     }
     
@@ -142,14 +173,18 @@ public class CardDeck : MonoBehaviour
             discardPile.Push(drawPile.Pop());
         }
     }
-    
-    
+
+    [ContextMenu("Reshuffle Discard Pile to Draw Pile")]
+    public void MenuDebugReshuffleDiscardToDraw()
+    {
+        ReshuffleDiscardToDraw();
+    }
+
     /// <summary>
     /// Create a new shuffled draw pile from the discard pile.
     /// Discards all cards currently in the draw pile before reshuffling discarded cards.
     /// </summary>
     /// <param name="includeHand">Discard the cards in hand and in the active zone before reshuffling.</param>
-    [ContextMenu("Reshuffle Discard Pile to Draw Pile")]
     public void ReshuffleDiscardToDraw(bool includeHand = false)
     {
         if (includeHand)
@@ -193,26 +228,28 @@ public class CardDeck : MonoBehaviour
     /// <summary>
     /// Debug.Log all cards, from all piles, in order.
     /// </summary>
+    [ContextMenu("Log Cards")]
     public void DebugContents()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("[DRAW PILE] ");
+        sb.Append($"DECK CONTENTS: {gameObject.name}\n");
+        sb.Append("[DRAW PILE]\n");
         foreach (CardBase card in drawPile)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
-        sb.Append("[HAND] ");
+        sb.Append("\n\n[HAND]\n");
         foreach (CardBase card in Hand)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
-        sb.Append("[DISCARD PILE] ");
+        sb.Append("\n\n[DISCARD PILE]\n");
         foreach (CardBase card in discardPile)
         {
             sb.Append(card.ToString());
-            sb.Append(" ");
+            sb.Append(", ");
         }
         Debug.Log(sb.ToString());
     }
@@ -245,5 +282,22 @@ public class CardDeck : MonoBehaviour
         }
         
         return cardToUse.TryUseCard(zoneCardUsed);
+    }
+
+    /// <summary>
+    /// Gets and replaces the face-up card at the int position
+    /// </summary>
+    public void GetFaceUpCard(int index)
+    {
+        if (FaceUpDeck.Count <= index)
+        {
+            Debug.LogError("Face up deck index is out of range");
+            return;
+        }
+
+        var cardToGive = FaceUpDeck[index];
+        var replacementCard = drawPile.Pop();
+        FaceUpDeck[0] = replacementCard;
+        TakeCardToHand(cardToGive);
     }
 }
