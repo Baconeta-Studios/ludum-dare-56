@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Racing slug_0: -2729823407184647820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
