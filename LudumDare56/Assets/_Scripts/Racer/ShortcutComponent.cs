@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using _Scripts.Racer;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShortcutComponent : MonoBehaviour
