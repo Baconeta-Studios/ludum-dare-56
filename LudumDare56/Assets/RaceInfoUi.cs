@@ -18,24 +18,14 @@ public class RaceInfoUi : MonoBehaviour
     
     public void SetPlacing(int newPlacing)
     {
-        string placingString = newPlacing.ToString();
-
-        switch (newPlacing)
+        string placingString = newPlacing switch
         {
-            case 1:
-                placingString = $"1<i><size={placingSuffixSize}>st</i></size>";
-                break;
-            case 2:
-                placingString = $"2<i><size={placingSuffixSize}>nd</i></size>";
-                break;
-            case 3:
-                placingString = $"3<i><size={placingSuffixSize}>rd</i></size>";
-                break;
-            case 4:
-                placingString = $"4<i><size={placingSuffixSize}>th</i></size>";
-                break;
-        }
-        
+            1 => $"1<i><size={placingSuffixSize}>st</i></size>",
+            2 => $"2<i><size={placingSuffixSize}>nd</i></size>",
+            3 => $"3<i><size={placingSuffixSize}>rd</i></size>",
+            _ => $"{newPlacing}<i><size={placingSuffixSize}>th</i></size>"
+        };
+
         placing.text = placingString;
     }
     
