@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
 public class Track : MonoBehaviour
 {
-    private SplineContainer trackSpline;
+    [SerializeField] private SplineContainer trackSpline;
     [SerializeField] private float trackWidth;
+    public float TrackWidth => trackWidth;
+    [SerializeField] [Range(0,1)] private float positionOnTrackToShowWidth;
 
     private void Awake()
     {
@@ -23,5 +26,17 @@ public class Track : MonoBehaviour
         nearestPointOnSpline = nearestPoint;
         
         return distanceAlongTrack;
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        if (trackSpline)
+        {
+            Vector3 trackPosition = trackSpline.EvaluatePosition(positionOnTrackToShowWidth);
+            Gizmos.DrawLine(trackPosition + new Vector3(trackWidth/2,0,0), trackPosition + new Vector3(-trackWidth/2,0,0));
+        }
+
     }
 }

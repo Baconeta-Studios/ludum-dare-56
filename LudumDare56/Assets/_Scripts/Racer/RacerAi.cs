@@ -18,8 +18,9 @@ public class RacerAi : RacerBase
     [SerializeField] private float boostRaycastDistance;
     [SerializeField] private float boostTangentThreshold = 0.5f;
     [SerializeField] private float minDistanceForBoost = 50f;
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (Time.time > timeOfNextCardUpdate)
         {
             timeOfNextCardUpdate = Time.time + cardUpdateInterval;
@@ -87,15 +88,16 @@ public class RacerAi : RacerBase
         return distToSpline;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision && collision.CompareTag("ShortcutPrep"))
         {
             TryUseCard<ShortcutCard>();
         }
     }
-    private void OnDrawGizmosSelected()
+    protected override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + transform.up * boostRaycastDistance);
         Gizmos.color = Color.white;

@@ -75,16 +75,23 @@ namespace _Scripts.Racer
             }
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             UpdateTrackPosition();
+            
+            if(!isRespawning && !shortcut.IsInShortcut && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth)
+            {
+                // To far away from the center of the track (and not shortcutting). Lets respawn.
+                StartCoroutine(Respawn());
+
+            }
         }
 
         private void UpdateTrackPosition()
         {
             distanceAlongTrack = track.GetDistanceToSpline(transform.position, out Vector3 positionOnSpline, out Vector3 tangentOnSpline);
             positionOnTrackSpline = positionOnSpline;
-            tangentOnTrackSpline = tangentOnSpline;
+            tangentOnTrackSpline = tangentOnSpline.normalized;
         }
 
         private void FixedUpdate()
@@ -166,7 +173,7 @@ namespace _Scripts.Racer
             }
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        protected virtual void OnTriggerExit2D(Collider2D collision)
         {
             if (!shortcut.IsInShortcut && !isRespawning && collision.transform.CompareTag("Track"))
             {
@@ -183,6 +190,12 @@ namespace _Scripts.Racer
             brake.RacerRespawned();
 
             yield return new WaitForSeconds(respawnStartDelay);
+
+            if (positionOnTrackSpline == Vector3.zero)
+            {
+                UpdateTrackPosition();
+            }
+            
             transform.position = positionOnTrackSpline;
 
             // Face the splines tangent, and also reset the heading + speed.
@@ -198,9 +211,10 @@ namespace _Scripts.Racer
             yield return null;
         }
 
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.cyan;
+            if (positionOnTrackSpline == Vector3.zero) positionOnTrackSpline = transform.position;
             Gizmos.DrawSphere(positionOnTrackSpline, positionGizmoRadius);
 
             Gizmos.color = Color.blue;
