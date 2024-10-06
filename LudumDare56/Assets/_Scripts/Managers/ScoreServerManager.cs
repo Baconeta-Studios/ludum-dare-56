@@ -27,10 +27,10 @@ namespace _Scripts.Managers
         [Tooltip("Row count | How many high-scores to show at once")] [SerializeField]
         private int maximumEntries = 12;
 
-        private const string SubmitTrackScoreUri = "https://???/api/scores?user={0}&raceTime={1}";
-        private const string SubmitLapScoreUri = "https://???/api/scores?user={0}&lapTime={1}";
-        private const string GetTrackScoresUri = "https://???/api/track_scores";
-        private const string GetLapScoresUri = "https://???/api/lap_scores";
+        private const string SubmitTrackScoreUri = "https://???/api/track_times?user={0}&time={1}";
+        private const string SubmitLapScoreUri = "https://???/api/lap_times?user={0}&time={1}";
+        private const string GetTrackScoresUri = "https://???/api/track_times";
+        private const string GetLapScoresUri = "https://???/api/lap_times";
 
         private readonly string defaultText = string.Concat(Enumerable.Repeat($"Loading...{Environment.NewLine}", 4));
 
