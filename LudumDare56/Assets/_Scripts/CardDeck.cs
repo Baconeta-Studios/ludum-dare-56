@@ -138,8 +138,7 @@ public class CardDeck : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"{owner.gameObject.name}");
-            throw new Exception("Invalid discard attempt.");
+            throw new Exception($"Invalid discard attempt by {owner.gameObject.name}.");
         }
     }
     
