@@ -142,6 +142,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2765832405885284045}
+    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7246832095280553673}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
 --- !u!114 &193115744124237289 stripped
 MonoBehaviour:
@@ -218,6 +221,19 @@ MonoBehaviour:
     jumpCards: 3
     sabotageCards: 2
     shortcutCards: 1
+--- !u!114 &7246832095280553673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311198365944158049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52966299a90fa44ebb459eed7ef3bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDeck: {fileID: 2765832405885284045}
 --- !u!198 &8526191286834518237 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Utils;
+﻿using Utils;
 
 namespace _Scripts
 {
