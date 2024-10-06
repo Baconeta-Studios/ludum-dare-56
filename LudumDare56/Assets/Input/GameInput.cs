@@ -16,13 +16,15 @@ public class GameInput : MonoBehaviour
     [SerializeField] private Vector3 primaryPositionWorld;
     [SerializeField] private Vector2 primaryDeltaNormalized;
     
-    
     [Header("Debug Toggles")]
     [SerializeField] private bool logMove;
     [SerializeField] private bool logLook;
     [SerializeField] private bool logPrimary;
     [SerializeField] private bool logPrimaryPosition;
     [SerializeField] private bool logPrimaryDelta;
+    
+    public Vector2 GetPrimaryPositionScreen => primaryPositionScreen;
+    public Vector3 GetPrimaryPositionWorld => primaryPositionWorld;
 
     private void Awake()
     {
