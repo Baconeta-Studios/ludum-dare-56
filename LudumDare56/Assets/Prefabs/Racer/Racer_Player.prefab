@@ -28,6 +28,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Racer_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: maxSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: acceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deceleration
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.41
@@ -92,6 +104,18 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.14
       objectReference: {fileID: 0}
+    - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: acceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deceleration
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: particleEffect
       value: 
@@ -147,12 +171,12 @@ MonoBehaviour:
   brake: {fileID: 193115744124237289}
   distanceAlongTrack: 0
   currentSpeed: 0
-  maxSpeed: 0.5
-  acceleration: 0.1
+  maxSpeed: 24
+  acceleration: 5
   forwardsWhiskerLength: 4
-  sideWhiskerLength: 8
+  sideWhiskerLength: 10
   sideWhiskerAngle: 30
-  sideWhiskerTurnAnglePerSecond: 90
+  sideWhiskerTurnAnglePerSecond: 70
   alignmentTurnAnglePerSecond: 10
   isRespawning: 0
   respawnStartDelay: 0.3
