@@ -43,6 +43,7 @@ public class CardDeck : MonoBehaviour
     /// <summary>
     /// Add the top card from the draw pile into hand.
     /// </summary>
+    [ContextMenu("Draw 1")]
     public void DrawCard()
     {
         hand.Add(drawPile.Pop());
@@ -73,6 +74,7 @@ public class CardDeck : MonoBehaviour
     /// <summary>
     /// Move all cards from hand to the discard pile.
     /// </summary>
+    [ContextMenu("Discard Hand (not active card)")]
     public void DiscardHand()
     {
         foreach (var item in hand)
@@ -82,6 +84,7 @@ public class CardDeck : MonoBehaviour
     /// <summary>
     /// Move all cards from the draw pile to the discard pile.
     /// </summary>
+    [ContextMenu("Discard Draw Pile")]
     public void DiscardDrawPile()
     {
         while (drawPile.Count > 0)
@@ -90,11 +93,13 @@ public class CardDeck : MonoBehaviour
         }
     }
     
+    
     /// <summary>
     /// Create a new shuffled draw pile from the discard pile.
     /// Discards all cards currently in the draw pile before reshuffling discarded cards.
     /// </summary>
     /// <param name="includeHand">Discard the cards in hand and in the active zone before reshuffling.</param>
+    [ContextMenu("Reshuffle Discard Pile to Draw Pile")]
     public void ReshuffleDiscardToDraw(bool includeHand = false)
     {
         if (includeHand)
@@ -107,6 +112,7 @@ public class CardDeck : MonoBehaviour
         discardPile.Clear();
     }
 
+    [ContextMenu("Shuffle Draw Pile")]
     public void ShuffleDrawPile()
     {
         drawPile = ShuffleStack(drawPile);
