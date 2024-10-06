@@ -9,19 +9,22 @@ namespace _Scripts.Managers
         private bool isRacing;
         
         private float totalRaceTimeSoFar; // Total time since the race began, updated each Update().
+        // Current Lap time.
+        private float lapTimeSoFar;
         private float lastTimeFinishLineCrossed; // Used to calculate lap times.
-        // Last Lap.
-        private float lastLapTime;
         // Fastest Lap.
         private float fastestLap;
         
+        public static event Action<float> OnRaceTimeChanged;
+        public static event Action<float> OnLapTimeChanged;
+        public static event Action<float> OnFastestLapTimeChanged;
         
         public void StartRaceTimer()
         {
             // Reset timer.
             totalRaceTimeSoFar = 0;
             lastTimeFinishLineCrossed = 0;
-            lastLapTime = 0;
+            lapTimeSoFar = 0;
             fastestLap = 0;
             
             // Start timer.
@@ -46,18 +49,17 @@ namespace _Scripts.Managers
                 return;
             }
             // Calculate last-lap time.
-            lastLapTime = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
+            lapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
             
             // Update fastest-lap time.
-            if (lastLapTime < fastestLap)
+            if (lapTimeSoFar < fastestLap)
             {
-                fastestLap = lastLapTime;
+                fastestLap = lapTimeSoFar;
             }
             
-            // Update cached times.
-            lastLapTimeCache = TimeSpan.FromSeconds(lastLapTime);
-            fastestLapCache = TimeSpan.FromSeconds(fastestLap);
+            
+            OnFastestLapTimeChanged?.Invoke(fastestLap * 1_000);
         }
 
         private void OnEnable()
@@ -72,10 +74,11 @@ namespace _Scripts.Managers
         
         private void Update()
         {
-            if (isRacing)
-            {
-                totalRaceTimeSoFar += Time.deltaTime;
-            }
+            if (!isRacing) return;
+            
+            totalRaceTimeSoFar += Time.deltaTime;
+            OnRaceTimeChanged?.Invoke(totalRaceTimeSoFar);
+            OnLapTimeChanged?.Invoke(lapTimeSoFar);
         }
     }
 }
