@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Utils;
 
 namespace _Scripts
 {
-    [Serializable]
-    public struct CardPrefabManager
+    public class CardPrefabManager : Singleton<CardPrefabManager>
     {
-        public List<GameObject> cards;
+        public CardBase boostCard;
+        public CardBase brakeCard;
+        public CardBase jumpCard;
+        public CardBase sabotageCard;
+        public CardBase shortcutCard;
     }
 }

@@ -2,8 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using _Scripts;
 using _Scripts.Racer;
 using UnityEngine;
+
+[Serializable]
+public struct NumberOfEachCard
+{
+    public int boostCards;
+    public int brakeCards;
+    public int jumpCards;
+    public int sabotageCards;
+    public int shortcutCards;
+}
 
 public class CardDeck : MonoBehaviour
 {
@@ -26,7 +37,35 @@ public class CardDeck : MonoBehaviour
             owner = value;
         }
     }
-    
+
+    public NumberOfEachCard deckSetup;
+
+    public void SetupDeck()
+    {
+        for (int i = 0; i < deckSetup.boostCards; i++)
+        {
+            AddCardToDeck(CardPrefabManager.Instance.boostCard);
+        }
+        for (int i = 0; i < deckSetup.brakeCards; i++)
+        {
+            AddCardToDeck(CardPrefabManager.Instance.brakeCard);
+        }
+        for (int i = 0; i < deckSetup.jumpCards; i++)
+        {
+            AddCardToDeck(CardPrefabManager.Instance.jumpCard);
+        }
+        for (int i = 0; i < deckSetup.sabotageCards; i++)
+        {
+            AddCardToDeck(CardPrefabManager.Instance.sabotageCard);
+        }
+        for (int i = 0; i < deckSetup.shortcutCards; i++)
+        {
+            AddCardToDeck(CardPrefabManager.Instance.shortcutCard);
+        }
+        
+        ShuffleDrawPile();
+    }
+
     public int Count => drawPile.Count + discardPile.Count + Hand.Count + (ActiveCard== null ? 0 : 1);
 
     /// <summary>
@@ -49,7 +88,14 @@ public class CardDeck : MonoBehaviour
     [ContextMenu("Draw 1")]
     public void DrawCard()
     {
-        Hand.Add(drawPile.Pop());
+        var card = drawPile.Pop();
+        Hand.Add(card);
+
+        if (owner.GetType() == typeof(RacerPlayer))
+        {
+            var ui = FindFirstObjectByType<CardTrayUIManager>();
+            ui.AddCardToUI(card.gameObject);
+        }
     }
 
     /// <summary>

@@ -55,6 +55,14 @@ namespace _Scripts.Racer
         private void BeginRace()
         {
             currentHeading = transform.up;
+            
+            // Setup Racers Deck
+            var deck = GetComponent<CardDeck>();
+            deck?.SetupDeck();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
+            deck?.DrawCard();
         }
 
         private void Update()
