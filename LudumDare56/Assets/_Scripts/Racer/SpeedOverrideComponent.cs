@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpeedOverrideComponent : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particleEffect;
+    [SerializeField] private ParticleSystem[] particleEffects;
     [SerializeField] [ReadOnly] private bool isActive;
     [SerializeField] [ReadOnly] private bool isFinishing;
     [SerializeField] private float duration = 3f;
@@ -48,7 +48,8 @@ public class SpeedOverrideComponent : MonoBehaviour
         }
 
         isActive = true;
-        particleEffect.Play();
+        foreach(var particleEffect in particleEffects)
+            particleEffect.Play();
     }
 
     protected virtual void EndOverride(bool forceFinish = false)
@@ -69,7 +70,8 @@ public class SpeedOverrideComponent : MonoBehaviour
     public void OverrideFinished()
     {
         isFinishing = false;
-        particleEffect.Stop();
+        foreach(var particleEffect in particleEffects)
+            particleEffect.Stop();
     }
 
     public void RacerRespawned()
