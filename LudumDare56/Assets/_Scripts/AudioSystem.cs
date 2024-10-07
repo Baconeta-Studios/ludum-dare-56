@@ -10,16 +10,17 @@ public class AudioSystem : Singleton<AudioSystem>
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip, float volume=1f)
     {
-         audioSource.PlayOneShot(clip);
+         audioSource.PlayOneShot(clip, volume);
     }
 
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip, float volume=1f)
     {
         var music = gameObject.AddComponent<AudioSource>();
         music.clip = clip;
         music.loop = true;
+        music.volume = volume;
         music.Play();
     }
 }
