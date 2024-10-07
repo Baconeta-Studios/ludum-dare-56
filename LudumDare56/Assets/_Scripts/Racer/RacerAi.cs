@@ -1,6 +1,8 @@
+using System;
+using _Scripts;
 using _Scripts.Racer;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RacerAi : RacerBase
 {
@@ -26,7 +28,27 @@ public class RacerAi : RacerBase
     [SerializeField] private float sabotageChance;
     [SerializeField] private float sabotageInterval;
     private float nextSabotageCheckTime;
+
+    private void OnEnable()
+    {
+        CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
+    }
     
+    private void OnDisable()
+    {
+        CheckPoint.OnRacerCrossCheckPoint -= OnRacerCrossCheckPoint;
+    }
+
+    private void OnRacerCrossCheckPoint(RacerBase racer)
+    {
+        if (racer == this)
+        {
+            Debug.Log(name  + " picked up two cards!");
+            deck.DrawCard();
+            deck.DrawCard();
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
