@@ -24,20 +24,11 @@ public class RaceInfoUi : MonoBehaviour
     
     public void SetPlayerPlacement(int newPlacing)
     {
-        string placingString = newPlacing switch
-        {
-            1 => $"1<i><size={placingSuffixSize}>st</i></size>",
-            2 => $"2<i><size={placingSuffixSize}>nd</i></size>",
-            3 => $"3<i><size={placingSuffixSize}>rd</i></size>",
-            _ => $"{newPlacing}<i><size={placingSuffixSize}>th</i></size>"
-        };
-
-        placing.text = placingString;
+        placing.text = StringUtils.FormatPlacing(newPlacing, placingSuffixSize);
     }
     
     public void SetCurrentPlayerLap(int lapNumber)
     {
-        
         currentLap.text = Mathf.Clamp(lapNumber, 1, RaceManager.Instance.TotalLaps).ToString();
     }
     
@@ -56,26 +47,17 @@ public class RaceInfoUi : MonoBehaviour
     
     public void SetLapTime(float timeSeconds)
     {
-        lapTime.text = FormatTimeSeconds(timeSeconds);
+        lapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
     }
     
     public void SetBestTime(float timeSeconds)
     {
-        bestLapTime.text = FormatTimeSeconds(timeSeconds);
+        bestLapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
     }
     
     public void SetRaceTime(float timeSeconds)
     {
-        raceTime.text = FormatTimeSeconds(timeSeconds);
-    }
-
-    public string FormatTimeSeconds(float timeSeconds)
-    {
-        int minutes = Mathf.FloorToInt(timeSeconds / 60);
-        int seconds = Mathf.FloorToInt(timeSeconds - minutes * 60);
-        int milliseconds = Mathf.CeilToInt((timeSeconds * 100) % 100);
-        
-        return $"{minutes:D2} - {seconds:D2} - {milliseconds:D2}";
+        raceTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
     }
     
     #endregion
