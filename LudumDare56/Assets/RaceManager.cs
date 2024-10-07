@@ -17,6 +17,7 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField] private int countdownSeconds;
     
+    public static event Action OnRaceCountdownStarting;
     public static event Action<int> OnRaceCountdownChanged;
     public static event Action<int> OnRaceStarted;
     public static event Action OnRaceCompleted;
@@ -33,6 +34,8 @@ public class RaceManager : MonoBehaviour
     
     IEnumerator RaceCountdown()
     {
+        OnRaceCountdownStarting?.Invoke();
+        yield return new WaitForSeconds(1.5f);
         for (int i = countdownSeconds; i > 0; i--)
         {
             OnRaceCountdownChanged?.Invoke(i);
