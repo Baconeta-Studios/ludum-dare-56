@@ -17,25 +17,31 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField] private int countdownSeconds;
     
+    [SerializeField] AudioClip countdownClip;
+    [SerializeField] float countdownVolume = 0.3f;
+    [SerializeField] private AudioClip backgroundMusicClip;
+    [SerializeField] private float bgMusicVolume = 0.5f;
+
     public static event Action OnRaceCountdownStarting;
     public static event Action<int> OnRaceCountdownChanged;
     public static event Action<int> OnRaceStarted;
     public static event Action OnRaceCompleted;
-    
-    void Awake()
+
+    private void Awake()
     {
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(RaceCountdown());
     }
-    
-    IEnumerator RaceCountdown()
+
+    private IEnumerator RaceCountdown()
     {
         OnRaceCountdownStarting?.Invoke();
         yield return new WaitForSeconds(1.5f);
+        AudioSystem.Instance.PlaySound(countdownClip, countdownVolume);
         for (int i = countdownSeconds; i > 0; i--)
         {
             OnRaceCountdownChanged?.Invoke(i);
@@ -48,20 +54,23 @@ public class RaceManager : MonoBehaviour
         
         hasRaceStarted = true;
         
+        yield return new WaitForSeconds(1.5f);
+        AudioSystem.Instance.PlayMusic(backgroundMusicClip, bgMusicVolume);
+        
         yield return null;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         TrackPositionManager.OnPlayerLapCompleted += CheckForRaceEnded;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         TrackPositionManager.OnPlayerLapCompleted -= CheckForRaceEnded;
     }
 
-    void CheckForRaceEnded(int newCurrentLap)
+    private void CheckForRaceEnded(int newCurrentLap)
     {
         currentLap = newCurrentLap;
         if (currentLap > totalLaps)
@@ -70,7 +79,7 @@ public class RaceManager : MonoBehaviour
         }
     }
 
-    void RaceEnded()
+    private void RaceEnded()
     {
         hasRaceFinished = true;
         TrackPositionManager.OnPlayerLapCompleted -= CheckForRaceEnded;
