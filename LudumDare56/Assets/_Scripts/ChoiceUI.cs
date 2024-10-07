@@ -40,38 +40,39 @@ namespace _Scripts
                 cardSelection = player.GetComponent<CardSelection>();
             }
 
-            var cardA = cardSelection.cardDeck.FaceUpDeck[0].GetType().ToString();
-            var cardB = cardSelection.cardDeck.FaceUpDeck[1].GetType().ToString();
-
-            var cardARef = cardA switch
+            if (cardSelection.cardDeck.FaceUpDeck[0] != null)
             {
-                "BoostCard" => Instantiate(CardPrefabManager.Instance.boostCard, choiceUIFaceUpA, false),
-                "JumpCard" => Instantiate(CardPrefabManager.Instance.jumpCard, choiceUIFaceUpA, false),
-                "BrakeCard" => Instantiate(CardPrefabManager.Instance.brakeCard, choiceUIFaceUpA, false),
-                "SabotageCard" => Instantiate(CardPrefabManager.Instance.sabotageCard, choiceUIFaceUpA, false),
-                "ShortcutCard" => Instantiate(CardPrefabManager.Instance.shortcutCard, choiceUIFaceUpA, false),
-            };
+                var cardA = cardSelection.cardDeck.FaceUpDeck[0].GetType().ToString();
+                var cardARef = cardA switch
+                {
+                    "BoostCard" => Instantiate(CardPrefabManager.Instance.boostCard, choiceUIFaceUpA, false),
+                    "JumpCard" => Instantiate(CardPrefabManager.Instance.jumpCard, choiceUIFaceUpA, false),
+                    "BrakeCard" => Instantiate(CardPrefabManager.Instance.brakeCard, choiceUIFaceUpA, false),
+                    "SabotageCard" => Instantiate(CardPrefabManager.Instance.sabotageCard, choiceUIFaceUpA, false),
+                    "ShortcutCard" => Instantiate(CardPrefabManager.Instance.shortcutCard, choiceUIFaceUpA, false),
+                };
+                cardARef.GetComponent<EventTrigger>().enabled = false;
+                Button button = cardARef.AddComponent<Button>();
+                button.onClick.AddListener(DrawCardA);
+                cardARef.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+            }
             
-            var cardBRef = cardB switch
+            if (cardSelection.cardDeck.FaceUpDeck[1] != null)
             {
-                "BoostCard" => Instantiate(CardPrefabManager.Instance.boostCard, choiceUIFaceUpB, false),
-                "JumpCard" => Instantiate(CardPrefabManager.Instance.jumpCard, choiceUIFaceUpB, false),
-                "BrakeCard" => Instantiate(CardPrefabManager.Instance.brakeCard, choiceUIFaceUpB, false),
-                "SabotageCard" => Instantiate(CardPrefabManager.Instance.sabotageCard, choiceUIFaceUpB, false),
-                "ShortcutCard" => Instantiate(CardPrefabManager.Instance.shortcutCard, choiceUIFaceUpB, false),
-            };
-            
-            cardARef.GetComponent<EventTrigger>().enabled = false;
-            cardBRef.GetComponent<EventTrigger>().enabled = false;
-            
-            Button button = cardARef.AddComponent<Button>();
-            button.onClick.AddListener(DrawCardA);
-            
-            button = cardBRef.AddComponent<Button>();
-            button.onClick.AddListener(DrawCardB);
-            
-            cardARef.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
-            cardBRef.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+                var cardB = cardSelection.cardDeck.FaceUpDeck[1].GetType().ToString();
+                var cardBRef = cardB switch
+                {
+                    "BoostCard" => Instantiate(CardPrefabManager.Instance.boostCard, choiceUIFaceUpB, false),
+                    "JumpCard" => Instantiate(CardPrefabManager.Instance.jumpCard, choiceUIFaceUpB, false),
+                    "BrakeCard" => Instantiate(CardPrefabManager.Instance.brakeCard, choiceUIFaceUpB, false),
+                    "SabotageCard" => Instantiate(CardPrefabManager.Instance.sabotageCard, choiceUIFaceUpB, false),
+                    "ShortcutCard" => Instantiate(CardPrefabManager.Instance.shortcutCard, choiceUIFaceUpB, false),
+                };
+                cardBRef.GetComponent<EventTrigger>().enabled = false;
+                Button button2 = cardBRef.AddComponent<Button>();
+                button2.onClick.AddListener(DrawCardB);
+                cardBRef.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+            }
         }
 
         private void DrawCardA()
