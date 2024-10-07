@@ -123,6 +123,7 @@ public class DraggableCard : MonoBehaviour
                 GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
                 gameObject.transform.SetParent(pos, true);
                 gameObject.transform.localPosition = Vector3.zero;
+                gameObject.GetComponent<EventTrigger>().enabled = false;
 
                 cardTrayUIManager.PlayCard(GetComponent<CardBase>());
             }
