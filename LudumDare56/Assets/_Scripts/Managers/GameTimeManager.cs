@@ -42,7 +42,7 @@ namespace _Scripts.Managers
             HandleLapEndEvent(FindFirstObjectByType<RacerPlayer>());
             isRacing = false;
             int raceTime = SecondsToCentiseconds(totalRaceTimeSoFar);
-            int lapTime = SecondsToCentiseconds(totalLapTimeSoFar);
+            int lapTime = SecondsToCentiseconds(fastestLap);
             OnRaceFinished?.Invoke(raceTime, lapTime);
             Debug.Log($"Fastest Lap: {fastestLap}\nRace Time: {totalRaceTimeSoFar}");
         }
