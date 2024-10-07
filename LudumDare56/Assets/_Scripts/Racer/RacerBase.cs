@@ -16,11 +16,8 @@ namespace _Scripts.Racer
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
-
         [SerializeField] private JumpComponent jumpComponent;
-
         [SerializeField] private SabotageComponent sabotage;
-
         public CardBase triggerCard;
 
         [Header("Cards")]
@@ -59,16 +56,24 @@ namespace _Scripts.Racer
         [Header("Debug")]
         public float positionGizmoRadius = 1f;
 
-        private void Start()
+        private void OnEnable()
+        {
+            RaceManager.OnRaceStarted += BeginRace;
+        }
+
+        private void OnDisable()
+        {
+            RaceManager.OnRaceStarted -= BeginRace;
+        }
+
+        private void Awake()
         {
             track = FindFirstObjectByType<Track>();
             racerRigidbody2d = GetComponent<Rigidbody2D>();
             collider2D = GetComponentInChildren<Collider2D>();
-
-            BeginRace();
         }
 
-        private void BeginRace()
+        private void BeginRace(int numberOfLaps)
         {
             currentHeading = transform.up;
 
@@ -85,6 +90,10 @@ namespace _Scripts.Racer
         {
             UpdateTrackPosition();
 
+            if (!RaceManager.Instance.HasRaceStarted)
+            {
+                return;
+            }
             if(!isRespawning && !shortcut.IsInShortcut && !jumpComponent.IsJumping && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth)
             {
                 // To far away from the center of the track (and not shortcutting). Lets respawn.
@@ -102,6 +111,11 @@ namespace _Scripts.Racer
 
         private void FixedUpdate()
         {
+            if (!RaceManager.Instance.HasRaceStarted)
+            {
+                return;
+            }
+            
             if (!shortcut.IsInShortcut && !isRespawning)
             {
                 MovementUpdate();

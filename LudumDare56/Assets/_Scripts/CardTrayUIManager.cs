@@ -37,11 +37,16 @@ namespace _Scripts
             {
                 return;
             }
+
             if (isTrayUIOpen)
             {
                 CloseTrayUI();
             }
             
+            if (RaceManager.Instance.HasRaceFinished)
+            {
+                return;
+            }
             Time.timeScale = 0.01f;
             OpenChoiceUI();
         }
