@@ -10,11 +10,11 @@ namespace _Scripts.Managers
         private bool isRacing;
         
         // Total time since the race began, updated each Update().
-        private float totalRaceTimeSoFar;
+        public float totalRaceTimeSoFar;
         // Current Lap time.
         private float totalLapTimeSoFar;
         // Fastest Lap.
-        private float fastestLap;
+        public float fastestLap;
         // This flag ensures that our first lap always becomes our best lap.
         private bool fastestLapExists = false;
         
