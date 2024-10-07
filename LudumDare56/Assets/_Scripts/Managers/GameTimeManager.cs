@@ -50,18 +50,16 @@ namespace _Scripts.Managers
                 StartRaceTimer();
                 return;
             }
-            // Calculate last-lap time.
-            lapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
             
             // Update fastest-lap time.
             if (totalLapTimeSoFar > fastestLap)
             {
                 fastestLap = totalLapTimeSoFar;
+                OnFastestLapTimeChanged?.Invoke(fastestLap);
             }
-            
-            
-            OnFastestLapTimeChanged?.Invoke(fastestLap * 1_000);
+
+            // Reset lap timer.
         }
 
         private void OnEnable()
