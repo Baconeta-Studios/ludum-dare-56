@@ -45,7 +45,10 @@ public abstract class CardBase : MonoBehaviour
     public virtual void UseCard()
     {
         associatedDeck.DiscardCard(this);
-        AudioSystem.Instance.PlaySound(cardSound, cardSoundVolume);
+        if (cardSound != null)
+        {
+            AudioSystem.Instance.PlaySound(cardSound, cardSoundVolume);
+        }
         callOnCardUsed?.Invoke();
     }
 
