@@ -30,6 +30,11 @@ public class HighScoreTab : MonoBehaviour
     public Transform highScoreContainer;
     public List<HighScoreEntry> entries;
 
+    void OnEnable()
+    {
+        ShowTrackTimes();
+    }
+    
     [ContextMenu("Refresh Numbers")]
     public void UpdateNumbers()
     {
