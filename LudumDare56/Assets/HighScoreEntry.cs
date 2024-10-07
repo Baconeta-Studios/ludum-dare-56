@@ -16,11 +16,12 @@ public class HighScoreEntry : MonoBehaviour
 
     public void SetName(string entryName)
     {
-        nameTxt.text = entryName.ToString();
+        int stringLimit = entryName.Length - 1 <= 12 ? entryName.Length : 12;
+        nameTxt.text = entryName.Substring(0, stringLimit);
     }
 
     public void SetTime(float time)
     {
-        timeTxt.text = time.ToString();
+        timeTxt.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(time, ":");
     }
 }

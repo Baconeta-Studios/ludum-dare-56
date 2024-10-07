@@ -47,17 +47,17 @@ public class RaceInfoUi : MonoBehaviour
     
     public void SetLapTime(float timeSeconds)
     {
-        lapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
+        lapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
     }
     
     public void SetBestTime(float timeSeconds)
     {
-        bestLapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
+        bestLapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
     }
     
     public void SetRaceTime(float timeSeconds)
     {
-        raceTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds);
+        raceTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
     }
     
     #endregion

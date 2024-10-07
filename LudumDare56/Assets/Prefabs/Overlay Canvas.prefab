@@ -142,6 +142,22 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2812573845973171769, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_Size.x
+      value: 952.0943
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812573845973171769, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_Size.y
+      value: 463.46417
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812573845973171769, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_Offset.x
+      value: 5.3228455
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812573845973171769, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_Offset.y
+      value: -33.267914
+      objectReference: {fileID: 0}
     - target: {fileID: 3439920434589296787, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: choiceUIPopup
       value: 
