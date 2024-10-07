@@ -17,24 +17,28 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField] private int countdownSeconds;
     
+    [SerializeField] AudioClip countdownClip;
+    [SerializeField] float countdownVolume = 0.3f;
+    
     public static event Action OnRaceCountdownStarting;
     public static event Action<int> OnRaceCountdownChanged;
     public static event Action<int> OnRaceStarted;
     public static event Action OnRaceCompleted;
-    
-    void Awake()
+
+    private void Awake()
     {
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(RaceCountdown());
     }
-    
-    IEnumerator RaceCountdown()
+
+    private IEnumerator RaceCountdown()
     {
         OnRaceCountdownStarting?.Invoke();
+        AudioSystem.Instance.PlaySound(countdownClip, countdownVolume);
         yield return new WaitForSeconds(1.5f);
         for (int i = countdownSeconds; i > 0; i--)
         {
@@ -51,17 +55,17 @@ public class RaceManager : MonoBehaviour
         yield return null;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         TrackPositionManager.OnPlayerLapCompleted += CheckForRaceEnded;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         TrackPositionManager.OnPlayerLapCompleted -= CheckForRaceEnded;
     }
 
-    void CheckForRaceEnded(int newCurrentLap)
+    private void CheckForRaceEnded(int newCurrentLap)
     {
         currentLap = newCurrentLap;
         if (currentLap > totalLaps)
@@ -70,7 +74,7 @@ public class RaceManager : MonoBehaviour
         }
     }
 
-    void RaceEnded()
+    private void RaceEnded()
     {
         hasRaceFinished = true;
         TrackPositionManager.OnPlayerLapCompleted -= CheckForRaceEnded;

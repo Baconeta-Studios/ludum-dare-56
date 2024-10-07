@@ -1090,6 +1090,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4637906467618307374, guid: a5d2fa6fb6cab0149b700d8e80b455e8, type: 3}
+      propertyPath: countdownClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 262dfbda72feb8145a83cb709e2e76e3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2501,6 +2505,10 @@ PrefabInstance:
     - target: {fileID: 2118391907467062777, guid: 07386a5bc94aa664d91daf0c23efab13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854868803353502666, guid: 07386a5bc94aa664d91daf0c23efab13, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8185838651717983118, guid: 07386a5bc94aa664d91daf0c23efab13, type: 3}
       propertyPath: m_Name
