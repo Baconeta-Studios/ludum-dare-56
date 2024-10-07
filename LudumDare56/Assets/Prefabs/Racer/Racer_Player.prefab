@@ -176,9 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b800ff8b8a6cc46ad63735c66d586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2331578844302432042 stripped
+--- !u!114 &2289143113277154994 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7951779118019489950, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5892293710849720582, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
   m_PrefabInstance: {fileID: 5620785222495627188}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311198365944158049}
@@ -219,7 +219,7 @@ MonoBehaviour:
   boost: {fileID: 5882442412960819051}
   brake: {fileID: 193115744124237289}
   shortcut: {fileID: 9007600361694348324}
-  jumpComponent: {fileID: 2331578844302432042}
+  jumpComponent: {fileID: 2289143113277154994}
   triggerCard: {fileID: 0}
   startingHand: 4
   distanceAlongTrack: 0
