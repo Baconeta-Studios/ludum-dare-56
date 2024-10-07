@@ -138,23 +138,23 @@ PrefabInstance:
       objectReference: {fileID: 1568846843800465314}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.jumpCards
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.boostCards
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: deckSetup.brakeCards
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      propertyPath: deckSetup.sabotageCards
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.brakeCards
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: deckSetup.sabotageCards
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739789996148736137, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: deckSetup.shortcutCards
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7081486185929337761, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_Mass

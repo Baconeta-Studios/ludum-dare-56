@@ -12,11 +12,13 @@ public abstract class CardBase : MonoBehaviour
     public UseType useType;
     
     public string cardName;
-
+    
     public void Initialize(CardDeck deck)
     {
         associatedDeck = deck;
     }
+
+    public CardUI cardUI;
 
     /// <summary>
     /// Returns true if the card was used immediately

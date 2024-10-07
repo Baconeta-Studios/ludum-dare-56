@@ -56,12 +56,12 @@ namespace _Scripts.Racer
         [Header("Debug")]
         public float positionGizmoRadius = 1f;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             RaceManager.OnRaceStarted += BeginRace;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             RaceManager.OnRaceStarted -= BeginRace;
         }
