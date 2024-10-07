@@ -61,7 +61,7 @@ MonoBehaviour:
   zoneUIPosition: {fileID: 5163733039465576858}
   playerCardDeck: {fileID: 0}
   drawCardSound: {fileID: 8300000, guid: 6a6d7cfc4e8c18249bf7a80b7665e57b, type: 3}
-  drawCardVolume: 0.6
+  drawCardVolume: 0.4
 --- !u!114 &8902760737458573215
 MonoBehaviour:
   m_ObjectHideFlags: 0
