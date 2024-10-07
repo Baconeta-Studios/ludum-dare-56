@@ -167,7 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 1665047884}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_Name
-      value: Racer_Ai (2)
+      value: Racer_Ai (Charlie)
       objectReference: {fileID: 0}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_IsActive
@@ -630,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 1665047884}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_Name
-      value: Racer_Ai (1)
+      value: Racer_Ai (Billy)
       objectReference: {fileID: 0}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_IsActive
@@ -1966,7 +1966,7 @@ PrefabInstance:
       objectReference: {fileID: 1665047884}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_Name
-      value: Racer_Ai
+      value: Racer_Ai (Al)
       objectReference: {fileID: 0}
     - target: {fileID: 7431049969610122085, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: isActive
