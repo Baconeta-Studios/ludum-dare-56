@@ -1,6 +1,7 @@
-using System;
 using _Scripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableCard : MonoBehaviour
 {
@@ -13,15 +14,42 @@ public class DraggableCard : MonoBehaviour
     private bool isInHandTrigger;
     private CardTrayUIManager cardTrayUIManager;
     private int handSiblingNumber;
+    
+    public Image cardImage;
 
     private void OnEnable()
     {
         RaceManager.OnRaceCompleted += OnRaceComplete;
+        CardTrayUIManager.OnOpenCardSelection += CardSelectionOpened;
+        CardTrayUIManager.OnCloseCardSelection += CardSelectionClosed;
+    }
+    
+    private void CardSelectionOpened()
+    {
+        if (isDragging)
+        {
+            isDragging = false;
+            ReturnCardToHand();
+        }
+        GetComponent<EventTrigger>().enabled = false;
+        var color = cardImage.color;
+        color.a = 0.3f;
+        cardImage.color = color;
+    }
+    
+    private void CardSelectionClosed()
+    {
+        GetComponent<EventTrigger>().enabled = true;
+        var color = cardImage.color;
+        color.a = 1f;
+        cardImage.color = color;
     }
 
     private void OnDisable()
     {
         RaceManager.OnRaceCompleted -= OnRaceComplete;
+        CardTrayUIManager.OnOpenCardSelection -= CardSelectionOpened;
+        CardTrayUIManager.OnCloseCardSelection -= CardSelectionClosed;
     }
 
     private void OnRaceComplete()

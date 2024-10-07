@@ -14,6 +14,9 @@ namespace _Scripts
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
+
+        public static event Action OnOpenCardSelection; 
+        public static event Action OnCloseCardSelection; 
     
         // Get Player Deck system controller
         
@@ -55,12 +58,14 @@ namespace _Scripts
         private void OpenChoiceUI()
         {
             Time.timeScale = 0.01f;
+            OnOpenCardSelection?.Invoke();
             choiceUIPopup.gameObject.SetActive(true);
         }
 
         public void CloseChoiceUI()
         {
             Time.timeScale = 1f;
+            OnCloseCardSelection?.Invoke();
             choiceUIPopup.gameObject.SetActive(false);
         }
         
