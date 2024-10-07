@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 8b4cfb321481e6d49b2edf038a108b01
+guid: 1f037b7b757e22a46ba004adf8589dec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -98070244222629441
-    second: Foreground_0
+      213: -9113396230751810132
+    second: Leaves_foreground_0
   - first:
-      213: -6723657067348311052
-    second: Foreground_1
-  - first:
-      213: 7330829005115928284
-    second: Foreground_2
-  - first:
-      213: 6377856438995678898
-    second: Foreground_3
+      213: 8670344392177435674
+    second: Leaves_foreground_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -148,34 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Foreground_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 363
-        width: 81
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fb9031ae1a593aef0800000000000000
-      internalID: -98070244222629441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Foreground_1
+      name: Leaves_foreground_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 398
-        height: 499
+        width: 577
+        height: 515
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f3c82d4585c0b2a0800000000000000
-      internalID: -6723657067348311052
+      spriteID: cad87a8b966b68180800000000000000
+      internalID: -9113396230751810132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Foreground_2
+      name: Leaves_foreground_1
       rect:
         serializedVersion: 2
-        x: 1201
+        x: 1026
         y: 0
-        width: 399
-        height: 499
+        width: 574
+        height: 513
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,29 +177,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdea017c3265cb560800000000000000
-      internalID: 7330829005115928284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Foreground_3
-      rect:
-        serializedVersion: 2
-        x: 1518
-        y: 363
-        width: 82
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b676c2d3a2b28850800000000000000
-      internalID: 6377856438995678898
+      spriteID: a1449088940435870800000000000000
+      internalID: 8670344392177435674
       vertices: []
       indices: 
       edges: []
@@ -242,10 +194,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Foreground_0: -98070244222629441
-      Foreground_1: -6723657067348311052
-      Foreground_2: 7330829005115928284
-      Foreground_3: 6377856438995678898
+      Leaves_foreground_0: -9113396230751810132
+      Leaves_foreground_1: 8670344392177435674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
