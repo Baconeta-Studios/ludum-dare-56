@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class SabotageCard : CardBase
 {
-    private SabotageEngine sabotageEngine;
+    private SabotageComponent sabotageEngine;
 
     protected void Start()
     {
-        // TODO will need a reference to the racer who played it so we can get a location to place the sabotage
-        sabotageEngine = GetComponent<SabotageEngine>();
+        sabotageEngine = GetComponent<SabotageComponent>();
     }
 
     public override void UseCard()
