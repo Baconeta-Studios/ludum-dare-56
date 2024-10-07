@@ -17,6 +17,11 @@ public class RaceInfoUi : MonoBehaviour
     public TextMeshProUGUI bestLapTime;
     public TextMeshProUGUI raceTime;
 
+    private void Awake()
+    {
+        SetTotalLaps(RaceManager.Instance.TotalLaps);
+    }
+    
     public void SetPlayerPlacement(int newPlacing)
     {
         string placingString = newPlacing switch
@@ -32,7 +37,8 @@ public class RaceInfoUi : MonoBehaviour
     
     public void SetCurrentPlayerLap(int lapNumber)
     {
-        currentLap.text = lapNumber.ToString();
+        
+        currentLap.text = Mathf.Clamp(lapNumber, 1, RaceManager.Instance.TotalLaps).ToString();
     }
     
     public void SetTotalLaps(int lapCount)
