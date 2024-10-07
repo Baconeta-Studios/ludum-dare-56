@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace _Scripts.Managers
@@ -112,7 +113,7 @@ namespace _Scripts.Managers
                 case UnityWebRequest.Result.Success:
                     string data = req.downloadHandler.text;
                     // Query succeeded. Convert from JSON string to objects, and then execute the callback.
-                    HighScoreCollection entryList = JsonUtility.FromJson<HighScoreCollection>("{\"entries\": " + data + "}");
+                    HighScoreCollection entryList = JsonUtility.FromJson<HighScoreCollection>("{\"highScores\": " + data + "}");
                     callback.Invoke(entryList, scoreType);
                     break;
                 case UnityWebRequest.Result.InProgress:
@@ -147,7 +148,9 @@ namespace _Scripts.Managers
     [Serializable]
     public struct HighScore
     {
-        public string name;
-        public float timeSeconds;
+        // user Name
+        public string user;
+        // Time seconds
+        public float score;
     }
 }

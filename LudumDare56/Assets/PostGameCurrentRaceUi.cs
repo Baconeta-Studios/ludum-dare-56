@@ -27,7 +27,7 @@ public class PostGameCurrentRaceUi : MonoBehaviour
     {
         playerNameTmp.text = playerName;
         placingTmp.text = StringUtils.FormatPlacing(placing, placingSuffixSize);
-        raceTimeTmp.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(raceTime);
-        bestLapTmp.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(bestLap);
+        raceTimeTmp.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(raceTime, ":");
+        bestLapTmp.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(bestLap, ":");
     }
 }
