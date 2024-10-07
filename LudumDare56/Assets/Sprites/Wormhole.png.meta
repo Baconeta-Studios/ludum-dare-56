@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wormhole_0: -6256721229306510428
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

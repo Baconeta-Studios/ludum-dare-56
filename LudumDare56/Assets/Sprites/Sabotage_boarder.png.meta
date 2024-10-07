@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sabotage_boarder_0: 6505720495936728908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
