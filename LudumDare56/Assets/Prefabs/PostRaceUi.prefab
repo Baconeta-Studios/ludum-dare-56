@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5773839354066751791}
   - component: {fileID: 469088598349678431}
   m_Layer: 5
-  m_Name: PostRaceUI
+  m_Name: PostRaceUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf64ab39b99f40e4c93587fc0063f8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiContainer: {fileID: 2042954726468207330}
+  postRaceUiContainer: {fileID: 2042954726468207330}
+  gameplayUIContainer: {fileID: 0}
 --- !u!1 &1507521700049622469
 GameObject:
   m_ObjectHideFlags: 0
