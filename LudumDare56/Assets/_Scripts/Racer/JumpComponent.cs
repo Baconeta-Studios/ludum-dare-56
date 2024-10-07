@@ -11,6 +11,8 @@ public class JumpComponent : MonoBehaviour
     [SerializeField] private float jumpDetectionDistance;
     [SerializeField] private AnimationCurve jumpAnimationCurve;
     [SerializeField] private float jumpScalePercent;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private float jumpSoundVolume;
 
     public bool IsActive
     {
@@ -27,7 +29,7 @@ public class JumpComponent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isActive)
         {
@@ -42,11 +44,16 @@ public class JumpComponent : MonoBehaviour
         }
     }
 
-    IEnumerator EJump(float distanceToJump)
+    private IEnumerator EJump(float distanceToJump)
     {
         isActive = false;
         isJumping = true;
         racer.UseActiveCard();
+        if (jumpSound != null)
+        {
+            AudioSystem.Instance.PlaySound(jumpSound, jumpSoundVolume);
+        }
+
         racer.DisableCollision();
         float timeToClearJump = (distanceToJump / racer.CurrentSpeed) * 2;
         float t = 0;

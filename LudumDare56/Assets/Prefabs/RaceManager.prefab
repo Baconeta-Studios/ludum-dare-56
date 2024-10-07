@@ -53,3 +53,7 @@ MonoBehaviour:
   countdownVolume: 0.2
   backgroundMusicClip: {fileID: 8300000, guid: bf0068cc4dd7bed4d911edd8be613422, type: 3}
   bgMusicVolume: 0.2
+  finishLapClip: {fileID: 8300000, guid: 548db6568dcd8dd49bb6415c16ca7599, type: 3}
+  finishLapVolume: 0.25
+  finishRaceClip: {fileID: 8300000, guid: 597ed56fa12a11c4ba2c3ce916b5fab5, type: 3}
+  finishRaceVolume: 0.35
