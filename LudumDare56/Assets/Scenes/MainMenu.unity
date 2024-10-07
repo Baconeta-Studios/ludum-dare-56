@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2d88272b9645c18fc3c809c667da05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowSubmitScoreInEditor: 0
+  DoYouReallyWantToSubmitInEditor: 0
 --- !u!4 &331719207
 Transform:
   m_ObjectHideFlags: 0

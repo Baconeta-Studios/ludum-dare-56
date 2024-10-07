@@ -2393,6 +2393,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2727148116266089444, guid: d54bd9635c3f6264d979cecb995b7181, type: 3}
+      propertyPath: m_Pivot.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2727148116266089444, guid: d54bd9635c3f6264d979cecb995b7181, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2727148116266089444, guid: d54bd9635c3f6264d979cecb995b7181, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 433
+      objectReference: {fileID: 0}
+    - target: {fileID: 2727148116266089444, guid: d54bd9635c3f6264d979cecb995b7181, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 866
+      objectReference: {fileID: 0}
     - target: {fileID: 2905027148744239731, guid: d54bd9635c3f6264d979cecb995b7181, type: 3}
       propertyPath: m_Name
       value: Overlay Canvas
