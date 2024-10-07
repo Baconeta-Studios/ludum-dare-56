@@ -17,14 +17,14 @@ namespace _Scripts
 
         public static event Action OnOpenCardSelection; 
         public static event Action OnCloseCardSelection; 
-    
+
         // Get Player Deck system controller
-        
+
         private void Awake()
         {
             playerCardDeck = GameObject.FindGameObjectWithTag("Player").GetComponent<CardDeck>();
         }
-        
+
         public void OnEnable()
         {
             CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
@@ -68,7 +68,7 @@ namespace _Scripts
             OnCloseCardSelection?.Invoke();
             choiceUIPopup.gameObject.SetActive(false);
         }
-        
+
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
@@ -112,7 +112,7 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIStartPosition;
             isTrayUIOpen = false;
-        
+
             Time.timeScale = 1f;
         }
 
@@ -131,13 +131,13 @@ namespace _Scripts
 
             if (prefab == null)
             {
-                Debug.Log("Card Prefab Not Found"); 
+                Debug.Log("Card Prefab Not Found");
             }
             var newCard = Instantiate(prefab, gameObject.transform, false);
-            newCard.transform.localScale = Vector3.one;
+            newCard.transform.localScale = Vector3.one * 1.3f;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
-        
+
         // This should probably only be used for discards so may be useless
         public void RemoveCardFromUI(GameObject card)
         {
@@ -166,7 +166,7 @@ namespace _Scripts
         public void ZoneCardUsed()
         {
             // playerCardDeck.DiscardCard(zoneUIPosition.GetChild(0).GetComponent<CardBase>());
-            // Callback function for the PlayCard system to tell us once it has been used 
+            // Callback function for the PlayCard system to tell us once it has been used
             if (zoneUIPosition.childCount > 0)
             {
                 Destroy(zoneUIPosition.GetChild(0).gameObject);
