@@ -1392,7 +1392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140ebf3969d976049adf332b9547eb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackWidth: 1
+  trackSpline: {fileID: 4862365258882303139}
+  trackWidth: 17
+  positionOnTrackToShowWidth: 0.97
 --- !u!1 &5802511218788719905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,13 +1599,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7847011271771911246}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.011431578, w: 0.9999347}
   m_LocalPosition: {x: -94.65, y: 76.27, z: 0}
-  m_LocalScale: {x: 0.7125, y: 0.234375, z: 1}
+  m_LocalScale: {x: 0.7125, y: 0.7125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4792539443104789960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.31}
 --- !u!212 &6077731825537036069
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1652,7 +1654,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 15, y: 10.01}
+  m_Size: {x: 15, y: 5.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1696,8 +1698,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 15, y: 10.01}
-    newSize: {x: 15, y: 10.01}
+    oldSize: {x: 15, y: 5.01}
+    newSize: {x: 15, y: 5.01}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

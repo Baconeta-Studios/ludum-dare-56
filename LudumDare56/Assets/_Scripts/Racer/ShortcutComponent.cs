@@ -52,7 +52,8 @@ public class ShortcutComponent : MonoBehaviour
 
     private IEnumerator UseShortcut()
     {
-        racer.EnteredShortcut();
+        racer.UseActiveCard();
+        racer.DisableCollision();
         float angle;
         
         // Travel to shortcut start

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 1f037b7b757e22a46ba004adf8589dec
+guid: 3ecfc41e97868ef4c8cdd6d1402927ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9113396230751810132
-    second: Leaves_foreground_0
-  - first:
-      213: 8670344392177435674
-    second: Leaves_foreground_1
+      213: 1663985795130343650
+    second: Leafpile Sabotage Transparent_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -142,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Leaves_foreground_0
+      name: Leafpile Sabotage Transparent_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 577
-        height: 515
+        x: 445
+        y: 31
+        width: 1082
+        height: 1010
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,29 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cad87a8b966b68180800000000000000
-      internalID: -9113396230751810132
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Leaves_foreground_1
-      rect:
-        serializedVersion: 2
-        x: 1026
-        y: 0
-        width: 574
-        height: 513
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1449088940435870800000000000000
-      internalID: 8670344392177435674
+      spriteID: 2e04a06b34aa71710800000000000000
+      internalID: 1663985795130343650
       vertices: []
       indices: 
       edges: []
@@ -186,7 +162,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -194,8 +170,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Leaves_foreground_0: -9113396230751810132
-      Leaves_foreground_1: 8670344392177435674
+      LeafPileSabotage_0: 6237405705875275378
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
