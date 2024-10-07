@@ -29,13 +29,15 @@ public class RacerAi : RacerBase
     [SerializeField] private float sabotageInterval;
     private float nextSabotageCheckTime;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
     }
     
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         CheckPoint.OnRacerCrossCheckPoint -= OnRacerCrossCheckPoint;
     }
 

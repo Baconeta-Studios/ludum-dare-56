@@ -17,7 +17,7 @@ public class RaceInfoUi : MonoBehaviour
     public TextMeshProUGUI bestLapTime;
     public TextMeshProUGUI raceTime;
 
-    private void Awake()
+    private void Start()
     {
         SetTotalLaps(RaceManager.Instance.TotalLaps);
     }
