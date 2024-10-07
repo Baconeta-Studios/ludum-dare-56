@@ -14,6 +14,10 @@ namespace _Scripts
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
+        
+        [SerializeField] private AudioClip drawCardSound;
+        [SerializeField] private float drawCardVolume = 0.5f;
+        public float SlowDownSpeed = 0.2f;
 
         public static event Action OnOpenCardSelection; 
         public static event Action OnCloseCardSelection; 
@@ -40,11 +44,6 @@ namespace _Scripts
             if (racer.GetType() != typeof(RacerPlayer))
             {
                 return;
-            }
-
-            if (isTrayUIOpen)
-            {
-                CloseTrayUI();
             }
 
             if (RaceManager.Instance.HasRaceFinished)
@@ -74,45 +73,13 @@ namespace _Scripts
             gameObject.transform.localPosition = trayUIStartPosition;
         }
 
-        public void ToggleTrayUI()
+        public void SetSlowTime()
         {
-            if (isTrayUIOpen)
-            {
-                CloseTrayUI();
-            }
-            else
-            {
-                OpenTrayUI();
-            }
+            Time.timeScale = SlowDownSpeed;
         }
 
-        private void OpenTrayUI()
+        public void SetNormalTime()
         {
-            Debug.Log("Opening Tray UI");
-            if (isTrayUIOpen)
-            {
-                // Do nothing
-                return;
-            }
-
-            gameObject.transform.localPosition = trayUIOpenPosition;
-            isTrayUIOpen = true;
-
-            Time.timeScale = 0.2f;
-        }
-
-        private void CloseTrayUI()
-        {
-            Debug.Log("Closing Tray UI");
-            if (!isTrayUIOpen)
-            {
-                // Do nothing
-                return;
-            }
-
-            gameObject.transform.localPosition = trayUIStartPosition;
-            isTrayUIOpen = false;
-
             Time.timeScale = 1f;
         }
 
@@ -136,6 +103,8 @@ namespace _Scripts
             var newCard = Instantiate(prefab, gameObject.transform, false);
             newCard.transform.localScale = Vector3.one * 1.3f;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
+            
+            AudioSystem.Instance.PlaySound(drawCardSound, drawCardVolume);
         }
 
         // This should probably only be used for discards so may be useless
@@ -152,8 +121,6 @@ namespace _Scripts
 
         public void PlayCard(CardBase card)
         {
-            CloseTrayUI();
-
             // This UI function tells the Card Deck that we have moved a card to the active play zone
             if (playerCardDeck.PlayCard(card, ZoneCardUsed))
             {
