@@ -19,7 +19,9 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField] AudioClip countdownClip;
     [SerializeField] float countdownVolume = 0.3f;
-    
+    [SerializeField] private AudioClip backgroundMusicClip;
+    [SerializeField] private float bgMusicVolume = 0.5f;
+
     public static event Action OnRaceCountdownStarting;
     public static event Action<int> OnRaceCountdownChanged;
     public static event Action<int> OnRaceStarted;
@@ -51,6 +53,9 @@ public class RaceManager : MonoBehaviour
         OnRaceStarted?.Invoke(totalLaps);
         
         hasRaceStarted = true;
+        
+        yield return new WaitForSeconds(1.5f);
+        AudioSystem.Instance.PlayMusic(backgroundMusicClip, bgMusicVolume);
         
         yield return null;
     }
