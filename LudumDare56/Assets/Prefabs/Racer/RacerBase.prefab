@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2279850917084086495}
   - component: {fileID: 5525670306965000797}
   - component: {fileID: 3675050188292301712}
-  - component: {fileID: 5739789996148736137}
   - component: {fileID: 7819534717606597358}
+  - component: {fileID: 5739789996148736137}
   m_Layer: 0
   m_Name: RacerBase
   m_TagString: Untagged
@@ -38,6 +38,7 @@ Transform:
   - {fileID: 5660436979322998417}
   - {fileID: 1802551902505841377}
   - {fileID: 5781570791450438942}
+  - {fileID: 1412972488287403246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7081486185929337761
@@ -147,6 +148,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7819534717606597358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843356639919173845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae11ab9c1a1441c1b1995973a5862a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sabotageObjPrefabRef: {fileID: 4118542699457558538, guid: 1a3ba6ca265fe9b4a8a64642bfd23c8a, type: 3}
+  durationOfSlow: 3
+  maxSpeedDuring: 3
+  isAffectingRacer: 0
+  deceleration: 0.3
+  sabotageSpawnPos: {fileID: 1412972488287403246}
 --- !u!114 &5739789996148736137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,19 +185,37 @@ MonoBehaviour:
     jumpCards: 4
     sabotageCards: 4
     shortcutCards: 4
---- !u!114 &7819534717606597358
-MonoBehaviour:
+--- !u!1 &2317135369683768016
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843356639919173845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae11ab9c1a1441c1b1995973a5862a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sabotageObjPrefabRef: {fileID: 4118542699457558538, guid: 1a3ba6ca265fe9b4a8a64642bfd23c8a, type: 3}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412972488287403246}
+  m_Layer: 0
+  m_Name: SabotageSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1412972488287403246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2317135369683768016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.991, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2343108882437292734}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2967280926059526073
 GameObject:
   m_ObjectHideFlags: 0

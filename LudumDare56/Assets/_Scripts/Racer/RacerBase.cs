@@ -1,5 +1,6 @@
 using System.Collections;
 using _Scripts.Cards;
+using _Scripts.Cards.Sabotage;
 using UnityEngine;
 
 namespace _Scripts.Racer
@@ -15,6 +16,7 @@ namespace _Scripts.Racer
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
+        [SerializeField] private SabotageComponent sabotage;
         public CardBase triggerCard;
 
         [Header("Cards")] 
@@ -116,8 +118,12 @@ namespace _Scripts.Racer
             AlignWithTrack();
             CheckSideWhisker(sideWhiskerDirectionLeft, -1);
             CheckSideWhisker(sideWhiskerDirectionRight, 1);
-
-            if (brake.IsActive && currentSpeed > brake.MaxSpeed)
+            
+            if (sabotage.IsAffectingRacer && currentSpeed > sabotage.MaxSpeed)
+            {
+                currentSpeed -= sabotage.Deceleration * Time.fixedDeltaTime;
+            }
+            else if (brake.IsActive && currentSpeed > brake.MaxSpeed)
             {
                 currentSpeed -= brake.Deceleration * Time.fixedDeltaTime;
             }
@@ -180,6 +186,20 @@ namespace _Scripts.Racer
                 // We've left the track. Time to respawn.
                 StartCoroutine(Respawn());
             }
+        }
+        
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!shortcut.IsInShortcut && !isRespawning && collision.transform.CompareTag("SabotageObject"))
+            {
+                // We've hit a sabotage
+                CollideWithSabotageObject(collision.gameObject);
+            }
+        }
+
+        private void CollideWithSabotageObject(GameObject sabotageObject)
+        {
+            sabotage.StartOverride();
         }
 
         private IEnumerator Respawn()
