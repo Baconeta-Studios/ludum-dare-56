@@ -82,7 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20eebfc14b7646e4eaa43bc49d0e2456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleEffect: {fileID: 4058332241905893225}
+  particleEffects:
+  - {fileID: 4058332241905893225}
   isActive: 0
   isFinishing: 0
   duration: 2
@@ -102,7 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b800ff8b8a6cc46ad63735c66d586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleEffect: {fileID: 8173365692778504342}
+  particleEffects:
+  - {fileID: 8173365692778504342}
+  - {fileID: 7628202890171764343}
   isActive: 0
   isFinishing: 0
   duration: 3
@@ -932,5 +935,10 @@ PrefabInstance:
 --- !u!4 &5227895041406256127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4498940561462575597, guid: 5e599346841b140ceb3cca3ff47e0cbe, type: 3}
+  m_PrefabInstance: {fileID: 8566484542433067538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7628202890171764343 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2251402138549931109, guid: 5e599346841b140ceb3cca3ff47e0cbe, type: 3}
   m_PrefabInstance: {fileID: 8566484542433067538}
   m_PrefabAsset: {fileID: 0}
