@@ -45,7 +45,7 @@ namespace _Scripts.Managers
             if (racer.GetType() == typeof(RacerPlayer))
             {
                 player.IncrementLapsCompleted();
-                OnPlayerLapCompleted?.Invoke(player.GetCurrentLap());
+                OnPlayerLapCompleted?.Invoke(Mathf.Max(player.GetCurrentLap(), 1));
             }
             else
             {
