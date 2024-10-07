@@ -42,12 +42,12 @@ namespace _Scripts
                 CloseTrayUI();
             }
             
-            Time.timeScale = 0.01f;
             OpenChoiceUI();
         }
 
         private void OpenChoiceUI()
         {
+            Time.timeScale = 0.01f;
             choiceUIPopup.gameObject.SetActive(true);
         }
 
