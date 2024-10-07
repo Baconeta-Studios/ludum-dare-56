@@ -32,17 +32,20 @@ public class DraggableCard : MonoBehaviour
             ReturnCardToHand();
         }
         GetComponent<EventTrigger>().enabled = false;
+        ChangeMainCardAlpha(0.3f);
+    }
+
+    private void ChangeMainCardAlpha(float alpha)
+    {
         var color = cardImage.color;
-        color.a = 0.3f;
+        color.a = alpha;
         cardImage.color = color;
     }
-    
+
     private void CardSelectionClosed()
     {
         GetComponent<EventTrigger>().enabled = true;
-        var color = cardImage.color;
-        color.a = 1f;
-        cardImage.color = color;
+        ChangeMainCardAlpha(1f);
     }
 
     private void OnDisable()
@@ -59,6 +62,8 @@ public class DraggableCard : MonoBehaviour
             ReturnCardToHand();
             isDragging = false;
         }
+        GetComponent<EventTrigger>().enabled = true;
+        ChangeMainCardAlpha(0.3f);
     }
 
     // Start is called before the first frame update
