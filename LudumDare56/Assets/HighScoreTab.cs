@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Scripts.Managers;
 using TMPro;
@@ -21,7 +22,16 @@ public class HighScoreTab : MonoBehaviour
     public Transform highScoreContainer;
     public List<HighScoreEntry> entries;
 
+
+    public float reCheckTime = 0.6f;
+
     void OnEnable()
+    {
+        UpdateCurrentDisplay();
+        StartCoroutine(EOnEnable());
+    }
+
+    private void UpdateCurrentDisplay()
     {
         switch (currentlyShowing)
         {
@@ -32,6 +42,13 @@ public class HighScoreTab : MonoBehaviour
                 ShowLapTimes();
                 break;
         }
+    }
+
+    IEnumerator EOnEnable()
+    {
+        yield return new WaitForSeconds(reCheckTime);
+        UpdateCurrentDisplay();
+        yield return null;
     }
 
     [ContextMenu("Refresh")]
@@ -76,8 +93,6 @@ public class HighScoreTab : MonoBehaviour
 
     public void ShowLapTimes()
     {
-        ScoreServerManager.OnTrackDataUpdate -= UpdateHighScores;
-        ScoreServerManager.OnLapDataUpdate += UpdateHighScores;
         currentlyShowing = HighScoreType.LapTimes;
         // Update high scores from server's data.
         UpdateHighScores(ScoreServerManager.Instance.GetLapData());
