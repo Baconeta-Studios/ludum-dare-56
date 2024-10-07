@@ -5,8 +5,6 @@ namespace _Scripts.Managers
 {
     public class PlayerStatsManager : Singleton<PlayerStatsManager>
     {
-        public static string defaultUsername = "Rustle Jr.";
-
         private static string GetPlayerUsername()
         {
             string playerUsername = PlayerPrefs.GetString("PlayerName");
@@ -17,7 +15,7 @@ namespace _Scripts.Managers
             }
 
             // Change the return if you'd desire a generated name instead of default.
-            return defaultUsername;
+            return UsernameGenerator.Instance.GenerateName();
             
         }
         private static void PrepareScoreSubmission(int trackTime, int bestLapTime)
