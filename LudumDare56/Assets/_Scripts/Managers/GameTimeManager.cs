@@ -1,10 +1,11 @@
 using System;
 using _Scripts.Racer;
 using UnityEngine;
+using Utils;
 
 namespace _Scripts.Managers
 {
-    public class GameTimeManager : MonoBehaviour
+    public class GameTimeManager : Singleton<GameTimeManager>
     {
         private bool isRacing;
         
@@ -22,6 +23,7 @@ namespace _Scripts.Managers
         public static event Action<float> OnRaceTimeChanged;
         public static event Action<float> OnLapTimeChanged;
         public static event Action<float> OnFastestLapTimeChanged;
+        public static event Action<float, float> OnRaceFinished;
         
         public void StartRaceTimer()
         {
@@ -39,6 +41,7 @@ namespace _Scripts.Managers
         {
             HandleLapEndEvent(FindFirstObjectByType<RacerPlayer>());
             isRacing = false;
+            OnRaceFinished?.Invoke(totalRaceTimeSoFar, totalLapTimeSoFar);
             Debug.Log($"Fastest Lap: {fastestLap}\nRace Time: {totalRaceTimeSoFar}");
         }
 
