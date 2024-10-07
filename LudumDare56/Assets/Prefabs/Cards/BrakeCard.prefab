@@ -92,10 +92,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5275869467699524384, guid: b38b806c50da86446a484000a105e386, type: 3}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409315046651033709, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586780024575177318, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5789141688622347452, guid: 67c9ecc8e9789644c9549434dc8529b1, type: 3}
+      objectReference: {fileID: 4806686159077143660, guid: 1233df0b8fe59b243a7aec33bd60e1a8, type: 3}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: BrakeCard
