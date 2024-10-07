@@ -21,6 +21,11 @@ public class RacerAi : RacerBase
     
     [Header("Ai Jump")]
     [SerializeField] private float jumpRaycastDistance = 10f;
+
+    [Header("Ai Sabotage")] 
+    [SerializeField] private float sabotageChance;
+    [SerializeField] private float sabotageInterval;
+    private float nextSabotageCheckTime;
     
     protected override void Update()
     {
@@ -28,13 +33,30 @@ public class RacerAi : RacerBase
         if (Time.time > timeOfNextCardUpdate)
         {
             timeOfNextCardUpdate = Time.time + cardUpdateInterval;
+            
             TryUseBoost();
             
             TryUseBrake();
 
             TryUseJump();
+
+            if (Time.time > nextSabotageCheckTime)
+            {
+                nextSabotageCheckTime = Time.time + sabotageInterval;
+                TryUseSabotage();
+            }
         }
         
+    }
+
+    private void TryUseSabotage()
+    {
+        float random = Random.Range(0f, 1f);
+
+        if (random <= sabotageChance)
+        {
+            TryUseCard<SabotageCard>();
+        }
     }
 
     private void TryUseJump()
