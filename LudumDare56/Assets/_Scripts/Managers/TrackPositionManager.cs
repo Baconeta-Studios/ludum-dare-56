@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Racer;
 using UnityEngine;
+using Utils;
 
 namespace _Scripts.Managers
 {
-    public class TrackPositionManager : MonoBehaviour
+    public class TrackPositionManager : Singleton<TrackPositionManager>
     {
         private RacerProgress player;
         private List<RacerProgress> otherRacers;
-        
+        public int playerPlacing;
         public static event Action<int> OnPlayerRankingChanged;
         public static event Action<int> OnPlayerLapCompleted;
         
@@ -74,7 +75,8 @@ namespace _Scripts.Managers
             // Make the ranking calculation.
             var li = new List<RacerProgress>(otherRacers) { player };
             li.Sort();
-            OnPlayerRankingChanged?.Invoke(li.IndexOf(player) + 1);
+            playerPlacing = li.IndexOf(player) + 1;
+            OnPlayerRankingChanged?.Invoke(playerPlacing);
         }
     }
     
