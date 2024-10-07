@@ -38,8 +38,8 @@ public class RaceManager : MonoBehaviour
     private IEnumerator RaceCountdown()
     {
         OnRaceCountdownStarting?.Invoke();
-        AudioSystem.Instance.PlaySound(countdownClip, countdownVolume);
         yield return new WaitForSeconds(1.5f);
+        AudioSystem.Instance.PlaySound(countdownClip, countdownVolume);
         for (int i = countdownSeconds; i > 0; i--)
         {
             OnRaceCountdownChanged?.Invoke(i);
