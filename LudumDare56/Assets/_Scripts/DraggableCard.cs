@@ -16,6 +16,13 @@ public class DraggableCard : MonoBehaviour
     private int handSiblingNumber;
     
     public Image cardImage;
+    
+    [SerializeField] private AudioClip playCardSound;
+    [SerializeField] private float playCardVolume = 0.2f;
+    [SerializeField] private AudioClip pickupCardSound;
+    [SerializeField] private float pickupCardVolume = 0.2f;
+    [SerializeField] private AudioClip discardCardSound;
+    [SerializeField] private float discardCardVolume = 0.2f;
 
     private void OnEnable()
     {
@@ -95,6 +102,7 @@ public class DraggableCard : MonoBehaviour
             isInHandTrigger = true;
             handSiblingNumber = transform.GetSiblingIndex();
             gameObject.transform.SetParent(cardCanvas.gameObject.transform, true);
+            AudioSystem.Instance.PlaySound(pickupCardSound, pickupCardVolume);
             
             // Calculate offset between object position and mouse position
             offset = transform.position - GetMouseWorldPosition();
@@ -116,6 +124,7 @@ public class DraggableCard : MonoBehaviour
             }
             else // Now we play the card, first removing the active zone card
             {
+                AudioSystem.Instance.PlaySound(playCardSound, playCardVolume);
                 cardTrayUIManager.ZoneCardUsed();
 
                 var pos = cardTrayUIManager.zoneUIPosition;
@@ -134,6 +143,7 @@ public class DraggableCard : MonoBehaviour
     {
         gameObject.transform.SetParent(cardTrayUIManager.transform, false);
         transform.SetSiblingIndex(handSiblingNumber);
+        AudioSystem.Instance.PlaySound(discardCardSound, discardCardVolume);
     }
 
     private Vector3 GetMouseWorldPosition()
