@@ -15,6 +15,7 @@ namespace _Scripts.Racer
         [SerializeField] private BoostComponent boost;
         [SerializeField] private BrakeComponent brake;
         [SerializeField] private ShortcutComponent shortcut;
+        [SerializeField] private JumpComponent jumpComponent;
         public CardBase triggerCard;
 
         [Header("Cards")] 
@@ -79,7 +80,7 @@ namespace _Scripts.Racer
         {
             UpdateTrackPosition();
             
-            if(!isRespawning && !shortcut.IsInShortcut && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth)
+            if(!isRespawning && !shortcut.IsInShortcut && !jumpComponent.IsJumping && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth)
             {
                 // To far away from the center of the track (and not shortcutting). Lets respawn.
                 StartCoroutine(Respawn());
@@ -226,19 +227,27 @@ namespace _Scripts.Racer
             Gizmos.DrawLine(transform.position, transform.position + whiskerLeft);
         }
 
-        public void EnteredShortcut()
+        public void UseActiveCard()
+        {
+            triggerCard?.UseCard();
+        }
+
+        public void DisableCollision()
         {
             racerRigidbody2d.isKinematic = true;
             collider2D.enabled = false;
-            
-            triggerCard?.UseCard();
+        }
+
+        public void EnableCollision()
+        {
+            racerRigidbody2d.isKinematic = false;
+            StartCoroutine((EnableCollisionAfterDuration()));
         }
 
         public void ExitedShortcut(Vector2 heading)
         {
             currentHeading = heading;
-            racerRigidbody2d.isKinematic = false;
-            StartCoroutine((EnableCollisionAfterDuration()));
+            EnableCollision();
         }
 
         private IEnumerator EnableCollisionAfterDuration()

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5525670306965000797}
   - component: {fileID: 3675050188292301712}
   - component: {fileID: 5739789996148736137}
+  - component: {fileID: 7951779118019489950}
   m_Layer: 0
   m_Name: RacerBase
   m_TagString: Untagged
@@ -165,6 +166,64 @@ MonoBehaviour:
     jumpCards: 4
     sabotageCards: 4
     shortcutCards: 4
+--- !u!114 &7951779118019489950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843356639919173845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d74ceb08d871c468e8011fa8c97f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  isJumping: 0
+  jumpDetectionDistance: 5
+  jumpAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.006260978
+      outSlope: 0.006260978
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.29375
+      value: 1
+      inSlope: 0.10480356
+      outSlope: 0.10480356
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.6349206
+    - serializedVersion: 3
+      time: 0.6875
+      value: 1
+      inSlope: -0.24918224
+      outSlope: -0.24918224
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.47392088
+      outWeight: 0.77838075
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.022223126
+      outSlope: 0.022223126
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpScalePercent: 1.4
 --- !u!1 &2967280926059526073
 GameObject:
   m_ObjectHideFlags: 0
