@@ -8,12 +8,14 @@ namespace _Scripts.Managers
     {
         private bool isRacing;
         
-        private float totalRaceTimeSoFar; // Total time since the race began, updated each Update().
+        // Total time since the race began, updated each Update().
+        private float totalRaceTimeSoFar;
         // Current Lap time.
-        private float lapTimeSoFar;
-        private float lastTimeFinishLineCrossed; // Used to calculate lap times.
+        private float totalLapTimeSoFar;
         // Fastest Lap.
         private float fastestLap;
+        
+        private float lastTimeFinishLineCrossed; // Used to calculate lap times.
         
         public static event Action<float> OnRaceTimeChanged;
         public static event Action<float> OnLapTimeChanged;
@@ -23,9 +25,9 @@ namespace _Scripts.Managers
         {
             // Reset timer.
             totalRaceTimeSoFar = 0;
-            lastTimeFinishLineCrossed = 0;
-            lapTimeSoFar = 0;
+            totalLapTimeSoFar = 0;
             fastestLap = 0;
+            lastTimeFinishLineCrossed = 0;
             
             // Start timer.
             isRacing = true;
@@ -38,23 +40,26 @@ namespace _Scripts.Managers
 
         public void HandleLapEndEvent(RacerBase racer)
         {
+            if (racer.GetType() != typeof(RacerPlayer))
+            {
+                return;
+            }
+            
             if (!isRacing)
             {
                 StartRaceTimer();
                 return;
             }
-            // Calculate last-lap time.
-            lapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
             
             // Update fastest-lap time.
-            if (lapTimeSoFar < fastestLap)
+            if (totalLapTimeSoFar > fastestLap)
             {
-                fastestLap = lapTimeSoFar;
+                fastestLap = totalLapTimeSoFar;
+                OnFastestLapTimeChanged?.Invoke(fastestLap);
             }
-            
-            
-            OnFastestLapTimeChanged?.Invoke(fastestLap * 1_000);
+
+            // Reset lap timer.
         }
 
         private void OnEnable()
@@ -72,8 +77,9 @@ namespace _Scripts.Managers
             if (!isRacing) return;
             
             totalRaceTimeSoFar += Time.deltaTime;
+            totalLapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
             OnRaceTimeChanged?.Invoke(totalRaceTimeSoFar);
-            OnLapTimeChanged?.Invoke(lapTimeSoFar);
+            OnLapTimeChanged?.Invoke(totalLapTimeSoFar);
         }
     }
 }

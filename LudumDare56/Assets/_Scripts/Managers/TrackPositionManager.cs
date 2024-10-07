@@ -11,7 +11,7 @@ namespace _Scripts.Managers
         private RacerProgress player;
         private List<RacerProgress> otherRacers;
         
-        public static event Action<int> OnPlayerPositionChanged;
+        public static event Action<int> OnPlayerRankingChanged;
         public static event Action<int> OnPlayerLapCompleted;
         
         private void Start()
@@ -27,13 +27,7 @@ namespace _Scripts.Managers
             }
             
             // Save other racers, they'll all be AI.
-            for (int i = 0; i < racers.Count; i++)
-            {
-                otherRacers = new List<RacerProgress>(racers.Count)
-                {
-                    [i] = new RacerProgress((RacerAi) racers[i])
-                };
-            }
+            otherRacers = racers.ToList().ConvertAll(racer => new RacerProgress(racer));
         }
         
         private void OnEnable()
@@ -51,56 +45,70 @@ namespace _Scripts.Managers
             if (racer.GetType() == typeof(RacerPlayer))
             {
                 player.IncrementLapsCompleted();
-                OnPlayerLapCompleted?.Invoke((int) Math.Round(player.GetRaceProgress()));
+                OnPlayerLapCompleted?.Invoke(player.GetCurrentLap());
             }
             else
             {
-                foreach (var racerProgress in otherRacers.Where(racerProgress => racerProgress.Racer.Equals(racer)))
+                foreach (var aiRacer in otherRacers.Where(aiRacer => aiRacer.Racer.Equals(racer)))
                 {
-                    racerProgress.IncrementLapsCompleted();
+                    aiRacer.IncrementLapsCompleted();
+                    break;
                 }
             }
         }
+
+        private void Update()
+        {
+            UpdatePlayerRanking();
+        }
         
         /// <summary>
-        /// Returns the place that the player is in, relative to other races. 1=1st, 3=3rd, etc.
+        /// Calculates the ranking that the player is in, relative to other racers. e.g. 1st, 3rd.
+        /// Broadcasts the ranking via OnPlayerRankingChanged.
         /// </summary>
-        /// <returns>Player's relative position in the race</returns>
-        public int GetPlayerPosition() {
-            List<RacerProgress> li = otherRacers.ToList();
-            li.Add(player);
+        private void UpdatePlayerRanking() {
+            // Ensure that our data is fresh.
+            player.UpdateLapProgress();
+            otherRacers.ForEach(racer => racer.UpdateLapProgress());
+            
+            // Make the ranking calculation.
+            var li = new List<RacerProgress>(otherRacers) { player };
             li.Sort();
-            return li.IndexOf(player) + 1;
+            OnPlayerRankingChanged?.Invoke(li.IndexOf(player) + 1);
         }
-
     }
     
     public class RacerProgress : IComparable<RacerProgress>
     {
         public readonly RacerBase Racer;
-        private int lapsCompleted;
+        private int currentLap;
         private float lapProgress;
 
         public RacerProgress(RacerBase racer)
         {
             this.Racer = racer;
-            lapsCompleted = 0;
+            currentLap = 0;
             lapProgress = 0;
         }
         
         public void IncrementLapsCompleted()
         {
-            lapsCompleted++;
+            currentLap++;
         }
 
-        public void UpdateLapProgress(float progress)
+        public void UpdateLapProgress()
         {
-            lapProgress = progress;
+            lapProgress = Racer.DistanceAlongTrack;
+        }
+
+        public int GetCurrentLap()
+        {
+            return currentLap;
         }
         
         public float GetRaceProgress()
         {
-            return (lapsCompleted * 1.0F) + lapProgress;
+            return GetCurrentLap() + lapProgress;
         }
         
         public int CompareTo(RacerProgress other)
