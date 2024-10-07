@@ -18,6 +18,10 @@ public class RacerAi : RacerBase
     [SerializeField] private float boostRaycastDistance;
     [SerializeField] private float boostTangentThreshold = 0.5f;
     [SerializeField] private float minDistanceForBoost = 50f;
+    
+    [Header("Ai Jump")]
+    [SerializeField] private float jumpRaycastDistance = 10f;
+    
     protected override void Update()
     {
         base.Update();
@@ -25,12 +29,29 @@ public class RacerAi : RacerBase
         {
             timeOfNextCardUpdate = Time.time + cardUpdateInterval;
             TryUseBoost();
-            TryUseBreak();
+            
+            TryUseBrake();
+
+            TryUseJump();
         }
         
     }
 
-    private void TryUseBreak()
+    private void TryUseJump()
+    {
+        var hits = Physics2D.RaycastAll(transform.position, Vector3.up, brakeRaycastDistance);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.CompareTag("SabotageObject"))
+            {
+                TryUseCard<JumpCard>();
+                break;
+            }
+        }
+    }
+
+    private void TryUseBrake()
     {
         var distToSpline = GetSplineInfoAtDistance(brakeRaycastDistance, out var nearestSpline, out var tangentOnSpline);
 
@@ -103,6 +124,8 @@ public class RacerAi : RacerBase
         Gizmos.color = Color.white;
         Gizmos.DrawLine(transform.position, transform.position + transform.up * brakeRaycastDistance);
         Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * jumpRaycastDistance);
+        
 
     }
 }
