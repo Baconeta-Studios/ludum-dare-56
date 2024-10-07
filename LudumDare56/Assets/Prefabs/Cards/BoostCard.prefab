@@ -87,7 +87,11 @@ PrefabInstance:
     - target: {fileID: 5275869467699524384, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -8280859189641132385, guid: 1827caed59163d4429ce168970307715, type: 3}
+      objectReference: {fileID: -5941527862202308817, guid: 646c16f8246a8d046be77e4ad253291e, type: 3}
+    - target: {fileID: 6586780024575177318, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5754703186250931684, guid: a15d8ad258416a24a81043b7ac56134b, type: 3}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: BoostCard

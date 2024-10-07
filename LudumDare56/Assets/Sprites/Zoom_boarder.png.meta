@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3ecfc41e97868ef4c8cdd6d1402927ae
+guid: a15d8ad258416a24a81043b7ac56134b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1663985795130343650
-    second: Leafpile Sabotage Transparent_0
+      213: -5754703186250931684
+    second: Zoom_boarder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Leafpile Sabotage Transparent_0
+      name: Zoom_boarder_0
       rect:
         serializedVersion: 2
-        x: 445
-        y: 31
-        width: 1082
-        height: 1010
+        x: 15
+        y: 7
+        width: 759
+        height: 1060
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e04a06b34aa71710800000000000000
-      internalID: 1663985795130343650
+      spriteID: c1264bb11ff2320b0800000000000000
+      internalID: -5754703186250931684
       vertices: []
       indices: 
       edges: []
@@ -170,7 +170,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LeafPileSabotage_0: 6237405705875275378
+      Zoom_boarder_0: -5754703186250931684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

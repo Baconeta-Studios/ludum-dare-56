@@ -95,7 +95,11 @@ PrefabInstance:
     - target: {fileID: 5275869467699524384, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7460046300004610927, guid: 176a5f3dbb4f5a44bb90a19e59e105cf, type: 3}
+      objectReference: {fileID: -5941527862202308817, guid: 646c16f8246a8d046be77e4ad253291e, type: 3}
+    - target: {fileID: 6586780024575177318, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2009159140553898089, guid: 1bbcce00b8b00f34ab4f6a67555c0e0c, type: 3}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: JumpCard
