@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 {
-    private RaceManager Instance;
+    public static RaceManager Instance;
     [SerializeField] private bool hasRaceStarted;
+    [SerializeField] public bool HasRaceStarted => hasRaceStarted;
     [SerializeField] private bool hasRaceFinished;
+    [SerializeField] public bool HasRaceFinished => hasRaceFinished;
     [SerializeField] private int currentLap;
     [SerializeField] private int totalLaps;
     public int TotalLaps => totalLaps;
