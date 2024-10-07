@@ -24,29 +24,16 @@ public class CountdownUi : MonoBehaviour
 
     private void UpdateLights(int timeRemaining)
     {
-        switch (timeRemaining)
-        {
-            case 0:
-                foreach (var trafficLight in trafficLights)
-                {
-                    foreach (var light in trafficLight.GreenLights)
-                    {
-                        light.enabled = true;
-                    }
-                    
-                    foreach (var light in trafficLight.RedLights)
-                    {
-                        light.enabled = false;
-                    }
-                    animator.SetTrigger("Hide");
-                }
-                break;
-            default:
-                foreach (var trafficLight in trafficLights)
-                {
-                    trafficLight.RedLights[timeRemaining - 1].enabled = true;
-                }
-                break;
+        foreach (var trafficLight in trafficLights)
+        { 
+            if(!trafficLight.image.enabled) trafficLight.image.enabled = true;
+            
+            trafficLight.image.sprite = trafficLight.sprites[timeRemaining];
+        }
+        
+        if(timeRemaining == 0)
+        {                    
+            animator.SetTrigger("Hide");
         }
     }
 

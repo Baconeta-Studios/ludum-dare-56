@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: c2a39f032eaad73449a9a23052f3b820
+guid: 5448e9b180e35644798ddac521b174aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5471171667472520872
-    second: Trafficlight_0
+      213: 4584338636833703478
+    second: Onered_0
+  - first:
+      213: -7118414749953490194
+    second: Onered_1
+  - first:
+      213: 1738106062031528605
+    second: Onered_2
+  - first:
+      213: -3257953302033317909
+    second: Onered_3
+  - first:
+      213: -4110138852023682768
+    second: Onered_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trafficlight_0
+      name: Onered_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 61
-        width: 365
-        height: 250
+        x: 28
+        y: 84
+        width: 117
+        height: 175
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +139,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8596e1f1b5e7214b0800000000000000
-      internalID: -5471171667472520872
+      spriteID: 636429a83b7de9f30800000000000000
+      internalID: 4584338636833703478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onered_1
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 160
+        width: 72
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee20f19ff7f463d90800000000000000
+      internalID: -7118414749953490194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onered_2
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 161
+        width: 72
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92a759214efe1810800000000000000
+      internalID: 1738106062031528605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onered_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 84
+        width: 72
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bef3e71bbbc69c2d0800000000000000
+      internalID: -3257953302033317909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onered_4
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 85
+        width: 72
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 039b8939d7ad5f6c0800000000000000
+      internalID: -4110138852023682768
       vertices: []
       indices: 
       edges: []
@@ -136,14 +232,19 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Onered_0: 4584338636833703478
+      Onered_1: -7118414749953490194
+      Onered_2: 1738106062031528605
+      Onered_3: -3257953302033317909
+      Onered_4: -4110138852023682768
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
