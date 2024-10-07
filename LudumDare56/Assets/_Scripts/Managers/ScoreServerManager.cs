@@ -5,10 +5,11 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using Utils;
 
 namespace _Scripts.Managers
 {
-    public class ScoreServerManager : MonoBehaviour
+    public class ScoreServerManager : Singleton<ScoreServerManager>
     {
         [Header("Track Text Fields")]
         
@@ -27,10 +28,11 @@ namespace _Scripts.Managers
         [Tooltip("Row count | How many high-scores to show at once")] [SerializeField]
         private int maximumEntries = 12;
 
-        private const string SubmitTrackScoreUri = "https://???/api/track_times?user={0}&time={1}";
-        private const string SubmitLapScoreUri = "https://???/api/lap_times?user={0}&time={1}";
-        private const string GetTrackScoresUri = "https://???/api/track_times";
-        private const string GetLapScoresUri = "https://???/api/lap_times";
+        private const string RootUri = "http://ec2-3-27-219-9.ap-southeast-2.compute.amazonaws.com:4000";
+        private const string SubmitTrackScoreUri = RootUri + "/api/track_times?user={0}&score={1}";
+        private const string SubmitLapScoreUri = RootUri + "/api/lap_times?user={0}&score={1}";
+        private const string GetTrackScoresUri = RootUri + "/api/track_times";
+        private const string GetLapScoresUri = RootUri + "/api/lap_times";
 
         private readonly string defaultText = string.Concat(Enumerable.Repeat($"Loading...{Environment.NewLine}", 4));
 
@@ -60,7 +62,7 @@ namespace _Scripts.Managers
         };
         
         // Post a user's score to the leaderboard server.
-        public void SubmitScore(ScoreType scoreType, string user, int score)
+        public void SubmitScore(ScoreType scoreType, string user, string score)
         {
             
             if (user == default)
@@ -78,7 +80,7 @@ namespace _Scripts.Managers
             StartCoroutine(SubmitScoreCoroutine(scoreType, user, score));
         }
 
-        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, int score)
+        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, string score)
         {
             string uri = scoreType == ScoreType.Track ? SubmitTrackScoreUri : SubmitLapScoreUri;
             using UnityWebRequest ping = UnityWebRequest.PostWwwForm(string.Format(uri, user, score), "");
