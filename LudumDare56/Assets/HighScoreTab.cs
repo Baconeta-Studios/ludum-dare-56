@@ -102,6 +102,11 @@ public class HighScoreTab : MonoBehaviour
                 entries[i].SetName(collection.highScores[i].user);
                 entries[i].SetTime(collection.highScores[i].score);
             }
+            else
+            {
+                entries[i].SetName("_________");
+                entries[i].SetTime(0f);
+            }
         }
     }
     

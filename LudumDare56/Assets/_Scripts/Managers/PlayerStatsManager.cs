@@ -9,8 +9,8 @@ namespace _Scripts.Managers
         private static void PrepareScoreSubmission(float trackTime, float bestLapTime)
         {
             var ssm = ScoreServerManager.Instance;
-            ssm.SubmitScore(ScoreServerManager.ScoreType.Track, PlayerUsername, trackTime.ToString("en-GB"));
-            ssm.SubmitScore(ScoreServerManager.ScoreType.Lap, PlayerUsername, bestLapTime.ToString("en-GB"));
+            ssm.SubmitScore(ScoreServerManager.ScoreType.Track, PlayerUsername, trackTime);
+            ssm.SubmitScore(ScoreServerManager.ScoreType.Lap, PlayerUsername, bestLapTime);
         }
         
         private void OnEnable()
