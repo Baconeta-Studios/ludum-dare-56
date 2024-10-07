@@ -12,7 +12,7 @@ namespace _Scripts.Managers
     {
         public bool AllowSubmitScoreInEditor;
         public bool DoYouReallyWantToSubmitInEditor;
-        private const string RootUri = "http://ec2-3-27-219-9.ap-southeast-2.compute.amazonaws.com:4000";
+        private const string RootUri = "https://ld56-ddss.free.beeceptor.com";
         private const string SubmitTrackScoreUri = RootUri + "/api/track_times?user={0}&score={1}";
         private const string SubmitLapScoreUri = RootUri + "/api/lap_times?user={0}&score={1}";
         private const string GetTrackScoresUri = RootUri + "/api/track_times";
