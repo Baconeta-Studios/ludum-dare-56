@@ -37,7 +37,14 @@ namespace Utils {
             generatedName.Append(separator);
             generatedName.Append(GetRandomNounFromFile());
 
-            return generatedName.ToString();
+            if (generatedName.ToString() == string.Empty)
+            {
+                return "Rustle";
+            }
+            else
+            {
+                return generatedName.ToString();
+            }
         }
 
         private string GetRandomAdjectiveFromFile()
