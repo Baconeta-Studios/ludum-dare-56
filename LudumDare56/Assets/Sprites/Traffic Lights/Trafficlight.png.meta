@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c1122b30a09b6492299670dd4c0718e1
+guid: c2a39f032eaad73449a9a23052f3b820
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1548286793080890564
-    second: Rock2 Clutter Transparent_0
+      213: -5471171667472520872
+    second: Trafficlight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -97,32 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock2 Clutter Transparent_0
+      name: Trafficlight_0
       rect:
         serializedVersion: 2
-        x: 783
-        y: 311
-        width: 247
-        height: 277
+        x: 33
+        y: 61
+        width: 365
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3b1cf76d51638ae0800000000000000
-      internalID: -1548286793080890564
+      spriteID: 8596e1f1b5e7214b0800000000000000
+      internalID: -5471171667472520872
       vertices: []
       indices: 
       edges: []
@@ -162,7 +136,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -170,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Rock2 Clutter Transparent_0: -1548286793080890564
+      Trafficlight_0: -5471171667472520872
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

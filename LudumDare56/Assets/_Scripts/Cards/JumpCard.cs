@@ -4,6 +4,12 @@ public class JumpCard : CardBase
 {
     private JumpComponent jumpComponent;
 
+    public void Start()
+    {
+        useType = UseType.Conditional;
+        cardName = "Hop";
+    }
+    
     public override void UseCard()
     {
         Debug.Log("Jump card played");

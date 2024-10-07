@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using _Scripts.Racer;
 using UnityEngine;
@@ -37,17 +38,23 @@ namespace _Scripts
             {
                 return;
             }
+
             if (isTrayUIOpen)
             {
                 CloseTrayUI();
             }
-            
-            Time.timeScale = 0.01f;
+
+            if (RaceManager.Instance.HasRaceFinished)
+            {
+                return;
+            }
+
             OpenChoiceUI();
         }
 
         private void OpenChoiceUI()
         {
+            Time.timeScale = 0.01f;
             choiceUIPopup.gameObject.SetActive(true);
         }
 
@@ -104,9 +111,24 @@ namespace _Scripts
             Time.timeScale = 1f;
         }
 
-        public void AddCardToUI(GameObject card)
+        public void AddCardToUI(CardBase card)
         {
-            var newCard = Instantiate(card, gameObject.transform, false);
+            string typeName = card.GetType().ToString();
+            GameObject prefab = typeName switch
+            {
+                "BrakeCard" => CardPrefabManager.Instance.brakeCard,
+                "JumpCard" => CardPrefabManager.Instance.jumpCard,
+                "BoostCard" => CardPrefabManager.Instance.boostCard,
+                "SabotageCard" => CardPrefabManager.Instance.sabotageCard,
+                "ShortcutCard" => CardPrefabManager.Instance.shortcutCard,
+                _ => null
+            };
+
+            if (prefab == null)
+            {
+                Debug.Log("Card Prefab Not Found"); 
+            }
+            var newCard = Instantiate(prefab, gameObject.transform, false);
             newCard.transform.localScale = Vector3.one;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
@@ -120,7 +142,7 @@ namespace _Scripts
             {
                 i = cardBase.transform.GetSiblingIndex();
             }
-            Destroy(gameObject.transform.GetChild(i).gameObject);
+            //Destroy(gameObject.transform.GetChild(i).gameObject);
         }
 
         public void PlayCard(CardBase card)

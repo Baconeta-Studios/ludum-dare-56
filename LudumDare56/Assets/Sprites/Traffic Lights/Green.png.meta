@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: c1122b30a09b6492299670dd4c0718e1
+guid: d3be2c6183718a24181a310d0320f040
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1548286793080890564
-    second: Rock2 Clutter Transparent_0
+      213: -4987337320017983735
+    second: Green_0
+  - first:
+      213: 3093105817896843584
+    second: Green_1
+  - first:
+      213: -8195212640869537175
+    second: Green_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -97,32 +103,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock2 Clutter Transparent_0
+      name: Green_0
       rect:
         serializedVersion: 2
-        x: 783
-        y: 311
-        width: 247
-        height: 277
+        x: 19
+        y: 51
+        width: 123
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +133,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3b1cf76d51638ae0800000000000000
-      internalID: -1548286793080890564
+      spriteID: 9078749a12b69cab0800000000000000
+      internalID: -4987337320017983735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green_1
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 57
+        width: 110
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0497f687a5becea20800000000000000
+      internalID: 3093105817896843584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green_2
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 58
+        width: 114
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96a2e22f581c44e80800000000000000
+      internalID: -8195212640869537175
       vertices: []
       indices: 
       edges: []
@@ -162,7 +184,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -170,7 +192,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Rock2 Clutter Transparent_0: -1548286793080890564
+      Green_0: -4987337320017983735
+      Green_1: 3093105817896843584
+      Green_2: -8195212640869537175
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

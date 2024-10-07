@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2753789888915960613
+--- !u!1 &1363983610624223385
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 644233956977315832}
-  - component: {fileID: 4656762669748034323}
+  - component: {fileID: 3543097657980505136}
+  - component: {fileID: 4637906467618307374}
   m_Layer: 0
-  m_Name: CardPrefabManager
+  m_Name: RaceManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &644233956977315832
+--- !u!4 &3543097657980505136
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2753789888915960613}
+  m_GameObject: {fileID: 1363983610624223385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -66.932106, y: 73.21107, z: 2.4645042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4656762669748034323
+--- !u!114 &4637906467618307374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2753789888915960613}
+  m_GameObject: {fileID: 1363983610624223385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b45d470ef1429ca37cce90ee61ae87, type: 3}
+  m_Script: {fileID: 11500000, guid: d404bf685cee52149a9c2c577988b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostCard: {fileID: 1157676087888648234, guid: 59df0c1243645e948ac41a443f705758, type: 3}
-  brakeCard: {fileID: 491398032484325064, guid: 70cf8f69c65e68147831d934f67353ec, type: 3}
-  jumpCard: {fileID: 6147310078943487806, guid: 8ff6a85e7b2909744b5764249a7838bc, type: 3}
-  sabotageCard: {fileID: 1197134106327132802, guid: ee202d125eb39ce46bb61e6427c77019, type: 3}
-  shortcutCard: {fileID: 5882031554566320610, guid: abd8c9dd6ba3add4fb4972eaea96a65c, type: 3}
+  totalLaps: 3
+  countdownSeconds: 3
