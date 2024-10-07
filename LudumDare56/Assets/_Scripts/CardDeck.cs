@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using _Scripts;
 using _Scripts.Racer;
-using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -78,6 +77,7 @@ public class CardDeck : MonoBehaviour
         for (var i = 0; i < deckSetup.boostCards; i++)
         {
             var go = new GameObject();
+            go.transform.SetParent(transform);
             go.AddComponent<BoostCard>();
             AddCardToDeck(go.GetComponent<CardBase>());
         }
@@ -85,24 +85,28 @@ public class CardDeck : MonoBehaviour
         {
             var go = new GameObject();
             go.AddComponent<BrakeCard>();
+            go.transform.SetParent(transform);
             AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.jumpCards; i++)
         {
             var go = new GameObject();
             go.AddComponent<JumpCard>();
+            go.transform.SetParent(transform);
             AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.sabotageCards; i++)
         {
             var go = new GameObject();
             go.AddComponent<SabotageCard>();
+            go.transform.SetParent(transform);
             AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.shortcutCards; i++)
         {
             var go = new GameObject();
             go.AddComponent<ShortcutCard>();
+            go.transform.SetParent(transform);
             AddCardToDeck(go.GetComponent<CardBase>());
         }
         
