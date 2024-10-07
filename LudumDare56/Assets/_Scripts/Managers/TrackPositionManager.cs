@@ -61,16 +61,25 @@ namespace _Scripts.Managers
                 }
             }
         }
+
+        private void Update()
+        {
+            UpdatePlayerRanking();
+        }
         
         /// <summary>
-        /// Returns the place that the player is in, relative to other races. 1=1st, 3=3rd, etc.
+        /// Calculates the ranking that the player is in, relative to other racers. e.g. 1st, 3rd.
+        /// Broadcasts the ranking via OnPlayerRankingChanged.
         /// </summary>
-        /// <returns>Player's relative position in the race</returns>
-        public int GetPlayerPosition() {
-            List<RacerProgress> li = otherRacers.ToList();
-            li.Add(player);
+        private void UpdatePlayerRanking() {
+            // Ensure that our data is fresh.
+            player.UpdateLapProgress();
+            otherRacers.ForEach(racer => racer.UpdateLapProgress());
+            
+            // Make the ranking calculation.
+            var li = new List<RacerProgress>(otherRacers) { player };
             li.Sort();
-            return li.IndexOf(player) + 1;
+            OnPlayerRankingChanged?.Invoke(li.IndexOf(player) + 1);
         }
     }
     
