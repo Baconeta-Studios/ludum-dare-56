@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2596474762824445984}
   - component: {fileID: 4352864858984930648}
   - component: {fileID: 213329145147639321}
+  - component: {fileID: 1483763573693813974}
   m_Layer: 0
   m_Name: StatsAndScoring
   m_TagString: Untagged
@@ -73,7 +74,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2d88272b9645c18fc3c809c667da05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackData:
-    highScores: []
-  lapData:
-    highScores: []
+--- !u!114 &1483763573693813974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783799320128712771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fefcaf5dd24c3ca1de4e5be13ba96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

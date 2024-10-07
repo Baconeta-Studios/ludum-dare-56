@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PostRaceUi : MonoBehaviour
 {
-    public GameObject uiContainer;
-    
-    void OnEnable()
+    public GameObject postRaceUiContainer;
+    public GameObject gameplayUIContainer;
+    public GameObject raceInfoUIContainer;
+
+    public void OnEnable()
     {
         RaceManager.OnRaceCompleted += ShowUi;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         RaceManager.OnRaceCompleted -= ShowUi;
     }
 
-    void ShowUi()
+    private void ShowUi()
     {
-        uiContainer.SetActive(true);
+        postRaceUiContainer.SetActive(true);
+        gameplayUIContainer.SetActive(false);
+        raceInfoUIContainer.SetActive(false);
     }
 }

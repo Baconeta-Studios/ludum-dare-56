@@ -65,19 +65,29 @@ public class HighScoreTab : MonoBehaviour
 
     public void ShowTrackTimes()
     {
+        ScoreServerManager.OnLapDataUpdate -= UpdateHighScores;
+        ScoreServerManager.OnTrackDataUpdate += UpdateHighScores;
         currentlyShowing = HighScoreType.RaceTimes;
         // Update high scores from server's data.
-        UpdateHighScores(ScoreServerManager.Instance.trackData);
+        UpdateHighScores(ScoreServerManager.Instance.GetTrackData());
         title.text = raceTimeTitle;
 
     }
 
     public void ShowLapTimes()
     {
+        ScoreServerManager.OnTrackDataUpdate -= UpdateHighScores;
+        ScoreServerManager.OnLapDataUpdate += UpdateHighScores;
         currentlyShowing = HighScoreType.LapTimes;
         // Update high scores from server's data.
-        UpdateHighScores(ScoreServerManager.Instance.lapData);
+        UpdateHighScores(ScoreServerManager.Instance.GetLapData());
         title.text = lapTimeTitle;
+    }
+
+    private void OnDisable()
+    {
+        ScoreServerManager.OnTrackDataUpdate -= UpdateHighScores;
+        ScoreServerManager.OnLapDataUpdate -= UpdateHighScores;
     }
 
     public void UpdateHighScores(HighScoreCollection collection)
@@ -91,6 +101,11 @@ public class HighScoreTab : MonoBehaviour
             {
                 entries[i].SetName(collection.highScores[i].user);
                 entries[i].SetTime(collection.highScores[i].score);
+            }
+            else
+            {
+                entries[i].SetName("_________");
+                entries[i].SetTime(0f);
             }
         }
     }

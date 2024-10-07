@@ -16,9 +16,23 @@ namespace _Scripts.Managers
         private const string GetTrackScoresUri = RootUri + "/api/track_times";
         private const string GetLapScoresUri = RootUri + "/api/lap_times";
 
-        public HighScoreCollection trackData;
-        public HighScoreCollection lapData;
+        private HighScoreCollection trackData;
+        private HighScoreCollection lapData;
         
+        public static event Action<HighScoreCollection> OnTrackDataUpdate;
+        public static event Action<HighScoreCollection> OnLapDataUpdate;
+
+        public HighScoreCollection GetTrackData()
+        {
+            RefetchTrackData();
+            return trackData;
+        }
+        
+        public HighScoreCollection GetLapData()
+        {
+            RefetchLapData();
+            return lapData;
+        }
         
         // The callback used to update text with leaderboard information that we have retrieved from the server.
         private delegate void Callback(HighScoreCollection entryList, ScoreType scoreType);
@@ -28,17 +42,30 @@ namespace _Scripts.Managers
             if (scoreType == ScoreType.Track)
             {
                 trackData = entryList;
+                OnTrackDataUpdate?.Invoke(trackData);
             }
             else if (scoreType == ScoreType.Lap)
             {
                 lapData = entryList;
+                OnLapDataUpdate?.Invoke(lapData);
             }
         }
         
         private void Start()
         {
             // Request global score information from the server, and provide a callback for when we get that information.
+            RefetchTrackData();
+            RefetchLapData();
+        }
+
+        [ContextMenu("Refresh Scores")]
+        private void RefetchTrackData()
+        {
             StartCoroutine(GetGlobalScoresRequest(SaveData, ScoreType.Track));
+        }
+
+        private void RefetchLapData()
+        {
             StartCoroutine(GetGlobalScoresRequest(SaveData, ScoreType.Lap));
         }
 
@@ -49,7 +76,7 @@ namespace _Scripts.Managers
         };
         
         // Post a user's score to the leaderboard server.
-        public void SubmitScore(ScoreType scoreType, string user, string score)
+        public void SubmitScore(ScoreType scoreType, string user, float score)
         {
             
             if (user == default)
@@ -67,7 +94,7 @@ namespace _Scripts.Managers
             StartCoroutine(SubmitScoreCoroutine(scoreType, user, score));
         }
 
-        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, string score)
+        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, float score)
         {
             string uri = scoreType == ScoreType.Track ? SubmitTrackScoreUri : SubmitLapScoreUri;
             using UnityWebRequest ping = UnityWebRequest.PostWwwForm(string.Format(uri, user, score), "");
