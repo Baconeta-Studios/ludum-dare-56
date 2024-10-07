@@ -17,6 +17,7 @@ namespace _Scripts
         
         [SerializeField] private AudioClip drawCardSound;
         [SerializeField] private float drawCardVolume = 0.5f;
+        public float SlowDownSpeed = 0.2f;
 
         public static event Action OnOpenCardSelection; 
         public static event Action OnCloseCardSelection; 
@@ -43,11 +44,6 @@ namespace _Scripts
             if (racer.GetType() != typeof(RacerPlayer))
             {
                 return;
-            }
-
-            if (isTrayUIOpen)
-            {
-                CloseTrayUI();
             }
 
             if (RaceManager.Instance.HasRaceFinished)
@@ -77,45 +73,13 @@ namespace _Scripts
             gameObject.transform.localPosition = trayUIStartPosition;
         }
 
-        public void ToggleTrayUI()
+        public void SetSlowTime()
         {
-            if (isTrayUIOpen)
-            {
-                CloseTrayUI();
-            }
-            else
-            {
-                OpenTrayUI();
-            }
+            Time.timeScale = SlowDownSpeed;
         }
 
-        private void OpenTrayUI()
+        public void SetNormalTime()
         {
-            Debug.Log("Opening Tray UI");
-            if (isTrayUIOpen)
-            {
-                // Do nothing
-                return;
-            }
-
-            gameObject.transform.localPosition = trayUIOpenPosition;
-            isTrayUIOpen = true;
-
-            Time.timeScale = 0.2f;
-        }
-
-        private void CloseTrayUI()
-        {
-            Debug.Log("Closing Tray UI");
-            if (!isTrayUIOpen)
-            {
-                // Do nothing
-                return;
-            }
-
-            gameObject.transform.localPosition = trayUIStartPosition;
-            isTrayUIOpen = false;
-
             Time.timeScale = 1f;
         }
 
@@ -157,8 +121,6 @@ namespace _Scripts
 
         public void PlayCard(CardBase card)
         {
-            CloseTrayUI();
-
             // This UI function tells the Card Deck that we have moved a card to the active play zone
             if (playerCardDeck.PlayCard(card, ZoneCardUsed))
             {
