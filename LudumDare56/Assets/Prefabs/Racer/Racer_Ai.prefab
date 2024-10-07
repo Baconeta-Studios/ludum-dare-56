@@ -169,6 +169,17 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 1568846843800465314}
   m_SourcePrefab: {fileID: 100100000, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+--- !u!114 &424925883491123699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5892293710849720582, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+  m_PrefabInstance: {fileID: 6061847571237486837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599356591692427296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d74ceb08d871c468e8011fa8c97f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1769666033179579048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5525670306965000797, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
@@ -234,6 +245,7 @@ MonoBehaviour:
   boost: {fileID: 5441380154746699818}
   brake: {fileID: 1769666033179579048}
   shortcut: {fileID: 7431049969610122085}
+  jumpComponent: {fileID: 424925883491123699}
   sabotage: {fileID: 4081549180851081755}
   triggerCard: {fileID: 0}
   startingHand: 4

@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LeafPileSabotage_0: 6237405705875275378
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
