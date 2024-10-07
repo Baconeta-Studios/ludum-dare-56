@@ -27,13 +27,7 @@ namespace _Scripts.Managers
             }
             
             // Save other racers, they'll all be AI.
-            for (int i = 0; i < racers.Count; i++)
-            {
-                otherRacers = new List<RacerProgress>(racers.Count)
-                {
-                    [i] = new RacerProgress((RacerAi) racers[i])
-                };
-            }
+            otherRacers = racers.ToList().ConvertAll(racer => new RacerProgress(racer));
         }
         
         private void OnEnable()
