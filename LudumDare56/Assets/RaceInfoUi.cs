@@ -42,22 +42,22 @@ public class RaceInfoUi : MonoBehaviour
     [ContextMenu("Test Lap Time")]
     public void TestLapTime()
     {
-        SetLapTime(70.56f);
+        SetLapTime(7056);
     }
     
-    public void SetLapTime(float timeSeconds)
+    public void SetLapTime(int timeCentiseconds)
     {
-        lapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
+        lapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeCentiseconds, " : ");
     }
     
-    public void SetBestTime(float timeSeconds)
+    public void SetBestTime(int timeCentiseconds)
     {
-        bestLapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
+        bestLapTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeCentiseconds, " : ");
     }
     
-    public void SetRaceTime(float timeSeconds)
+    public void SetRaceTime(int timeCentiseconds)
     {
-        raceTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeSeconds, " : ");
+        raceTime.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(timeCentiseconds, " : ");
     }
     
     #endregion
