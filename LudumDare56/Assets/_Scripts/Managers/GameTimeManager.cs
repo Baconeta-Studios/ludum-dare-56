@@ -40,6 +40,11 @@ namespace _Scripts.Managers
 
         public void HandleLapEndEvent(RacerBase racer)
         {
+            if (racer.GetType() != typeof(RacerPlayer))
+            {
+                return;
+            }
+            
             if (!isRacing)
             {
                 StartRaceTimer();
