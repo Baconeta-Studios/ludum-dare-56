@@ -18,19 +18,62 @@ public class RacerAi : RacerBase
     [SerializeField] private float boostRaycastDistance;
     [SerializeField] private float boostTangentThreshold = 0.5f;
     [SerializeField] private float minDistanceForBoost = 50f;
+    
+    [Header("Ai Jump")]
+    [SerializeField] private float jumpRaycastDistance = 10f;
+
+    [Header("Ai Sabotage")] 
+    [SerializeField] private float sabotageChance;
+    [SerializeField] private float sabotageInterval;
+    private float nextSabotageCheckTime;
+    
     protected override void Update()
     {
         base.Update();
         if (Time.time > timeOfNextCardUpdate)
         {
             timeOfNextCardUpdate = Time.time + cardUpdateInterval;
+            
             TryUseBoost();
-            TryUseBreak();
+            
+            TryUseBrake();
+
+            TryUseJump();
+
+            if (Time.time > nextSabotageCheckTime)
+            {
+                nextSabotageCheckTime = Time.time + sabotageInterval;
+                TryUseSabotage();
+            }
         }
         
     }
 
-    private void TryUseBreak()
+    private void TryUseSabotage()
+    {
+        float random = Random.Range(0f, 1f);
+
+        if (random <= sabotageChance)
+        {
+            TryUseCard<SabotageCard>();
+        }
+    }
+
+    private void TryUseJump()
+    {
+        var hits = Physics2D.RaycastAll(transform.position, Vector3.up, brakeRaycastDistance);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.CompareTag("SabotageObject"))
+            {
+                TryUseCard<JumpCard>();
+                break;
+            }
+        }
+    }
+
+    private void TryUseBrake()
     {
         var distToSpline = GetSplineInfoAtDistance(brakeRaycastDistance, out var nearestSpline, out var tangentOnSpline);
 
@@ -103,6 +146,8 @@ public class RacerAi : RacerBase
         Gizmos.color = Color.white;
         Gizmos.DrawLine(transform.position, transform.position + transform.up * brakeRaycastDistance);
         Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * jumpRaycastDistance);
+        
 
     }
 }

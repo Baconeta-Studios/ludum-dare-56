@@ -274,6 +274,9 @@ MonoBehaviour:
   boostRaycastDistance: 40
   boostTangentThreshold: 0.5
   minDistanceForBoost: 30
+  jumpRaycastDistance: 12.58
+  sabotageChance: 0.05
+  sabotageInterval: 1
 --- !u!114 &7431049969610122085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3675050188292301712, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
