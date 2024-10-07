@@ -2,6 +2,7 @@ using System.Collections;
 using _Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DraggableCard : MonoBehaviour
@@ -25,7 +26,8 @@ public class DraggableCard : MonoBehaviour
     [SerializeField] private AudioClip discardCardSound;
     [SerializeField] private float discardCardVolume = 0.2f;
     
-    public float lerpDuration = 0.1f; // Duration over which the lerp happens
+    [FormerlySerializedAs("lerpDuration")] public float lerpDurationHand = 0.1f; // Duration over which the lerp happens
+    public float lerpDurationZone = 0.1f;
     private bool isLerping = false; // To check if lerping is happening
     private float elapsedTime;
     private Vector3 endPosition;
@@ -133,14 +135,8 @@ public class DraggableCard : MonoBehaviour
                 AudioSystem.Instance.PlaySound(playCardSound, playCardVolume);
                 cardTrayUIManager.ZoneCardUsed();
 
-                var pos = cardTrayUIManager.zoneUIPosition;
-                GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
-                GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
-                gameObject.transform.SetParent(pos, true);
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.GetComponent<EventTrigger>().enabled = false;
-
-                cardTrayUIManager.PlayCard(GetComponent<CardBase>());
+                endPosition = cardTrayUIManager.zoneUIPosition.position;
+                StartCoroutine(LerpPositionActiveZone());
             }
         }
     }
@@ -148,29 +144,64 @@ public class DraggableCard : MonoBehaviour
     private void ReturnCardToHand()
     {
         endPosition = cardTrayUIManager.transform.position;
-        StartCoroutine(LerpPosition());
+        StartCoroutine(LerpPositionHand());
     }
 
-    private IEnumerator LerpPosition()
+    private IEnumerator LerpPositionHand()
     {
         isLerping = true;
         elapsedTime = 0f;
 
         Vector3 initialPosition = transform.position;
 
-        while (elapsedTime < lerpDuration)
+        while (elapsedTime < lerpDurationHand)
         {
-            transform.position = Vector3.Lerp(initialPosition, endPosition, elapsedTime / lerpDuration);
+            transform.position = Vector3.Lerp(initialPosition, endPosition, elapsedTime / lerpDurationHand);
             elapsedTime += Time.unscaledDeltaTime;
             yield return null; // Wait until next frame
         }
-
+    
         // Ensure the final position is exactly the target position after lerping
         transform.position = endPosition;
         gameObject.transform.SetParent(cardTrayUIManager.transform, false);
         transform.SetSiblingIndex(handSiblingNumber);
         AudioSystem.Instance.PlaySound(discardCardSound, discardCardVolume);
         isLerping = false;
+    }
+    
+    private IEnumerator LerpPositionActiveZone()
+    {
+        isLerping = true;
+        elapsedTime = 0f;
+
+        Vector3 initialPosition = transform.position;
+        
+        if (GetComponent<CardBase>().useType == CardBase.UseType.Conditional)
+        {
+            cardTrayUIManager.PlayCard(GetComponent<CardBase>());
+        }
+        
+        while (elapsedTime < lerpDurationZone)
+        {
+            transform.position = Vector3.Lerp(initialPosition, endPosition, elapsedTime / lerpDurationZone);
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null; // Wait until next frame
+        }
+    
+        // Ensure the final position is exactly the target position after lerping
+        transform.position = endPosition;
+        
+        var pos = cardTrayUIManager.zoneUIPosition;
+        GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+        GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+        gameObject.transform.SetParent(pos, true);
+        gameObject.transform.localPosition = Vector3.zero;
+        gameObject.GetComponent<EventTrigger>().enabled = false;
+
+        if (GetComponent<CardBase>().useType == CardBase.UseType.Instant)
+        {
+            cardTrayUIManager.PlayCard(GetComponent<CardBase>());
+        }
     }
 
     private Vector3 GetMouseWorldPosition()
