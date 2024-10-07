@@ -8,7 +8,7 @@ namespace _Scripts.Cards.Sabotage
 
         public void CreateNewSabotage()
         {
-            Vector3 position = transform.parent.transform.position;
+            Vector3 position = transform.position;
             Instantiate(sabotageObjPrefabRef, position, Quaternion.identity);
         }
     }

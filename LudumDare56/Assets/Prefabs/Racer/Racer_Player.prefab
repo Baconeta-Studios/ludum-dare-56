@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Racer_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2279850917084086495, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: maxSpeed
       value: 35
@@ -233,11 +237,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 4775466648566033861}
   deckSetup:
-    boostCards: 5
-    brakeCards: 4
-    jumpCards: 3
+    boostCards: 6
+    brakeCards: 6
+    jumpCards: 4
     sabotageCards: 2
-    shortcutCards: 1
+    shortcutCards: 2
 --- !u!114 &7246832095280553673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52966299a90fa44ebb459eed7ef3bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardDeck: {fileID: 2765832405885284045}
+  cardDeck: {fileID: 119027588522092349}
 --- !u!198 &8526191286834518237 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4058332241905893225, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}

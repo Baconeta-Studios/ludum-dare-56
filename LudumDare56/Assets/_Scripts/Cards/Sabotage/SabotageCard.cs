@@ -3,16 +3,13 @@ using UnityEngine;
 
 public class SabotageCard : CardBase
 {
-    private SabotageComponent sabotageEngine;
-
-    protected void Start()
-    {
-        sabotageEngine = GetComponent<SabotageComponent>();
-    }
+    private SabotageComponent sabotageComponent;
+    private bool isActive;
 
     public override void UseCard()
     {
-        sabotageEngine.CreateNewSabotage();
+        sabotageComponent = associatedDeck.owner.GetComponent<SabotageComponent>();
+        sabotageComponent.CreateNewSabotage();
         Debug.Log("Sabotage card used");
         base.UseCard();
     }
