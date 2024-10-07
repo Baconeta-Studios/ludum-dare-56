@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mushroom Red Transparent_0: -1865811656731866590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

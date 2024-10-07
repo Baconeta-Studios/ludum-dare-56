@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rock2 Clutter Transparent_0: -1548286793080890564
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
