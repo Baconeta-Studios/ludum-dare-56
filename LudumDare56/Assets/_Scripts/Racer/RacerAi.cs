@@ -1,4 +1,3 @@
-using System;
 using _Scripts;
 using _Scripts.Racer;
 using UnityEngine;
@@ -10,6 +9,7 @@ public class RacerAi : RacerBase
     private float timeOfNextCardUpdate;
     [SerializeField] private float cardCooldownDuration;
     [SerializeField] private float cardCooldownFinishTime;
+    [SerializeField] private float chanceToDrawTwoCards = 0.4f;
     
     [Header("Ai Brake")]
     [SerializeField] private float brakeRaycastDistance = 20f;
@@ -45,9 +45,11 @@ public class RacerAi : RacerBase
     {
         if (racer == this)
         {
-            Debug.Log(name  + " picked up two cards!");
             deck.DrawCard();
-            deck.DrawCard();
+            if (Random.Range(0f, 1f) <= chanceToDrawTwoCards);
+            {
+                deck.DrawCard();
+            }
         }
     }
 
