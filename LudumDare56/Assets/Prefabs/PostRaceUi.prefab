@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postRaceUiContainer: {fileID: 2042954726468207330}
   gameplayUIContainer: {fileID: 0}
+  raceInfoUIContainer: {fileID: 0}
 --- !u!1 &1507521700049622469
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,13 +923,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: SceneSystem, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
