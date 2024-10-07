@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5895479978831468077}
         m_TargetAssemblyTypeName: HighScoreTab, Assembly-CSharp
         m_MethodName: ShowLapTimes
         m_Mode: 1
@@ -295,8 +295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -25}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: -15.099976, y: -19.100006}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4201293309454116409
 CanvasRenderer:
@@ -319,15 +319,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9811321, g: 0.6887746, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 6986589286519018887, guid: 6726966fa0797514984e86f8f5fc22bb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6881869508639081583}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5895479978831468077}
         m_TargetAssemblyTypeName: HighScoreTab, Assembly-CSharp
         m_MethodName: ShowTrackTimes
         m_Mode: 1
@@ -1631,3 +1631,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8184734870762479729, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
   m_PrefabInstance: {fileID: 3763156888537524138}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5895479978831468077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7343568405640425863, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+  m_PrefabInstance: {fileID: 3763156888537524138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4033d93bcca8edf4cb19e975d5cf6965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

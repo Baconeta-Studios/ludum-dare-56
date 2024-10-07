@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f5cbe4216c3c1464986c13be38dfdccc
+guid: 6726966fa0797514984e86f8f5fc22bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6220736335902542612
-    second: close_button_0
+      213: 6986589286519018887
+    second: close_button-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,32 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: close_button_0
+      name: close_button-modified_0
       rect:
         serializedVersion: 2
         x: 26
-        y: 25
+        y: 26
         width: 313
-        height: 316
+        height: 315
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41b06d61dbe745650800000000000000
-      internalID: 6220736335902542612
+      spriteID: 785148680f955f060800000000000000
+      internalID: 6986589286519018887
       vertices: []
       indices: 
       edges: []
@@ -169,7 +143,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      close_button-modified_0: 6986589286519018887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
