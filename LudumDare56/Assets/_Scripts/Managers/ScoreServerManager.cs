@@ -5,10 +5,11 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using Utils;
 
 namespace _Scripts.Managers
 {
-    public class ScoreServerManager : MonoBehaviour
+    public class ScoreServerManager : Singleton<ScoreServerManager>
     {
         [Header("Track Text Fields")]
         
@@ -61,7 +62,7 @@ namespace _Scripts.Managers
         };
         
         // Post a user's score to the leaderboard server.
-        public void SubmitScore(ScoreType scoreType, string user, int score)
+        public void SubmitScore(ScoreType scoreType, string user, string score)
         {
             
             if (user == default)
@@ -79,7 +80,7 @@ namespace _Scripts.Managers
             StartCoroutine(SubmitScoreCoroutine(scoreType, user, score));
         }
 
-        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, int score)
+        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, string score)
         {
             string uri = scoreType == ScoreType.Track ? SubmitTrackScoreUri : SubmitLapScoreUri;
             using UnityWebRequest ping = UnityWebRequest.PostWwwForm(string.Format(uri, user, score), "");
