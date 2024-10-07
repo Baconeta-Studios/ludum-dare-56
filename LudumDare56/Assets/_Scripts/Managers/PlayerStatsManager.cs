@@ -6,7 +6,7 @@ namespace _Scripts.Managers
     {
         public static string PlayerUsername = "Rustle Jr.";
         
-        private static void PrepareScoreSubmission(float trackTime, float bestLapTime)
+        private static void PrepareScoreSubmission(int trackTime, int bestLapTime)
         {
             var ssm = ScoreServerManager.Instance;
             ssm.SubmitScore(ScoreServerManager.ScoreType.Track, PlayerUsername, trackTime);
