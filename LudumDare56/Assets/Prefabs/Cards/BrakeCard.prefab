@@ -159,3 +159,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useType: 0
   cardName: Slow
+  cardSound: {fileID: 8300000, guid: f0c81fbbda1ac194e9b6e96494ad6818, type: 3}
+  cardSoundVolume: 0.5

@@ -56,6 +56,10 @@ namespace _Scripts.Racer
         [Header("Debug")]
         public float positionGizmoRadius = 1f;
 
+        [Header("Audio")]
+        [SerializeField] private AudioClip crashSound;
+        [SerializeField] private float crashSoundVolume = 0.5f;
+
         protected virtual void OnEnable()
         {
             RaceManager.OnRaceStarted += BeginRace;
@@ -218,6 +222,10 @@ namespace _Scripts.Racer
         private void CollideWithSabotageObject(GameObject sabotageObject)
         {
             sabotage.StartOverride();
+            if (crashSound != null)
+            {
+                AudioSystem.Instance.PlaySound(crashSound, crashSoundVolume);
+            }
         }
 
         private IEnumerator Respawn()

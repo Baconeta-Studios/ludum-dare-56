@@ -144,6 +144,14 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 4775466648566033861}
+    - target: {fileID: 5892293710849720582, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 819e40cd18a38a3479665e3856d86697, type: 3}
+    - target: {fileID: 5892293710849720582, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
+      propertyPath: jumpSoundVolume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7727762620040672839, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: particleEffect
       value: 
@@ -252,6 +260,8 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
+  crashSound: {fileID: 8300000, guid: eb6f153025e24c948bf9635c08867616, type: 3}
+  crashSoundVolume: 0.5
 --- !u!114 &7246832095280553673
 MonoBehaviour:
   m_ObjectHideFlags: 0

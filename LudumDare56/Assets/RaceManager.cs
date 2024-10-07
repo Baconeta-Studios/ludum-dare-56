@@ -17,10 +17,15 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField] private int countdownSeconds;
     
+    [Header("Audio")]
     [SerializeField] AudioClip countdownClip;
     [SerializeField] float countdownVolume = 0.3f;
     [SerializeField] private AudioClip backgroundMusicClip;
     [SerializeField] private float bgMusicVolume = 0.5f;
+    [SerializeField] private AudioClip finishLapClip;
+    [SerializeField] private float finishLapVolume = 0.5f;
+    [SerializeField] private AudioClip finishRaceClip;
+    [SerializeField] private float finishRaceVolume = 0.5f;
 
     public static event Action OnRaceCountdownStarting;
     public static event Action<int> OnRaceCountdownChanged;
@@ -75,7 +80,12 @@ public class RaceManager : MonoBehaviour
         currentLap = newCurrentLap;
         if (currentLap > totalLaps)
         {
+            AudioSystem.Instance.PlaySound(finishRaceClip, finishRaceVolume);
             RaceEnded();
+        }
+        else if (currentLap > 1)
+        {
+            AudioSystem.Instance.PlaySound(finishLapClip, finishLapVolume);
         }
     }
 

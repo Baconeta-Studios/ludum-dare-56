@@ -4,21 +4,17 @@ using UnityEngine;
 public abstract class CardBase : MonoBehaviour
 {
     protected CardDeck associatedDeck;
-
     private Action callOnCardUsed;
-    
     public enum UseType { Instant, Conditional };
-    
     public UseType useType;
-    
     public string cardName;
-    
+    public AudioClip cardSound;
+    public float cardSoundVolume = 0.5f;
+
     public void Initialize(CardDeck deck)
     {
         associatedDeck = deck;
     }
-
-    public CardUI cardUI;
 
     /// <summary>
     /// Returns true if the card was used immediately
@@ -49,6 +45,10 @@ public abstract class CardBase : MonoBehaviour
     public virtual void UseCard()
     {
         associatedDeck.DiscardCard(this);
+        if (cardSound != null)
+        {
+            AudioSystem.Instance.PlaySound(cardSound, cardSoundVolume);
+        }
         callOnCardUsed?.Invoke();
     }
 
