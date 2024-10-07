@@ -14,6 +14,9 @@ namespace _Scripts
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
+        
+        [SerializeField] private AudioClip drawCardSound;
+        [SerializeField] private float drawCardVolume = 0.5f;
 
         public static event Action OnOpenCardSelection; 
         public static event Action OnCloseCardSelection; 
@@ -136,6 +139,8 @@ namespace _Scripts
             var newCard = Instantiate(prefab, gameObject.transform, false);
             newCard.transform.localScale = Vector3.one * 1.3f;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
+            
+            AudioSystem.Instance.PlaySound(drawCardSound, drawCardVolume);
         }
 
         // This should probably only be used for discards so may be useless
