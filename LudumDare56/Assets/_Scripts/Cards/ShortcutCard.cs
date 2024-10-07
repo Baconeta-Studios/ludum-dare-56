@@ -3,6 +3,12 @@ using UnityEngine;
 public class ShortcutCard : CardBase
 {
     private ShortcutComponent shortcutComponent;
+    
+    public void Start()
+    {
+        useType = UseType.Conditional;
+        cardName = "Shortcut";
+    }
 
     public override void UseCard()
     {

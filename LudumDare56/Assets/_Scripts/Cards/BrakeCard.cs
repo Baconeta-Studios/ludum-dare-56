@@ -4,6 +4,12 @@ using UnityEngine;
 public class BrakeCard : CardBase
 {
     private BrakeComponent bc = null;
+    
+    public void Start()
+    {
+        useType = UseType.Instant;
+        cardName = "Slow";
+    }
 
     public override void UseCard()
     {

@@ -77,33 +77,33 @@ public class CardDeck : MonoBehaviour
     {
         for (var i = 0; i < deckSetup.boostCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.boostCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<BoostCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.brakeCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.brakeCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<BrakeCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.jumpCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.jumpCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<JumpCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.sabotageCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.sabotageCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<SabotageCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.shortcutCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.shortcutCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<ShortcutCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         
         ShuffleDrawPile();
@@ -163,7 +163,7 @@ public class CardDeck : MonoBehaviour
         if (owner.GetType() == typeof(RacerPlayer))
         {
             var ui = FindFirstObjectByType<CardTrayUIManager>();
-            ui.AddCardToUI(card.gameObject);
+            ui.AddCardToUI(card);
         }
     }
 
