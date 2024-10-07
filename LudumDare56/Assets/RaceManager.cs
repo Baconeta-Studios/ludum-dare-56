@@ -11,6 +11,8 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private bool hasRaceFinished;
     [SerializeField] private int currentLap;
     [SerializeField] private int totalLaps;
+    public int TotalLaps => totalLaps;
+    
     [SerializeField] private int countdownSeconds;
     
     public static event Action<int> OnRaceCountdownChanged;
@@ -24,7 +26,24 @@ public class RaceManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(RaceCountdown());
+    }
+    
+    IEnumerator RaceCountdown()
+    {
+        for (int i = countdownSeconds; i > 0; i--)
+        {
+            OnRaceCountdownChanged?.Invoke(i);
+            yield return new WaitForSeconds(1f);
+        }
+        
+        OnRaceCountdownChanged?.Invoke(0);
+        
+        OnRaceStarted?.Invoke(totalLaps);
+        
         hasRaceStarted = true;
+        
+        yield return null;
     }
 
     void OnEnable()
