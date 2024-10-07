@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b45d470ef1429ca37cce90ee61ae87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostCard: {fileID: 3331454688533213701, guid: 59df0c1243645e948ac41a443f705758, type: 3}
-  brakeCard: {fileID: -436038404648989798, guid: 70cf8f69c65e68147831d934f67353ec, type: 3}
-  jumpCard: {fileID: 2407262815065780988, guid: 8ff6a85e7b2909744b5764249a7838bc, type: 3}
-  sabotageCard: {fileID: 3448496010263485285, guid: ee202d125eb39ce46bb61e6427c77019, type: 3}
-  shortcutCard: {fileID: -5938776638676060134, guid: abd8c9dd6ba3add4fb4972eaea96a65c, type: 3}
+  boostCard: {fileID: 1157676087888648234, guid: 59df0c1243645e948ac41a443f705758, type: 3}
+  brakeCard: {fileID: 491398032484325064, guid: 70cf8f69c65e68147831d934f67353ec, type: 3}
+  jumpCard: {fileID: 6147310078943487806, guid: 8ff6a85e7b2909744b5764249a7838bc, type: 3}
+  sabotageCard: {fileID: 1197134106327132802, guid: ee202d125eb39ce46bb61e6427c77019, type: 3}
+  shortcutCard: {fileID: 5882031554566320610, guid: abd8c9dd6ba3add4fb4972eaea96a65c, type: 3}

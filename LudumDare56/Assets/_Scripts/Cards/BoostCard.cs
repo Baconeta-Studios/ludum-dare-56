@@ -4,6 +4,12 @@ public class BoostCard : CardBase
 {
     private BoostComponent bc = null;
 
+    public void Start()
+    {
+        useType = UseType.Instant;
+        cardName = "Boost";
+    }
+
     public override void UseCard()
     {
         if (bc == null)
