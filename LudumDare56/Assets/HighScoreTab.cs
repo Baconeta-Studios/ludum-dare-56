@@ -23,7 +23,7 @@ public class HighScoreTab : MonoBehaviour
     public List<HighScoreEntry> entries;
 
 
-    public float reCheckTime = 0.6f;
+    public float reCheckTime = 1.1f;
 
     void OnEnable()
     {
