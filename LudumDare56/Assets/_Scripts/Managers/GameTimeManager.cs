@@ -37,8 +37,10 @@ namespace _Scripts.Managers
 
         public void StopRaceTimer()
         {
+            HandleLapEndEvent(FindFirstObjectByType<RacerPlayer>());
             isRacing = false;
             OnRaceFinished?.Invoke(totalRaceTimeSoFar, totalLapTimeSoFar);
+            Debug.Log($"Fastest Lap: {fastestLap}\nRace Time: {totalRaceTimeSoFar}");
         }
 
         public void HandleLapEndEvent(RacerBase racer)
@@ -48,7 +50,7 @@ namespace _Scripts.Managers
                 return;
             }
             
-            if (!isRacing)
+            if (!isRacing && !RaceManager.Instance.HasRaceFinished)
             {
                 StartRaceTimer();
                 return;
@@ -68,11 +70,14 @@ namespace _Scripts.Managers
         private void OnEnable()
         {
             FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
+            RaceManager.OnRaceCompleted += StopRaceTimer;
         }
 
         private void OnDisable()
         {
             FinishLine.OnRacerCrossFinishLine -= HandleLapEndEvent;
+            RaceManager.OnRaceCompleted -= StopRaceTimer;
+
         }
         
         private void Update()
