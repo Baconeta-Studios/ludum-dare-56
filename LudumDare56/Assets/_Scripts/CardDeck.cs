@@ -300,6 +300,7 @@ public class CardDeck : MonoBehaviour
         // End card effect for card in zone and discard it if it exists
         if (ActiveCard != null)
         {
+            ActiveCard.CancelUseCard();
             ActiveCard.EndCardEffect();
             DiscardCard(ActiveCard);
         }

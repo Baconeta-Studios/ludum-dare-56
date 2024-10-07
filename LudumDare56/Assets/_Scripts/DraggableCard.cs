@@ -1,6 +1,7 @@
-using System;
 using _Scripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableCard : MonoBehaviour
 {
@@ -13,15 +14,45 @@ public class DraggableCard : MonoBehaviour
     private bool isInHandTrigger;
     private CardTrayUIManager cardTrayUIManager;
     private int handSiblingNumber;
+    
+    public Image cardImage;
 
     private void OnEnable()
     {
         RaceManager.OnRaceCompleted += OnRaceComplete;
+        CardTrayUIManager.OnOpenCardSelection += CardSelectionOpened;
+        CardTrayUIManager.OnCloseCardSelection += CardSelectionClosed;
+    }
+    
+    private void CardSelectionOpened()
+    {
+        if (isDragging)
+        {
+            isDragging = false;
+            ReturnCardToHand();
+        }
+        GetComponent<EventTrigger>().enabled = false;
+        ChangeMainCardAlpha(0.3f);
+    }
+
+    private void ChangeMainCardAlpha(float alpha)
+    {
+        var color = cardImage.color;
+        color.a = alpha;
+        cardImage.color = color;
+    }
+
+    private void CardSelectionClosed()
+    {
+        GetComponent<EventTrigger>().enabled = true;
+        ChangeMainCardAlpha(1f);
     }
 
     private void OnDisable()
     {
         RaceManager.OnRaceCompleted -= OnRaceComplete;
+        CardTrayUIManager.OnOpenCardSelection -= CardSelectionOpened;
+        CardTrayUIManager.OnCloseCardSelection -= CardSelectionClosed;
     }
 
     private void OnRaceComplete()
@@ -31,6 +62,8 @@ public class DraggableCard : MonoBehaviour
             ReturnCardToHand();
             isDragging = false;
         }
+        GetComponent<EventTrigger>().enabled = true;
+        ChangeMainCardAlpha(0.3f);
     }
 
     // Start is called before the first frame update

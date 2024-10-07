@@ -38,6 +38,14 @@ public abstract class CardBase : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// AKA discard a card from the hand before it is used by using a new card
+    /// </summary>
+    public void CancelUseCard()
+    {
+        DisableUsableState();
+    }
+
     public virtual void UseCard()
     {
         associatedDeck.DiscardCard(this);
@@ -65,7 +73,19 @@ public abstract class CardBase : MonoBehaviour
         return false;
     }
 
-    public virtual void SetUsableState()
+    protected virtual void SetUsableState()
     {
+        if (useType == UseType.Instant)
+        {
+            return; // Usable state isn't handled on instant cards
+        }
+    }
+
+    protected virtual void DisableUsableState()
+    {
+        if (useType == UseType.Instant)
+        {
+            return; // Usable state isn't handled on instant cards
+        }
     }
 }

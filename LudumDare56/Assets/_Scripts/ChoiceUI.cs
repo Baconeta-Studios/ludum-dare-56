@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,12 +9,8 @@ namespace _Scripts
         [SerializeField] private RectTransform choiceUIFaceUpA;
         [SerializeField] private RectTransform choiceUIFaceUpB;
         [SerializeField] private RectTransform choiceUIFaceDown;
-
         [SerializeField] private CardSelection cardSelection;
-        
         [SerializeField] private CardTrayUIManager cardTrayUIManager;
-
-        private bool hasBeenInit;
 
         private void OnEnable()
         {

@@ -16,7 +16,7 @@ public class JumpCard : CardBase
         base.UseCard();
     }
 
-    public override void SetUsableState()
+    protected override void SetUsableState()
     {
         if (jumpComponent == null)
         {
@@ -25,5 +25,15 @@ public class JumpCard : CardBase
 
         jumpComponent.IsActive = true;
         associatedDeck.owner.triggerCard = this;
+    }
+    
+    protected override void DisableUsableState()
+    {
+        if (jumpComponent == null)
+        {
+            jumpComponent = associatedDeck.owner.GetComponent<JumpComponent>();
+        }
+
+        jumpComponent.IsActive = false;
     }
 }

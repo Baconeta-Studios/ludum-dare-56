@@ -16,7 +16,7 @@ public class ShortcutCard : CardBase
         base.UseCard();
     }
 
-    public override void SetUsableState()
+    protected override void SetUsableState()
     {
         if (shortcutComponent == null)
         {
@@ -25,5 +25,15 @@ public class ShortcutCard : CardBase
 
         shortcutComponent.IsActive = true;
         associatedDeck.owner.triggerCard = this;
+    }
+
+    protected override void DisableUsableState()
+    {
+        if (shortcutComponent == null)
+        {
+            shortcutComponent = associatedDeck.owner.GetComponent<ShortcutComponent>();
+        }
+
+        shortcutComponent.IsActive = false;
     }
 }

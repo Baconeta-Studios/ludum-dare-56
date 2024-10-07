@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5808386207927101945}
   - component: {fileID: 6586780024575177318}
   m_Layer: 5
-  m_Name: Shadow
+  m_Name: MainCardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  cardImage: {fileID: 6586780024575177318}
 --- !u!114 &7391116151936823074
 MonoBehaviour:
   m_ObjectHideFlags: 0
