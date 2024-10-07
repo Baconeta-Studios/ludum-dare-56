@@ -131,7 +131,7 @@ public class RacerAi : RacerBase
         return distToSpline;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision && collision.CompareTag("ShortcutPrep"))
         {
