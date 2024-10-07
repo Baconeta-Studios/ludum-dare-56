@@ -10,6 +10,8 @@ namespace _Scripts.Managers
 {
     public class ScoreServerManager : Singleton<ScoreServerManager>
     {
+        public bool AllowSubmitScoreInEditor;
+        public bool DoYouReallyWantToSubmitInEditor;
         private const string RootUri = "http://ec2-3-27-219-9.ap-southeast-2.compute.amazonaws.com:4000";
         private const string SubmitTrackScoreUri = RootUri + "/api/track_times?user={0}&score={1}";
         private const string SubmitLapScoreUri = RootUri + "/api/lap_times?user={0}&score={1}";
@@ -79,6 +81,8 @@ namespace _Scripts.Managers
         public void SubmitScore(ScoreType scoreType, string user, float score)
         {
             
+            #if (AllowSubmitScoreInEditor && DoYouReallyWantToSubmitInEditor) || !UNITY_EDITOR
+            
             if (user == default)
             {
                 Debug.Log("Not submitting a score as there is no player name.");
@@ -92,6 +96,8 @@ namespace _Scripts.Managers
             }
 
             StartCoroutine(SubmitScoreCoroutine(scoreType, user, score));
+            
+            #endif
         }
 
         private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, float score)
