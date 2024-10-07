@@ -52,6 +52,8 @@ public class RacerAi : RacerBase
     protected override void Update()
     {
         base.Update();
+        if (!RaceManager.Instance.HasRaceStarted) return;
+        
         if (Time.time > timeOfNextCardUpdate)
         {
             timeOfNextCardUpdate = Time.time + cardUpdateInterval;

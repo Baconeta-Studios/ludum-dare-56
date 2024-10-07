@@ -1,3 +1,4 @@
+using System;
 using _Scripts;
 using UnityEngine;
 
@@ -12,6 +13,25 @@ public class DraggableCard : MonoBehaviour
     private bool isInHandTrigger;
     private CardTrayUIManager cardTrayUIManager;
     private int handSiblingNumber;
+
+    private void OnEnable()
+    {
+        RaceManager.OnRaceCompleted += OnRaceComplete;
+    }
+
+    private void OnDisable()
+    {
+        RaceManager.OnRaceCompleted -= OnRaceComplete;
+    }
+
+    private void OnRaceComplete()
+    {
+        if (isDragging)
+        {
+            ReturnCardToHand();
+            isDragging = false;
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -35,39 +55,51 @@ public class DraggableCard : MonoBehaviour
 
     public void MouseDown()
     {
-        // When the mouse is clicked, start dragging
-        isDragging = true;
-        isInHandTrigger = true;
-        handSiblingNumber = transform.GetSiblingIndex();
-        gameObject.transform.SetParent(cardCanvas.gameObject.transform, true);
+        if (!RaceManager.Instance.HasRaceFinished && RaceManager.Instance.HasRaceStarted)
+        {
+            // When the mouse is clicked, start dragging
+            isDragging = true;
+            isInHandTrigger = true;
+            handSiblingNumber = transform.GetSiblingIndex();
+            gameObject.transform.SetParent(cardCanvas.gameObject.transform, true);
+            
+            // Calculate offset between object position and mouse position
+            offset = transform.position - GetMouseWorldPosition();
+        }
 
-        // Calculate offset between object position and mouse position
-        offset = transform.position - GetMouseWorldPosition();
     }
 
     public void MouseUp()
     {
-        // When the mouse is released, stop dragging
-        isDragging = false;
+        if (!RaceManager.Instance.HasRaceFinished && RaceManager.Instance.HasRaceStarted)
+        {
+            // When the mouse is released, stop dragging
+            isDragging = false;
 
-        if (isInHandTrigger)
-        {
-            // Put the card back into the hand
-            gameObject.transform.SetParent(cardTrayUIManager.transform, false);
-            transform.SetSiblingIndex(handSiblingNumber);
+            if (isInHandTrigger)
+            {
+                // Put the card back into the hand
+                ReturnCardToHand();
+            }
+            else // Now we play the card, first removing the active zone card
+            {
+                cardTrayUIManager.ZoneCardUsed();
+
+                var pos = cardTrayUIManager.zoneUIPosition;
+                GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+                GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+                gameObject.transform.SetParent(pos, true);
+                gameObject.transform.localPosition = Vector3.zero;
+
+                cardTrayUIManager.PlayCard(GetComponent<CardBase>());
+            }
         }
-        else // Now we play the card, first removing the active zone card
-        {
-            cardTrayUIManager.ZoneCardUsed();
-            
-            var pos = cardTrayUIManager.zoneUIPosition;
-            GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
-            GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
-            gameObject.transform.SetParent(pos, true);
-            gameObject.transform.localPosition = Vector3.zero;
-            
-            cardTrayUIManager.PlayCard(GetComponent<CardBase>());
-        }
+    }
+
+    private void ReturnCardToHand()
+    {
+        gameObject.transform.SetParent(cardTrayUIManager.transform, false);
+        transform.SetSiblingIndex(handSiblingNumber);
     }
 
     private Vector3 GetMouseWorldPosition()

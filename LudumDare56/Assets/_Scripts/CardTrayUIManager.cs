@@ -38,11 +38,17 @@ namespace _Scripts
             {
                 return;
             }
+
             if (isTrayUIOpen)
             {
                 CloseTrayUI();
             }
-            
+
+            if (RaceManager.Instance.HasRaceFinished)
+            {
+                return;
+            }
+
             OpenChoiceUI();
         }
 
