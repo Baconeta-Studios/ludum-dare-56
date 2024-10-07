@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using _Scripts.Racer;
 using UnityEngine;
@@ -13,14 +14,14 @@ namespace _Scripts
         private bool isTrayUIOpen = false;
 
         [SerializeField] private CardDeck playerCardDeck;
-    
+
         // Get Player Deck system controller
-        
+
         private void Awake()
         {
             playerCardDeck = GameObject.FindGameObjectWithTag("Player").GetComponent<CardDeck>();
         }
-        
+
         public void OnEnable()
         {
             CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
@@ -42,17 +43,18 @@ namespace _Scripts
             {
                 CloseTrayUI();
             }
-            
+
             if (RaceManager.Instance.HasRaceFinished)
             {
                 return;
             }
-            Time.timeScale = 0.01f;
+
             OpenChoiceUI();
         }
 
         private void OpenChoiceUI()
         {
+            Time.timeScale = 0.01f;
             choiceUIPopup.gameObject.SetActive(true);
         }
 
@@ -61,7 +63,7 @@ namespace _Scripts
             Time.timeScale = 1f;
             choiceUIPopup.gameObject.SetActive(false);
         }
-        
+
         private void Start()
         {
             gameObject.transform.localPosition = trayUIStartPosition;
@@ -105,17 +107,32 @@ namespace _Scripts
 
             gameObject.transform.localPosition = trayUIStartPosition;
             isTrayUIOpen = false;
-        
+
             Time.timeScale = 1f;
         }
 
-        public void AddCardToUI(GameObject card)
+        public void AddCardToUI(CardBase card)
         {
-            var newCard = Instantiate(card, gameObject.transform, false);
+            string typeName = card.GetType().ToString();
+            GameObject prefab = typeName switch
+            {
+                "BrakeCard" => CardPrefabManager.Instance.brakeCard,
+                "JumpCard" => CardPrefabManager.Instance.jumpCard,
+                "BoostCard" => CardPrefabManager.Instance.boostCard,
+                "SabotageCard" => CardPrefabManager.Instance.sabotageCard,
+                "ShortcutCard" => CardPrefabManager.Instance.shortcutCard,
+                _ => null
+            };
+
+            if (prefab == null)
+            {
+                Debug.Log("Card Prefab Not Found");
+            }
+            var newCard = Instantiate(prefab, gameObject.transform, false);
             newCard.transform.localScale = Vector3.one * 1.3f;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
-        
+
         // This should probably only be used for discards so may be useless
         public void RemoveCardFromUI(GameObject card)
         {
@@ -125,7 +142,7 @@ namespace _Scripts
             {
                 i = cardBase.transform.GetSiblingIndex();
             }
-            Destroy(gameObject.transform.GetChild(i).gameObject);
+            //Destroy(gameObject.transform.GetChild(i).gameObject);
         }
 
         public void PlayCard(CardBase card)
@@ -144,7 +161,7 @@ namespace _Scripts
         public void ZoneCardUsed()
         {
             // playerCardDeck.DiscardCard(zoneUIPosition.GetChild(0).GetComponent<CardBase>());
-            // Callback function for the PlayCard system to tell us once it has been used 
+            // Callback function for the PlayCard system to tell us once it has been used
             if (zoneUIPosition.childCount > 0)
             {
                 Destroy(zoneUIPosition.GetChild(0).gameObject);

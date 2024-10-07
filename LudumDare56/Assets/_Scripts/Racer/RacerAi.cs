@@ -1,6 +1,8 @@
+using System;
+using _Scripts;
 using _Scripts.Racer;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RacerAi : RacerBase
 {
@@ -26,7 +28,29 @@ public class RacerAi : RacerBase
     [SerializeField] private float sabotageChance;
     [SerializeField] private float sabotageInterval;
     private float nextSabotageCheckTime;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        CheckPoint.OnRacerCrossCheckPoint += OnRacerCrossCheckPoint;
+    }
     
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        CheckPoint.OnRacerCrossCheckPoint -= OnRacerCrossCheckPoint;
+    }
+
+    private void OnRacerCrossCheckPoint(RacerBase racer)
+    {
+        if (racer == this)
+        {
+            Debug.Log(name  + " picked up two cards!");
+            deck.DrawCard();
+            deck.DrawCard();
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -133,7 +157,7 @@ public class RacerAi : RacerBase
         return distToSpline;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision && collision.CompareTag("ShortcutPrep"))
         {

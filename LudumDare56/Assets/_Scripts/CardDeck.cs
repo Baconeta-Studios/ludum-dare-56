@@ -18,8 +18,38 @@ public struct NumberOfEachCard
 
 public class CardDeck : MonoBehaviour
 {
+    // // This class is inside the TestClass so it could access its private fields
+    // // this custom editor will show up on any object with TestScript attached to it
+    // // you don't need (and can't) attach this class to a gameobject
+    // [CustomEditor(typeof(CardDeck))]
+    // public class StackPreview : Editor {
+    //     public override void OnInspectorGUI() {
+    //
+    //         // get the target script as TestScript and get the stack from it
+    //         var ts = (CardDeck)target; 
+    //         var stack = ts.discardPile;
+    //         var stackhand = ts.drawPile;
+    //
+    //         // some styling for the header, this is optional
+    //         var bold = new GUIStyle(); 
+    //         bold.fontStyle = FontStyle.Bold; 
+    //         GUILayout.Label("Items in my stack", bold);
+    //
+    //         // add a label for each item, you can add more properties
+    //         // you can even access components inside each item and display them
+    //         // for example if every item had a sprite we could easily show it 
+    //         // foreach (var item in stack) {
+    //         //     GUILayout.Label(item.name); 
+    //         // }
+    //         // GUILayout.Label("Items in my stack", bold);
+    //         foreach (var item in stackhand) {
+    //             GUILayout.Label(item.name); 
+    //         }
+    //     }
+    // }
+    
     private Stack<CardBase> drawPile = new();
-    private Stack<CardBase> discardPile = new();
+    private readonly Stack<CardBase> discardPile = new();
 
     public List<CardBase> Hand { get; } = new();
 
@@ -46,33 +76,38 @@ public class CardDeck : MonoBehaviour
     {
         for (var i = 0; i < deckSetup.boostCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.boostCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.transform.SetParent(transform);
+            go.AddComponent<BoostCard>();
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.brakeCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.brakeCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<BrakeCard>();
+            go.transform.SetParent(transform);
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.jumpCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.jumpCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<JumpCard>();
+            go.transform.SetParent(transform);
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.sabotageCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.sabotageCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<SabotageCard>();
+            go.transform.SetParent(transform);
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         for (var i = 0; i < deckSetup.shortcutCards; i++)
         {
-            var cardObject = Instantiate(CardPrefabManager.Instance.shortcutCard.gameObject, transform);
-            cardObject.transform.localScale = Vector3.zero;
-            AddCardToDeck(cardObject.GetComponent<CardBase>());
+            var go = new GameObject();
+            go.AddComponent<ShortcutCard>();
+            go.transform.SetParent(transform);
+            AddCardToDeck(go.GetComponent<CardBase>());
         }
         
         ShuffleDrawPile();
@@ -110,13 +145,19 @@ public class CardDeck : MonoBehaviour
     [ContextMenu("Draw 1")]
     public void DrawCard()
     {
-        var card = drawPile.Pop();
-        TakeCardToHand(card);
-
         if (drawPile.Count == 0)
         {
             ReshuffleDiscardToDraw();
         }
+
+        if (drawPile.Count == 0) // still
+        {
+            Debug.LogWarning(owner.name + " has no cards to draw.");
+            return;
+        }
+        
+        var card = drawPile.Pop();
+        TakeCardToHand(card);
     }
 
     private void TakeCardToHand(CardBase card)
@@ -126,7 +167,7 @@ public class CardDeck : MonoBehaviour
         if (owner.GetType() == typeof(RacerPlayer))
         {
             var ui = FindFirstObjectByType<CardTrayUIManager>();
-            ui.AddCardToUI(card.gameObject);
+            ui.AddCardToUI(card);
         }
     }
 
@@ -257,13 +298,13 @@ public class CardDeck : MonoBehaviour
     public bool PlayCard(CardBase cardToUse, Action zoneCardUsed)
     {
         // End card effect for card in zone and discard it if it exists
-        ActiveCard?.EndCardEffect();
         if (ActiveCard != null)
         {
+            ActiveCard.EndCardEffect();
             DiscardCard(ActiveCard);
         }
 
-        // Physically move the card in the desk systems
+        // Physically move the card in the deck systems
         CardBase handCardRef = null;
         foreach (var card in Hand)
         {
@@ -296,8 +337,17 @@ public class CardDeck : MonoBehaviour
         }
 
         var cardToGive = FaceUpDeck[index];
+        if (drawPile.Count == 0)
+        {
+            ReshuffleDiscardToDraw();
+            if (drawPile.Count == 0)
+            {
+                Debug.LogWarning("No cards to draw to refill face up cards with");
+                return;
+            }
+        }
         var replacementCard = drawPile.Pop();
-        FaceUpDeck[0] = replacementCard;
+        FaceUpDeck[index] = replacementCard;
         TakeCardToHand(cardToGive);
     }
 }

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7391116151936823074}
   - component: {fileID: 1563813821301852479}
   m_Layer: 5
-  m_Name: CardBase
+  m_Name: CardUIBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

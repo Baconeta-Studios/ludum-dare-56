@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 72.7
+      value: 52.4
       objectReference: {fileID: 0}
     - target: {fileID: 2343108882437292734, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       propertyPath: m_LocalPosition.z
@@ -155,9 +155,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4775466648566033861}
-    - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2765832405885284045}
     - targetCorrespondingSourceObject: {fileID: 1843356639919173845, guid: 9d5d61cdc2b5aac41afd7967bf9c2d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7246832095280553673}
@@ -255,25 +252,6 @@ MonoBehaviour:
   respawnStartDelay: 0.3
   respawnDuration: 1.5
   positionGizmoRadius: 2
---- !u!114 &2765832405885284045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311198365944158049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2575ab8427fe40588467ab4653c7f6d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 4775466648566033861}
-  deckSetup:
-    boostCards: 6
-    brakeCards: 6
-    jumpCards: 4
-    sabotageCards: 2
-    shortcutCards: 2
 --- !u!114 &7246832095280553673
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ namespace _Scripts.Managers
         private float totalLapTimeSoFar;
         // Fastest Lap.
         private float fastestLap;
+        // This flag ensures that our first lap always becomes our best lap.
+        private bool fastestLapExists = false;
         
         private float lastTimeFinishLineCrossed; // Used to calculate lap times.
         
@@ -42,26 +44,29 @@ namespace _Scripts.Managers
 
         public void HandleLapEndEvent(RacerBase racer)
         {
+            // We only care about the player completing a lap. AI lap completion is handled elsewhere.
             if (racer.GetType() != typeof(RacerPlayer))
             {
                 return;
             }
             
+            // The first time that the player completes a lap, start the race and do nothing else.
             if (!isRacing && !RaceManager.Instance.HasRaceFinished)
             {
                 StartRaceTimer();
                 return;
             }
-            lastTimeFinishLineCrossed = totalRaceTimeSoFar;
             
             // Update fastest-lap time.
-            if (totalLapTimeSoFar > fastestLap)
+            if (!fastestLapExists || totalLapTimeSoFar < fastestLap)
             {
                 fastestLap = totalLapTimeSoFar;
+                fastestLapExists = true;
                 OnFastestLapTimeChanged?.Invoke(fastestLap);
             }
 
             // Reset lap timer.
+            lastTimeFinishLineCrossed = totalRaceTimeSoFar;
         }
 
         private void OnEnable()
