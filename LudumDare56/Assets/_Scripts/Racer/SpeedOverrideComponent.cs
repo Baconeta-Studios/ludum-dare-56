@@ -52,7 +52,7 @@ public class SpeedOverrideComponent : MonoBehaviour
             particleEffect.Play();
     }
 
-    protected virtual void EndOverride(bool forceFinish = false)
+    public virtual void EndOverride(bool forceFinish = false)
     {
         isActive = false;
         timeRemaining = 0f;
