@@ -49,9 +49,10 @@ namespace _Scripts.Managers
             }
             else
             {
-                foreach (var racerProgress in otherRacers.Where(racerProgress => racerProgress.Racer.Equals(racer)))
+                foreach (var aiRacer in otherRacers.Where(aiRacer => aiRacer.Racer.Equals(racer)))
                 {
-                    racerProgress.IncrementLapsCompleted();
+                    aiRacer.IncrementLapsCompleted();
+                    break;
                 }
             }
         }
