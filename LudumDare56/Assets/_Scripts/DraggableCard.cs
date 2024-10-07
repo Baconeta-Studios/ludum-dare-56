@@ -1,3 +1,4 @@
+using System.Collections;
 using _Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,6 +24,11 @@ public class DraggableCard : MonoBehaviour
     [SerializeField] private float pickupCardVolume = 0.2f;
     [SerializeField] private AudioClip discardCardSound;
     [SerializeField] private float discardCardVolume = 0.2f;
+    
+    public float lerpDuration = 0.1f; // Duration over which the lerp happens
+    private bool isLerping = false; // To check if lerping is happening
+    private float elapsedTime;
+    private Vector3 endPosition;
 
     private void OnEnable()
     {
@@ -141,9 +147,30 @@ public class DraggableCard : MonoBehaviour
 
     private void ReturnCardToHand()
     {
+        endPosition = cardTrayUIManager.transform.position;
+        StartCoroutine(LerpPosition());
+    }
+
+    private IEnumerator LerpPosition()
+    {
+        isLerping = true;
+        elapsedTime = 0f;
+
+        Vector3 initialPosition = transform.position;
+
+        while (elapsedTime < lerpDuration)
+        {
+            transform.position = Vector3.Lerp(initialPosition, endPosition, elapsedTime / lerpDuration);
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null; // Wait until next frame
+        }
+
+        // Ensure the final position is exactly the target position after lerping
+        transform.position = endPosition;
         gameObject.transform.SetParent(cardTrayUIManager.transform, false);
         transform.SetSiblingIndex(handSiblingNumber);
         AudioSystem.Instance.PlaySound(discardCardSound, discardCardVolume);
+        isLerping = false;
     }
 
     private Vector3 GetMouseWorldPosition()
