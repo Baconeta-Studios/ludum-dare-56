@@ -114,6 +114,7 @@ public class DraggableCard : MonoBehaviour
             
             // Calculate offset between object position and mouse position
             offset = transform.position - GetMouseWorldPosition();
+            cardTrayUIManager.SetSlowTime();
         }
 
     }
@@ -124,6 +125,7 @@ public class DraggableCard : MonoBehaviour
         {
             // When the mouse is released, stop dragging
             isDragging = false;
+            cardTrayUIManager.SetNormalTime();
 
             if (isInHandTrigger)
             {

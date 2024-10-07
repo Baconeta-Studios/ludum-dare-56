@@ -174,7 +174,8 @@ MonoBehaviour:
   pickupCardVolume: 1
   discardCardSound: {fileID: 8300000, guid: 312341bf1f91ecf4d87d1d479412b67a, type: 3}
   discardCardVolume: 1
-  lerpDuration: 0.25
+  lerpDurationHand: 0.2
+  lerpDurationZone: 0.1
 --- !u!114 &7391116151936823074
 MonoBehaviour:
   m_ObjectHideFlags: 0
