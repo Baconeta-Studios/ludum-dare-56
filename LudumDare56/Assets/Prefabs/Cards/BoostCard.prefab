@@ -123,3 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useType: 0
   cardName: Zoom
+  cardSound: {fileID: 8300000, guid: 1031c8c0600eabd49addb3c50858a54d, type: 3}
+  cardSoundVolume: 0.5

@@ -248,6 +248,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpScalePercent: 1.3
+  jumpSound: {fileID: 0}
+  jumpSoundVolume: 0
 --- !u!1 &2967280926059526073
 GameObject:
   m_ObjectHideFlags: 0

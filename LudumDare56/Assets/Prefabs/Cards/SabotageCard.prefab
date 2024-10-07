@@ -131,3 +131,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useType: 0
   cardName: Sabotage
+  cardSound: {fileID: 8300000, guid: 0ade1207dd6f22343bc1bf4537d92f54, type: 3}
+  cardSoundVolume: 0.5
