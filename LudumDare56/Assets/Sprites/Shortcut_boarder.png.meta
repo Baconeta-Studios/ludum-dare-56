@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 09972c050346f104db7cf353625713ff
+guid: 1da4dfe64facb064a933a4fda864085f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8187015238159602258
-    second: Sabotage_0
+      213: -2095721152522169935
+    second: Shortcut_boarder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sabotage_0
+      name: Shortcut_boarder_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 753
-        height: 1050
+        x: 15
+        y: 7
+        width: 759
+        height: 1060
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25296318bfe1e9170800000000000000
-      internalID: 8187015238159602258
+      spriteID: 1b1d4a327b08ae2e0800000000000000
+      internalID: -2095721152522169935
       vertices: []
       indices: 
       edges: []
@@ -169,8 +169,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Sabotage_0: 8187015238159602258
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

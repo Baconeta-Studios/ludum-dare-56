@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 5275869467699524384, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7806899418501417076, guid: c18825e7ecf615e4b8648c437aebc295, type: 3}
+      objectReference: {fileID: 6505720495936728908, guid: a1eb3103ac456814eb2c01c00dd0247b, type: 3}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: ShortcutCard
