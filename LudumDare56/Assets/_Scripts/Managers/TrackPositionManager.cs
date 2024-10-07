@@ -11,7 +11,7 @@ namespace _Scripts.Managers
         private RacerProgress player;
         private List<RacerProgress> otherRacers;
         
-        public static event Action<int> OnPlayerPositionChanged;
+        public static event Action<int> OnPlayerRankingChanged;
         public static event Action<int> OnPlayerLapCompleted;
         
         private void Start()

@@ -79,7 +79,7 @@ public class RaceInfoUi : MonoBehaviour
         GameTimeManager.OnRaceTimeChanged += SetRaceTime;
         GameTimeManager.OnLapTimeChanged += SetLapTime;
         GameTimeManager.OnFastestLapTimeChanged += SetBestTime;
-        TrackPositionManager.OnPlayerPositionChanged += SetPlayerPlacement;
+        TrackPositionManager.OnPlayerRankingChanged += SetPlayerPlacement;
         TrackPositionManager.OnPlayerLapCompleted += SetCurrentPlayerLap;
     }
 
@@ -88,7 +88,7 @@ public class RaceInfoUi : MonoBehaviour
         GameTimeManager.OnRaceTimeChanged -= SetRaceTime;
         GameTimeManager.OnLapTimeChanged -= SetLapTime;
         GameTimeManager.OnFastestLapTimeChanged -= SetBestTime;
-        TrackPositionManager.OnPlayerPositionChanged -= SetPlayerPlacement;
+        TrackPositionManager.OnPlayerRankingChanged -= SetPlayerPlacement;
         TrackPositionManager.OnPlayerLapCompleted += SetCurrentPlayerLap;
     }
 }
