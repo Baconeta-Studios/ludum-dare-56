@@ -23,7 +23,15 @@ public class HighScoreTab : MonoBehaviour
 
     void OnEnable()
     {
-        ShowTrackTimes();
+        switch (currentlyShowing)
+        {
+            case HighScoreType.RaceTimes:
+                ShowTrackTimes();
+                break;
+            case HighScoreType.LapTimes:
+                ShowLapTimes();
+                break;
+        }
     }
     
     [ContextMenu("Refresh Numbers")]
