@@ -18,21 +18,27 @@ namespace _Scripts.Managers
         private const string GetTrackScoresUri = RootUri + "/api/track_times";
         private const string GetLapScoresUri = RootUri + "/api/lap_times";
 
-        private HighScoreCollection trackData;
-        private HighScoreCollection lapData;
+        public HighScoreCollection trackData;
+        public HighScoreCollection lapData;
         
         public static event Action<HighScoreCollection> OnTrackDataUpdate;
         public static event Action<HighScoreCollection> OnLapDataUpdate;
 
-        public HighScoreCollection GetTrackData()
+        public HighScoreCollection GetTrackData(bool fetchDataFromServer=true)
         {
-            RefetchTrackData();
+            if (fetchDataFromServer)
+            {
+                RefetchTrackData();
+            }
             return trackData;
         }
         
-        public HighScoreCollection GetLapData()
+        public HighScoreCollection GetLapData(bool fetchDataFromServer=true)
         {
-            RefetchLapData();
+            if (fetchDataFromServer)
+            {
+                RefetchLapData();
+            }
             return lapData;
         }
         
@@ -51,13 +57,6 @@ namespace _Scripts.Managers
                 lapData = entryList;
                 OnLapDataUpdate?.Invoke(lapData);
             }
-        }
-        
-        private void Start()
-        {
-            // Request global score information from the server, and provide a callback for when we get that information.
-            RefetchTrackData();
-            RefetchLapData();
         }
 
         [ContextMenu("Refresh Scores")]

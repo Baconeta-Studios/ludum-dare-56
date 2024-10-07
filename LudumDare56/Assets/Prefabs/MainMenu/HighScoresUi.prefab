@@ -124,7 +124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5895479978831468077}
         m_TargetAssemblyTypeName: HighScoreTab, Assembly-CSharp
         m_MethodName: ShowLapTimes
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -516,7 +516,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5895479978831468077}
         m_TargetAssemblyTypeName: HighScoreTab, Assembly-CSharp
         m_MethodName: ShowTrackTimes
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

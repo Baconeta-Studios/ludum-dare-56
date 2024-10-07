@@ -24,11 +24,12 @@ public class HighScoreTab : MonoBehaviour
 
 
     public float reCheckTime = 1.1f;
+    private bool trackTimesUpdated = false;
+    private bool lapTimesUpdated = false;
 
     void OnEnable()
     {
         UpdateCurrentDisplay();
-        StartCoroutine(EOnEnable());
     }
 
     private void UpdateCurrentDisplay()
@@ -42,13 +43,6 @@ public class HighScoreTab : MonoBehaviour
                 ShowLapTimes();
                 break;
         }
-    }
-
-    IEnumerator EOnEnable()
-    {
-        yield return new WaitForSeconds(reCheckTime);
-        UpdateCurrentDisplay();
-        yield return null;
     }
 
     [ContextMenu("Refresh")]
@@ -65,10 +59,10 @@ public class HighScoreTab : MonoBehaviour
         switch (currentlyShowing)
         {
             case HighScoreType.RaceTimes:
-                ShowTrackTimes();
+                ShowTrackTimes(true);
                 break;
             case HighScoreType.LapTimes:
-                ShowLapTimes();
+                ShowLapTimes(true);
                 break;
         }
     }
@@ -80,22 +74,39 @@ public class HighScoreTab : MonoBehaviour
         }
     }
 
-    public void ShowTrackTimes()
+    public void ShowTrackTimes(bool dontFetch=false)
     {
-        ScoreServerManager.OnLapDataUpdate -= UpdateHighScores;
-        ScoreServerManager.OnTrackDataUpdate += UpdateHighScores;
+        if (!trackTimesUpdated && !dontFetch)
+        {
+            trackTimesUpdated = true;
+            ScoreServerManager.OnLapDataUpdate -= UpdateHighScores;
+            ScoreServerManager.OnTrackDataUpdate += UpdateHighScores;
+            ScoreServerManager.Instance.GetTrackData();
+        }
+        else
+        {
+            UpdateHighScores(ScoreServerManager.Instance.GetTrackData(false));
+        }
         currentlyShowing = HighScoreType.RaceTimes;
-        // Update high scores from server's data.
-        UpdateHighScores(ScoreServerManager.Instance.GetTrackData());
         title.text = raceTimeTitle;
 
     }
 
-    public void ShowLapTimes()
+    public void ShowLapTimes(bool dontFetch=false)
     {
+        if (!lapTimesUpdated && !dontFetch)
+        {
+            lapTimesUpdated = true;
+            ScoreServerManager.OnLapDataUpdate += UpdateHighScores;
+            ScoreServerManager.OnTrackDataUpdate -= UpdateHighScores;
+            // Update high scores from server's data.
+            ScoreServerManager.Instance.GetLapData();
+        }
+        else
+        {
+            UpdateHighScores(ScoreServerManager.Instance.GetLapData(false));
+        }
         currentlyShowing = HighScoreType.LapTimes;
-        // Update high scores from server's data.
-        UpdateHighScores(ScoreServerManager.Instance.GetLapData());
         title.text = lapTimeTitle;
     }
 
