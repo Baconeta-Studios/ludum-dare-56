@@ -120,7 +120,7 @@ namespace _Scripts
             {
                 i = cardBase.transform.GetSiblingIndex();
             }
-            Destroy(gameObject.transform.GetChild(i).gameObject);
+            //Destroy(gameObject.transform.GetChild(i).gameObject);
         }
 
         public void PlayCard(CardBase card)
