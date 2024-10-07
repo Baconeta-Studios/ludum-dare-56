@@ -701,6 +701,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Cookie
       objectReference: {fileID: 0}
+    - target: {fileID: 520809872314706589, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
     - target: {fileID: 695740467535080262, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -833,6 +837,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1371886417744150752, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1739187324680364069, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_text
       value: 8.
@@ -881,6 +889,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2388170828460513654, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466131988953939366, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2522175089240235422, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -948,6 +964,10 @@ PrefabInstance:
     - target: {fileID: 2824484187564208612, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926478735523350169, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
       objectReference: {fileID: 0}
     - target: {fileID: 3080250434257917208, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_text
@@ -960,6 +980,10 @@ PrefabInstance:
     - target: {fileID: 3156499382482082476, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_text
       value: Cookie
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156499382482082476, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
       objectReference: {fileID: 0}
     - target: {fileID: 3166722707219888890, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1033,6 +1057,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 00:03:15
       objectReference: {fileID: 0}
+    - target: {fileID: 3810015298484021519, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3977578271121848291, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1080,6 +1108,10 @@ PrefabInstance:
     - target: {fileID: 4056508607336569812, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_Name
       value: HighScoreTab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056508607336569812, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4296441516525465914, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1232,6 +1264,10 @@ PrefabInstance:
     - target: {fileID: 5530829978080350546, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547628246526013700, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
       objectReference: {fileID: 0}
     - target: {fileID: 5734110502016028007, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1449,6 +1485,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Cookie
       objectReference: {fileID: 0}
+    - target: {fileID: 7973785582521344184, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8016518804726880027, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1576,6 +1616,10 @@ PrefabInstance:
     - target: {fileID: 8485941810392694615, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_text
       value: Cookie
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485941810392694615, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
       objectReference: {fileID: 0}
     - target: {fileID: 8734917347145028639, guid: 9ec934225b07d124f8729c94202a02f9, type: 3}
       propertyPath: m_AnchorMax.y
