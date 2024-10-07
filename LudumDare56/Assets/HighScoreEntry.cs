@@ -19,7 +19,7 @@ public class HighScoreEntry : MonoBehaviour
         nameTxt.text = entryName.ToString();
     }
 
-    public void SetTime(int time)
+    public void SetTime(float time)
     {
         timeTxt.text = time.ToString();
     }

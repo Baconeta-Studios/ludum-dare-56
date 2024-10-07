@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Linq;
-using System.Text;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utils;
@@ -11,48 +9,36 @@ namespace _Scripts.Managers
 {
     public class ScoreServerManager : Singleton<ScoreServerManager>
     {
-        [Header("Track Text Fields")]
-        
-        [Tooltip("High-score 'Name' Column")] [SerializeField]
-        private TextMeshProUGUI nameColumnTrack;
-        [Tooltip("High-score 'Score' Column")] [SerializeField]
-        private TextMeshProUGUI scoreColumnTrack;
-        
-        [Header("Lap Text Fields")]
-        
-        [Tooltip("High-score 'Name' Column")] [SerializeField]
-        private TextMeshProUGUI nameColumnLab;
-        [Tooltip("High-score 'Score' Column")] [SerializeField]
-        private TextMeshProUGUI scoreColumnLab;
-
-        [Tooltip("Row count | How many high-scores to show at once")] [SerializeField]
-        private int maximumEntries = 12;
-
         private const string RootUri = "http://ec2-3-27-219-9.ap-southeast-2.compute.amazonaws.com:4000";
         private const string SubmitTrackScoreUri = RootUri + "/api/track_times?user={0}&score={1}";
         private const string SubmitLapScoreUri = RootUri + "/api/lap_times?user={0}&score={1}";
         private const string GetTrackScoresUri = RootUri + "/api/track_times";
         private const string GetLapScoresUri = RootUri + "/api/lap_times";
 
-        private readonly string defaultText = string.Concat(Enumerable.Repeat($"Loading...{Environment.NewLine}", 4));
-
+        public HighScoreCollection trackData;
+        public HighScoreCollection lapData;
+        
+        
         // The callback used to update text with leaderboard information that we have retrieved from the server.
-        private delegate void Callback(ScoreEntryList entryList, ScoreType scoreType);
+        private delegate void Callback(HighScoreCollection entryList, ScoreType scoreType);
+
+        private void SaveData(HighScoreCollection entryList, ScoreType scoreType)
+        {
+            if (scoreType == ScoreType.Track)
+            {
+                trackData = entryList;
+            }
+            else if (scoreType == ScoreType.Lap)
+            {
+                lapData = entryList;
+            }
+        }
         
         private void Start()
         {
-            if (nameColumnTrack != default)
-            {
-                // Set the text of the columns to display "Loading..." on each line.
-                nameColumnTrack.text = defaultText;
-                scoreColumnTrack.text = defaultText;
-                nameColumnLab.text = defaultText;
-                scoreColumnLab.text = defaultText;
-
-                // Request global score information from the server, and provide a callback for when we get that information.
-                StartCoroutine(GetGlobalScoresRequest(UpdateTextFields, ScoreType.Track));
-                StartCoroutine(GetGlobalScoresRequest(UpdateTextFields, ScoreType.Lap));
-            }
+            // Request global score information from the server, and provide a callback for when we get that information.
+            StartCoroutine(GetGlobalScoresRequest(SaveData, ScoreType.Track));
+            StartCoroutine(GetGlobalScoresRequest(SaveData, ScoreType.Lap));
         }
 
         public enum ScoreType
@@ -126,7 +112,7 @@ namespace _Scripts.Managers
                 case UnityWebRequest.Result.Success:
                     string data = req.downloadHandler.text;
                     // Query succeeded. Convert from JSON string to objects, and then execute the callback.
-                    ScoreEntryList entryList = JsonUtility.FromJson<ScoreEntryList>("{\"entries\": " + data + "}");
+                    HighScoreCollection entryList = JsonUtility.FromJson<HighScoreCollection>("{\"entries\": " + data + "}");
                     callback.Invoke(entryList, scoreType);
                     break;
                 case UnityWebRequest.Result.InProgress:
@@ -149,44 +135,19 @@ namespace _Scripts.Managers
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        // Update the text fields with the information that we have received from the leaderboard server.
-        private void UpdateTextFields(ScoreEntryList entryList, ScoreType scoreType)
-        {
-            StringBuilder nameBuilder = new StringBuilder();
-            StringBuilder scoreBuilder = new StringBuilder();
-
-            for (int i = 0; i < maximumEntries && i < entryList.entries.Length; ++i)
-            {
-                nameBuilder.AppendLine(entryList.entries[i].user);
-                scoreBuilder.AppendLine(entryList.entries[i].score.ToString());
-            }
-            
-            if (scoreType == ScoreType.Track)
-            {
-                nameColumnTrack.text = nameBuilder.ToString();
-                scoreColumnTrack.text = scoreBuilder.ToString();
-            }
-            else
-            {
-                nameColumnLab.text = nameBuilder.ToString();
-                scoreColumnLab.text = scoreBuilder.ToString(); 
-            }
-        }
     }
 
 // Class objects for JSON deserialization.
-
     [Serializable]
-    public class ScoreEntryList
+    public struct HighScoreCollection
     {
-        public ScoreEntry[] entries;
+        public HighScore[] highScores;
     }
-
+    
     [Serializable]
-    public class ScoreEntry
+    public struct HighScore
     {
-        public string user;
-        public int score;
+        public string name;
+        public float timeSeconds;
     }
 }
