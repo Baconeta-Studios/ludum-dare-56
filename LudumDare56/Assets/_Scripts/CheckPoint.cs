@@ -14,7 +14,6 @@ namespace _Scripts
                 var racer = collision.transform.parent.GetComponent<RacerBase>();
                 if (racer)
                 {
-                    Debug.Log($"Racer Crossed Checkpoint: {racer.name}");
                     OnRacerCrossCheckPoint?.Invoke(racer);
                 }
             }

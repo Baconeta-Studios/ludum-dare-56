@@ -8,8 +8,11 @@ namespace _Scripts.Managers
 {
     public class TrackPositionManager : MonoBehaviour
     {
-        private RacerProgress playerRacer;
-        private RacerProgress[] otherRacers;
+        private RacerProgress player;
+        private List<RacerProgress> otherRacers;
+        
+        public static event Action<int> OnPlayerRankingChanged;
+        public static event Action<int> OnPlayerLapCompleted;
         
         private void Start()
         {
@@ -18,53 +21,94 @@ namespace _Scripts.Managers
             // Find and extract the player racer from the list of racers.
             foreach (var racerPlayer in racers.Where(racer => racer.GetType() == typeof(RacerPlayer)))
             {
-                this.playerRacer = new RacerProgress((RacerPlayer) racerPlayer);
+                this.player = new RacerProgress((RacerPlayer) racerPlayer);
                 racers.Remove(racerPlayer);
                 break;
             }
             
             // Save other racers, they'll all be AI.
-            for (int i = 0; i < racers.Count; i++)
-            {
-                otherRacers = new RacerProgress[racers.Count];
-                otherRacers[i] = new RacerProgress((RacerAi) racers[i]);
-            }
+            otherRacers = racers.ToList().ConvertAll(racer => new RacerProgress(racer));
         }
         
-        public int GetPlayerPosition() {
-            List<RacerProgress> li = otherRacers.ToList();
-            li.Add(playerRacer);
+        private void OnEnable()
+        {
+            FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
+        }
+
+        private void OnDisable()
+        {
+            FinishLine.OnRacerCrossFinishLine -= HandleLapEndEvent;
+        }
+        
+        private void HandleLapEndEvent(RacerBase racer)
+        {
+            if (racer.GetType() == typeof(RacerPlayer))
+            {
+                player.IncrementLapsCompleted();
+                OnPlayerLapCompleted?.Invoke(player.GetCurrentLap());
+            }
+            else
+            {
+                foreach (var aiRacer in otherRacers.Where(aiRacer => aiRacer.Racer.Equals(racer)))
+                {
+                    aiRacer.IncrementLapsCompleted();
+                    break;
+                }
+            }
+        }
+
+        private void Update()
+        {
+            UpdatePlayerRanking();
+        }
+        
+        /// <summary>
+        /// Calculates the ranking that the player is in, relative to other racers. e.g. 1st, 3rd.
+        /// Broadcasts the ranking via OnPlayerRankingChanged.
+        /// </summary>
+        private void UpdatePlayerRanking() {
+            // Ensure that our data is fresh.
+            player.UpdateLapProgress();
+            otherRacers.ForEach(racer => racer.UpdateLapProgress());
+            
+            // Make the ranking calculation.
+            var li = new List<RacerProgress>(otherRacers) { player };
             li.Sort();
-            return li.IndexOf(playerRacer) + 1;
+            OnPlayerRankingChanged?.Invoke(li.IndexOf(player) + 1);
         }
     }
     
     public class RacerProgress : IComparable<RacerProgress>
     {
-        private RacerBase racer;
-        private int lapsCompleted;
+        public readonly RacerBase Racer;
+        private int currentLap;
         private float lapProgress;
 
         public RacerProgress(RacerBase racer)
         {
-            this.racer = racer;
-            lapsCompleted = 0;
+            this.Racer = racer;
+            currentLap = 0;
             lapProgress = 0;
         }
-
+        
         public void IncrementLapsCompleted()
         {
-            lapsCompleted++;
+            currentLap++;
         }
 
-        public void UpdateLapProgress(float progress)
+        public void UpdateLapProgress()
         {
-            this.lapProgress = progress;
+            lapProgress = Racer.DistanceAlongTrack;
+        }
+
+        public int GetCurrentLap()
+        {
+            return currentLap;
         }
         
-        private float GetRaceProgress()
+        public float GetRaceProgress()
         {
-            return (lapsCompleted * 1.0F) + lapProgress;
+            return GetCurrentLap() + lapProgress;
         }
         
         public int CompareTo(RacerProgress other)

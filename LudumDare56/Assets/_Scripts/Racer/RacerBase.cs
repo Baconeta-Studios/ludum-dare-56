@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using _Scripts.Cards;
 using UnityEngine;
 
 namespace _Scripts.Racer
@@ -245,6 +245,17 @@ namespace _Scripts.Racer
         {
             yield return new WaitForSeconds(1f);
             collider2D.enabled = true;
+        }
+
+        protected bool Equals(RacerBase other)
+        {
+            if (this.name == null || other.name == null) throw new Exception("racerNames are null");
+            return this.name.Equals(other.name);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.name.GetHashCode();
         }
     }
 }

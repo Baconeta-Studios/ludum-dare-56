@@ -7,6 +7,7 @@ public class SabotageCard : CardBase
 
     protected void Start()
     {
+        // TODO will need a reference to the racer who played it so we can get a location to place the sabotage
         sabotageEngine = GetComponent<SabotageEngine>();
     }
 
