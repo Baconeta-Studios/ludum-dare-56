@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using _Scripts.Cards;
 using UnityEngine;
 
 namespace _Scripts.Racer

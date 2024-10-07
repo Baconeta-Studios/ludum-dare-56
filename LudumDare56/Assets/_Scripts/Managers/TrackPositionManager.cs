@@ -51,7 +51,7 @@ namespace _Scripts.Managers
             if (racer.GetType() == typeof(RacerPlayer))
             {
                 player.IncrementLapsCompleted();
-                OnPlayerLapCompleted?.Invoke((int) Math.Round(player.GetRaceProgress()));
+                OnPlayerLapCompleted?.Invoke(player.GetCurrentLap());
             }
             else
             {
@@ -72,35 +72,39 @@ namespace _Scripts.Managers
             li.Sort();
             return li.IndexOf(player) + 1;
         }
-
     }
     
     public class RacerProgress : IComparable<RacerProgress>
     {
         public readonly RacerBase Racer;
-        private int lapsCompleted;
+        private int currentLap;
         private float lapProgress;
 
         public RacerProgress(RacerBase racer)
         {
             this.Racer = racer;
-            lapsCompleted = 0;
+            currentLap = 0;
             lapProgress = 0;
         }
         
         public void IncrementLapsCompleted()
         {
-            lapsCompleted++;
+            currentLap++;
         }
 
-        public void UpdateLapProgress(float progress)
+        public void UpdateLapProgress()
         {
-            lapProgress = progress;
+            lapProgress = Racer.DistanceAlongTrack;
+        }
+
+        public int GetCurrentLap()
+        {
+            return currentLap;
         }
         
         public float GetRaceProgress()
         {
-            return (lapsCompleted * 1.0F) + lapProgress;
+            return GetCurrentLap() + lapProgress;
         }
         
         public int CompareTo(RacerProgress other)
