@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Managers;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class HighScoreTab : MonoBehaviour
 {
@@ -17,13 +15,6 @@ public class HighScoreTab : MonoBehaviour
 
     public HighScoreType currentlyShowing;
     
-    [Serializable]
-    public struct HighScoreNewEntry
-    {
-        public string name;
-        public int timeSeconds;
-
-    }
     public TextMeshProUGUI title;
     public string lapTimeTitle;
     public string raceTimeTitle;
@@ -41,7 +32,7 @@ public class HighScoreTab : MonoBehaviour
         entries.Clear();
         for (int i = 0; i < highScoreContainer.childCount; i++)
         {
-            entries.Add(highScoreContainer.GetChild(i).GetComponent<global::HighScoreEntry>());
+            entries.Add(highScoreContainer.GetChild(i).GetComponent<HighScoreEntry>());
         }
         for(int i = 0; i < entries.Count; i++)
         {
@@ -53,10 +44,7 @@ public class HighScoreTab : MonoBehaviour
     {
         currentlyShowing = HighScoreType.RaceTimes;
         // Update high scores from server's data.
-        // @james
-        // highscoreEntires = new List<HighScoreNewEntry>()
-        // foreach entry > entries.add(new HighScoreNewEntry(name, timeSecondsInt))
-        // UpdateHighScores(highscoreEntires)
+        UpdateHighScores(ScoreServerManager.Instance.trackData);
         title.text = raceTimeTitle;
 
     }
@@ -64,23 +52,21 @@ public class HighScoreTab : MonoBehaviour
     public void ShowLapTimes()
     {
         currentlyShowing = HighScoreType.LapTimes;
-        // @james
-        // highscoreEntires = new List<HighScoreNewEntry>()
-        // foreach entry > entries.add(new HighScoreNewEntry(name, timeSecondsInt))
-        // UpdateHighScores(highscoreEntries)
+        // Update high scores from server's data.
+        UpdateHighScores(ScoreServerManager.Instance.lapData);
         title.text = lapTimeTitle;
     }
 
-    public void UpdateHighScores(HighScoreNewEntry[] highScores)
+    public void UpdateHighScores(HighScoreCollection collection)
     {
         // Go through each entry
         for (int i = 0; i < entries.Count; i++)
         {
             // if the high score exists for this entry
-            if (i < highScores.Length)
+            if (i < collection.highScores.Length)
             {
-                entries[i].SetName(highScores[i].name);
-                entries[i].SetTime(highScores[i].timeSeconds);
+                entries[i].SetName(collection.highScores[i].name);
+                entries[i].SetTime(collection.highScores[i].timeSeconds);
             }
             
         }
