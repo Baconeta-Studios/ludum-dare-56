@@ -76,7 +76,7 @@ namespace _Scripts.Managers
         };
         
         // Post a user's score to the leaderboard server.
-        public void SubmitScore(ScoreType scoreType, string user, string score)
+        public void SubmitScore(ScoreType scoreType, string user, float score)
         {
             
             if (user == default)
@@ -94,7 +94,7 @@ namespace _Scripts.Managers
             StartCoroutine(SubmitScoreCoroutine(scoreType, user, score));
         }
 
-        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, string score)
+        private static IEnumerator SubmitScoreCoroutine(ScoreType scoreType, string user, float score)
         {
             string uri = scoreType == ScoreType.Track ? SubmitTrackScoreUri : SubmitLapScoreUri;
             using UnityWebRequest ping = UnityWebRequest.PostWwwForm(string.Format(uri, user, score), "");
