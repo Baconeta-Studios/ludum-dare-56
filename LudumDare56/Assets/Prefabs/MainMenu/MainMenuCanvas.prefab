@@ -2130,6 +2130,44 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3990700252138301677}
     m_Modifications:
+    - target: {fileID: 3554711144702388621, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_text
+      value: 'Producer
+
+        Programmer
+
+        Programmer
+
+        Audio Engineer
+
+        Graphic
+        Designer/Artist
+
+        Game Artist
+
+        Environment Artist
+
+        Concept
+        Artist
+
+        Head Chef'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554711144702388621, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554711144702388621, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_margin.x
+      value: -10.1471405
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554711144702388621, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_margin.z
+      value: 10.147156
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554711144702388621, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 6288888748768918118, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2209,6 +2247,38 @@ PrefabInstance:
     - target: {fileID: 6288888748768918118, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926410621265479622, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_text
+      value: 'Joshua Villgren
+
+        Sabrina Cooke
+
+        James Coburn
+
+        Jakob
+        Eriksson
+
+        Veera Villgren
+
+        Alexis Moor
+
+        Ty Wiley
+
+        Mcarty
+        Hudson
+
+        Luke Chandler
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926410621265479622, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926410621265479622, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8348675244889975415, guid: d51edf5a2dd30f94485c95c0cfaf33d1, type: 3}
       propertyPath: m_Name
