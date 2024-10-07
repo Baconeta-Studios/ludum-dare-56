@@ -168,6 +168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   cardImage: {fileID: 6586780024575177318}
+  playCardSound: {fileID: 8300000, guid: 1bdf8b43caa5a1c419ccd6ec58311664, type: 3}
+  playCardVolume: 1
+  pickupCardSound: {fileID: 8300000, guid: 249c9b88a55a61a46b3caa1ff16474c1, type: 3}
+  pickupCardVolume: 1
+  discardCardSound: {fileID: 8300000, guid: 312341bf1f91ecf4d87d1d479412b67a, type: 3}
+  discardCardVolume: 1
 --- !u!114 &7391116151936823074
 MonoBehaviour:
   m_ObjectHideFlags: 0
