@@ -20,7 +20,7 @@ public class HighScoreEntry : MonoBehaviour
         nameTxt.text = entryName.Substring(0, stringLimit);
     }
 
-    public void SetTime(float time)
+    public void SetTime(int time)
     {
         timeTxt.text = StringUtils.ConvertFloatToMinutesSecondsMilliseconds(time, ":");
     }

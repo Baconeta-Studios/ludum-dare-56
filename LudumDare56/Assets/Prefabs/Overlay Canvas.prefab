@@ -298,6 +298,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0a1ae5875609c40a681d816e67e7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4453295923015741367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4329917526224113208, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+  m_PrefabInstance: {fileID: 133907325250429327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6786027527754570744 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6915114592876804727, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
@@ -589,6 +594,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1972456071198736180, guid: b7e870dcc99133244a8dec16443fa39e, type: 3}
   m_PrefabInstance: {fileID: 521676768144207093}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7860214806144089021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7649445301533857608, guid: b7e870dcc99133244a8dec16443fa39e, type: 3}
+  m_PrefabInstance: {fileID: 521676768144207093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4484943698104902998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -806,6 +816,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -354.89026
       objectReference: {fileID: 0}
+    - target: {fileID: 469088598349678431, guid: f1f77dbbca36c684898c6cab79263432, type: 3}
+      propertyPath: gameplayUIContainer
+      value: 
+      objectReference: {fileID: 4453295923015741367}
+    - target: {fileID: 469088598349678431, guid: f1f77dbbca36c684898c6cab79263432, type: 3}
+      propertyPath: raceInfoUIContainer
+      value: 
+      objectReference: {fileID: 7860214806144089021}
     - target: {fileID: 897201195809408907, guid: f1f77dbbca36c684898c6cab79263432, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

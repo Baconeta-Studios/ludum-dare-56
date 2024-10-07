@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class StringUtils
 {
-    public static string ConvertFloatToMinutesSecondsMilliseconds(float timeSeconds, string separator)
+    public static string ConvertFloatToMinutesSecondsMilliseconds(int timeCentiseconds, string separator)
     {
-        int minutes = Mathf.FloorToInt(timeSeconds / 60);
-        int seconds = Mathf.FloorToInt(timeSeconds - minutes * 60);
-        int milliseconds = Mathf.CeilToInt((timeSeconds * 100) % 100);
+        int totalSeconds = timeCentiseconds / 100;
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds - (minutes * 60);
+        int milliseconds = timeCentiseconds % 100;
         
         return $"{minutes:D2}{separator}{seconds:D2}{separator}{milliseconds:D2}";
     }

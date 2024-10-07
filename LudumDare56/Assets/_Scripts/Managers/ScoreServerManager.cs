@@ -178,6 +178,6 @@ namespace _Scripts.Managers
         // user Name
         public string user;
         // Time seconds
-        public float score;
+        public int score;
     }
 }

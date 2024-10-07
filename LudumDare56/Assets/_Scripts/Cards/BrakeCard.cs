@@ -13,6 +13,7 @@ public class BrakeCard : CardBase
 
     public override void UseCard()
     {
+        associatedDeck.owner.GetComponent<BoostComponent>().EndOverride(true);
         if (bc == null)
         {
             bc = associatedDeck.owner.GetComponent<BrakeComponent>();

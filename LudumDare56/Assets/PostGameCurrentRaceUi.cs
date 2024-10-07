@@ -17,13 +17,14 @@ public class PostGameCurrentRaceUi : MonoBehaviour
     {
         // fetch details
 
+        var gtm = GameTimeManager.Instance;
         UpdateDetails("Rustle",
             TrackPositionManager.Instance.playerPlacing,
-            GameTimeManager.Instance.totalRaceTimeSoFar,
-            GameTimeManager.Instance.fastestLap);
+            GameTimeManager.SecondsToCentiseconds(gtm.totalRaceTimeSoFar),
+            GameTimeManager.SecondsToCentiseconds(gtm.fastestLap));
     }
     
-    private void UpdateDetails(string playerName, int placing, float raceTime, float bestLap)
+    private void UpdateDetails(string playerName, int placing, int raceTime, int bestLap)
     {
         playerNameTmp.text = playerName;
         placingTmp.text = StringUtils.FormatPlacing(placing, placingSuffixSize);

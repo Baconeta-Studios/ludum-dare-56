@@ -20,10 +20,10 @@ namespace _Scripts.Managers
         
         private float lastTimeFinishLineCrossed; // Used to calculate lap times.
         
-        public static event Action<float> OnRaceTimeChanged;
-        public static event Action<float> OnLapTimeChanged;
-        public static event Action<float> OnFastestLapTimeChanged;
-        public static event Action<float, float> OnRaceFinished;
+        public static event Action<int> OnRaceTimeChanged;
+        public static event Action<int> OnLapTimeChanged;
+        public static event Action<int> OnFastestLapTimeChanged;
+        public static event Action<int, int> OnRaceFinished;
         
         public void StartRaceTimer()
         {
@@ -41,7 +41,9 @@ namespace _Scripts.Managers
         {
             HandleLapEndEvent(FindFirstObjectByType<RacerPlayer>());
             isRacing = false;
-            OnRaceFinished?.Invoke(totalRaceTimeSoFar, totalLapTimeSoFar);
+            int raceTime = SecondsToCentiseconds(totalRaceTimeSoFar);
+            int lapTime = SecondsToCentiseconds(totalLapTimeSoFar);
+            OnRaceFinished?.Invoke(raceTime, lapTime);
             Debug.Log($"Fastest Lap: {fastestLap}\nRace Time: {totalRaceTimeSoFar}");
         }
 
@@ -65,13 +67,18 @@ namespace _Scripts.Managers
             {
                 fastestLap = totalLapTimeSoFar;
                 fastestLapExists = true;
-                OnFastestLapTimeChanged?.Invoke(fastestLap);
+                OnFastestLapTimeChanged?.Invoke(SecondsToCentiseconds(fastestLap));
             }
 
             // Reset lap timer.
             lastTimeFinishLineCrossed = totalRaceTimeSoFar;
         }
 
+        public static int SecondsToCentiseconds(float seconds)
+        {
+            return (int)(seconds * 100);
+        }
+        
         private void OnEnable()
         {
             FinishLine.OnRacerCrossFinishLine += HandleLapEndEvent;
@@ -91,8 +98,8 @@ namespace _Scripts.Managers
             
             totalRaceTimeSoFar += Time.deltaTime;
             totalLapTimeSoFar = totalRaceTimeSoFar - lastTimeFinishLineCrossed;
-            OnRaceTimeChanged?.Invoke(totalRaceTimeSoFar);
-            OnLapTimeChanged?.Invoke(totalLapTimeSoFar);
+            OnRaceTimeChanged?.Invoke(SecondsToCentiseconds(totalRaceTimeSoFar));
+            OnLapTimeChanged?.Invoke(SecondsToCentiseconds(totalLapTimeSoFar));
         }
     }
 }

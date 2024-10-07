@@ -15,18 +15,18 @@ namespace _Scripts.Managers
             {
                 return playerUsername;
             }
-            
+
             // Change the return if you'd desire a generated name instead of default.
             return defaultUsername;
             
         }
-        private static void PrepareScoreSubmission(float trackTime, float bestLapTime)
+        private static void PrepareScoreSubmission(int trackTime, int bestLapTime)
         {
             var ssm = ScoreServerManager.Instance;
             ssm.SubmitScore(ScoreServerManager.ScoreType.Track, GetPlayerUsername(), trackTime);
             ssm.SubmitScore(ScoreServerManager.ScoreType.Lap, GetPlayerUsername(), bestLapTime);
         }
-        
+
         private void OnEnable()
         {
             GameTimeManager.OnRaceFinished += PrepareScoreSubmission;

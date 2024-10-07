@@ -105,7 +105,7 @@ public class HighScoreTab : MonoBehaviour
             else
             {
                 entries[i].SetName("_________");
-                entries[i].SetTime(0f);
+                entries[i].SetTime(0);
             }
         }
     }

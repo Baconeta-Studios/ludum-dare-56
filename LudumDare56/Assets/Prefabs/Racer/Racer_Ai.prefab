@@ -252,7 +252,7 @@ MonoBehaviour:
   jumpComponent: {fileID: 424925883491123699}
   sabotage: {fileID: 4081549180851081755}
   triggerCard: {fileID: 0}
-  startingHand: 4
+  startingHand: 2
   distanceAlongTrack: 0
   currentSpeed: 0
   maxSpeed: 25

@@ -1,6 +1,6 @@
 public class BrakeComponent : SpeedOverrideComponent
 {
-    protected override void EndOverride(bool forceFinish = false)
+    public override void EndOverride(bool forceFinish = false)
     {
         base.EndOverride(forceFinish);
 
