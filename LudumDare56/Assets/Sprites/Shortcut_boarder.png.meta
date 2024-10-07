@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shortcut_boarder_0: -2095721152522169935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

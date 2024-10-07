@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hop_boarder_0: 2009159140553898089
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

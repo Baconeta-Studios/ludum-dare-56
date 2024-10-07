@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Zoom_boarder_0: -5754703186250931684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

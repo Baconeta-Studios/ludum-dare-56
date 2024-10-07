@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Leaf Pile Sabotage Transparent FinalFinal_0: -5066834365522011165
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
