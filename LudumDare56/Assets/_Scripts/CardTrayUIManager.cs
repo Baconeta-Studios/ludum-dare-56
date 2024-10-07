@@ -112,7 +112,7 @@ namespace _Scripts
         public void AddCardToUI(GameObject card)
         {
             var newCard = Instantiate(card, gameObject.transform, false);
-            newCard.transform.localScale = Vector3.one;
+            newCard.transform.localScale = Vector3.one * 1.3f;
             newCard.GetComponent<CardBase>().Initialize(playerCardDeck);
         }
         
