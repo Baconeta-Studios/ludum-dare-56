@@ -10,6 +10,7 @@ namespace _Scripts.Racer
         protected Track track;
         private Rigidbody2D racerRigidbody2d;
         private Collider2D collider2D;
+        protected float scaledFixedDeltaTime;
 
         [Header("Card Components")]
         [SerializeField] protected CardDeck deck;
@@ -128,6 +129,8 @@ namespace _Scripts.Racer
 
         private void MovementUpdate()
         {
+            scaledFixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
+            
             // Whiskers
             whiskerFront = transform.up * forwardsWhiskerLength;
             // Setup Whisker Right
@@ -137,21 +140,21 @@ namespace _Scripts.Racer
             Vector3 sideWhiskerDirectionLeft = Vector3.RotateTowards(transform.up, transform.right * -1, Mathf.Deg2Rad * sideWhiskerAngle, 0);
             whiskerLeft = sideWhiskerDirectionLeft * sideWhiskerLength;
 
-            AlignWithTrack();
             CheckSideWhisker(sideWhiskerDirectionLeft, -1);
             CheckSideWhisker(sideWhiskerDirectionRight, 1);
-
+            AlignWithTrack();
+            
             if (sabotage.IsAffectingRacer && currentSpeed > sabotage.MaxSpeed)
             {
-                currentSpeed -= sabotage.Deceleration * Time.fixedDeltaTime;
+                currentSpeed -= sabotage.Deceleration * scaledFixedDeltaTime;
             }
             else if (brake.IsActive && currentSpeed > brake.MaxSpeed)
             {
-                currentSpeed -= brake.Deceleration * Time.fixedDeltaTime;
+                currentSpeed -= brake.Deceleration * scaledFixedDeltaTime;
             }
             else if (boost.IsFinishing) // Boost - Finished, so decelerate to max speed.
             {
-                currentSpeed -= boost.Deceleration * Time.fixedDeltaTime;
+                currentSpeed -= boost.Deceleration * scaledFixedDeltaTime;
                 if (currentSpeed <= maxSpeed)
                 {
                     boost.OverrideFinished();
@@ -164,37 +167,21 @@ namespace _Scripts.Racer
 
                 if (currentSpeed <= (isBoosting ? boost.MaxSpeed : maxSpeed))
                 {
-                    currentSpeed += accelerationChange * Time.fixedDeltaTime;
+                    currentSpeed += accelerationChange * scaledFixedDeltaTime;
                 }
             }
-
-            // Forwards avoidance.
-            var hits = Physics2D.RaycastAll(transform.position, transform.position + whiskerFront.normalized, whiskerFront.magnitude);
-            foreach (var hit in hits)
-            {
-                if (hit.transform.CompareTag("RacerAi"))
-                {
-                    // Hit a racer in front of us
-                    // Check left/right whiskers
-                    if (!CheckForUnobstructedSideWhisker(sideWhiskerDirectionLeft, -1))
-                    {
-                        // First side is obstructed, check other side.
-                        CheckForUnobstructedSideWhisker(sideWhiskerDirectionLeft, -1);
-                    }
-                }
-                    
-            }
+            
             // Execute the move and set the cart to look in the direction of movement.
             float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
 
-            racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * Time.fixedDeltaTime * Time.timeScale), angle - 90f);
+            racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * scaledFixedDeltaTime), angle - 90f);
 
         }
 
         private void AlignWithTrack()
         {
             currentHeading = Vector3.RotateTowards(currentHeading, tangentOnTrackSpline,
-                (Mathf.Deg2Rad * alignmentTurnAnglePerSecond) * Time.fixedDeltaTime,
+                (Mathf.Deg2Rad * alignmentTurnAnglePerSecond) * scaledFixedDeltaTime,
                 0);
         }
 
@@ -209,7 +196,7 @@ namespace _Scripts.Racer
                     {
                         // Collided with the track border.
                         currentHeading = Vector3.RotateTowards(currentHeading, transform.right * -side,
-                            (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
+                            (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * scaledFixedDeltaTime,
                             0);
                         return;
                     }
@@ -237,7 +224,7 @@ namespace _Scripts.Racer
             if (unobstructed)
             {
                 currentHeading = Vector3.RotateTowards(currentHeading, transform.right * side,
-                    (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
+                    (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * scaledFixedDeltaTime,
                     0);
             }
 
@@ -311,7 +298,7 @@ namespace _Scripts.Racer
             Gizmos.DrawLine(transform.position, transform.position + (currentSpeed * currentHeading));
 
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + whiskerFront);
+            Gizmos.DrawLine(transform.position, transform.position + transform.up * forwardsWhiskerLength);
             Gizmos.DrawLine(transform.position , transform.position + whiskerRight);
             Gizmos.DrawLine(transform.position, transform.position + whiskerLeft);
         }
