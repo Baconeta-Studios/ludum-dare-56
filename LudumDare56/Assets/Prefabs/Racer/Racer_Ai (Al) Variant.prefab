@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: durationOfSlow
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4997455294738752203, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.96
+      objectReference: {fileID: 0}
     - target: {fileID: 5599356591692427296, guid: c748840ae4e023a4fb4adfa53e60a4b3, type: 3}
       propertyPath: m_Name
       value: Racer_Ai (Al) Variant
