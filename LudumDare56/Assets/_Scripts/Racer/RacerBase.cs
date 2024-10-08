@@ -168,6 +168,22 @@ namespace _Scripts.Racer
                 }
             }
 
+            // Forwards avoidance.
+            var hits = Physics2D.RaycastAll(transform.position, transform.position + whiskerFront.normalized, whiskerFront.magnitude);
+            foreach (var hit in hits)
+            {
+                if (hit.transform.CompareTag("RacerAi"))
+                {
+                    // Hit a racer in front of us
+                    // Check left/right whiskers
+                    if (!CheckForUnobstructedSideWhisker(sideWhiskerDirectionLeft, -1))
+                    {
+                        // First side is obstructed, check other side.
+                        CheckForUnobstructedSideWhisker(sideWhiskerDirectionLeft, -1);
+                    }
+                }
+                    
+            }
             // Execute the move and set the cart to look in the direction of movement.
             float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
 
@@ -195,10 +211,38 @@ namespace _Scripts.Racer
                         currentHeading = Vector3.RotateTowards(currentHeading, transform.right * -side,
                             (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
                             0);
+                        return;
+                    }
+                }
+            }
+        }
+        
+        private bool CheckForUnobstructedSideWhisker(Vector3 whiskerDirection, int side)
+        {
+            bool unobstructed = true;
+            var hits = Physics2D.RaycastAll(transform.position, whiskerDirection, sideWhiskerLength);
+            if (hits.Length > 0)
+            {
+                foreach (var hit in hits)
+                {
+                    if (hit.transform.CompareTag("Track")) // Potentially add tag check for RacerAi
+                    {
+                        // Collided with the track border.
+                        unobstructed = false;
                         break;
                     }
                 }
             }
+
+            if (unobstructed)
+            {
+                currentHeading = Vector3.RotateTowards(currentHeading, transform.right * side,
+                    (Mathf.Deg2Rad * sideWhiskerTurnAnglePerSecond) * Time.fixedDeltaTime,
+                    0);
+            }
+
+            return unobstructed;
+
         }
 
         protected virtual void OnTriggerExit2D(Collider2D collision)

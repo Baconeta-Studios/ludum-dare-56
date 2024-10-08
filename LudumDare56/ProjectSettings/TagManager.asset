@@ -9,6 +9,7 @@ TagManager:
   - Shortcut
   - ShortcutPrep
   - SabotageObject
+  - RacerAi
   layers:
   - Default
   - TransparentFX
