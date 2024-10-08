@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sabotageObjPrefabRef: {fileID: 4118542699457558538, guid: 1a3ba6ca265fe9b4a8a64642bfd23c8a, type: 3}
-  durationOfSlow: 1.25
+  durationOfSlow: 0.5
   maxSpeedDuring: 3
   isAffectingRacer: 0
-  deceleration: 20
+  deceleration: 30
   sabotageSpawnPos: {fileID: 1259465432681718334}
 --- !u!114 &5892293710849720582
 MonoBehaviour:
