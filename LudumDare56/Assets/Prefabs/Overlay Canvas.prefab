@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 04ddc1ac9947b0648a7f97d8ab3996e4, type: 3}
+    - target: {fileID: 4234251237509750858, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_Color.a
+      value: 0.89411765
+      objectReference: {fileID: 0}
     - target: {fileID: 4329917526224113208, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: m_Name
       value: CardTrayUI
@@ -269,6 +273,10 @@ PrefabInstance:
     - target: {fileID: 7204495493607337186, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: dotWidth
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617830988058924610, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8316949892681361604, guid: 20177c4c94cf9ea418ce15390fb81797, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1498,7 +1506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368079266116740168, guid: f1f77dbbca36c684898c6cab79263432, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -11.115021
+      value: -11.11499
       objectReference: {fileID: 0}
     - target: {fileID: 6382475958200770986, guid: f1f77dbbca36c684898c6cab79263432, type: 3}
       propertyPath: m_AnchorMax.y
