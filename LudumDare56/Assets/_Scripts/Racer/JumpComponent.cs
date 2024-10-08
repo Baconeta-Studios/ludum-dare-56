@@ -38,13 +38,13 @@ public class JumpComponent : MonoBehaviour
             {
                 if (hit.collider.CompareTag("SabotageObject"))
                 {
-                    StartCoroutine(EJump(Vector2.Distance(hit.transform.position, transform.position)));
+                    StartCoroutine(EJump(Vector2.Distance(hit.transform.position, transform.position), hit.collider));
                 }
             }
         }
     }
 
-    private IEnumerator EJump(float distanceToJump)
+    private IEnumerator EJump(float distanceToJump, Collider2D hitCollider)
     {
         isActive = false;
         isJumping = true;
@@ -55,13 +55,15 @@ public class JumpComponent : MonoBehaviour
         }
 
         racer.DisableCollision();
-        float timeToClearJump = (distanceToJump / racer.CurrentSpeed) * 2;
+        float timeToReachJump = distanceToJump / racer.CurrentSpeed;
+        float timeToClearObstacle = (4 / racer.CurrentSpeed) + ((CircleCollider2D)hitCollider).radius * hitCollider.transform.localScale.magnitude / racer.CurrentSpeed;
+        float timeToEndJump = timeToReachJump + timeToClearObstacle;
         float t = 0;
         Vector3 originalSize = transform.localScale;
         
-        while (t < timeToClearJump)
+        while (t < timeToEndJump)
         {
-            transform.localScale = Vector3.Lerp(originalSize, originalSize * jumpScalePercent, jumpAnimationCurve.Evaluate(t / timeToClearJump));
+            transform.localScale = Vector3.Lerp(originalSize, originalSize * jumpScalePercent, jumpAnimationCurve.Evaluate(t / timeToEndJump));
             t += Time.deltaTime;
             yield return null;
         }

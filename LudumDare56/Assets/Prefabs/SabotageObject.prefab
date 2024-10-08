@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6288988055673557264}
   - component: {fileID: 1607778644498657923}
-  - component: {fileID: 5089581546643921638}
   - component: {fileID: 874665549999170820}
+  - component: {fileID: 7488499975199643349}
   m_Layer: 0
   m_Name: SabotageObject
   m_TagString: SabotageObject
@@ -88,8 +88,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5089581546643921638
-BoxCollider2D:
+--- !u!114 &874665549999170820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118542699457558538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84f3cace641846409c6e97240c83484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLifetimeSpanSeconds: 30
+--- !u!58 &7488499975199643349
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,28 +135,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.27703547, y: 0.024640083}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.23, y: 9.8}
-    newSize: {x: 9.23, y: 9.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 10.917381, y: 10.166189}
-  m_EdgeRadius: 0
---- !u!114 &874665549999170820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4118542699457558538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84f3cace641846409c6e97240c83484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startLifetimeSpanSeconds: 25
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 4.75
