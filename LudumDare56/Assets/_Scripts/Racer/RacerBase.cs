@@ -11,6 +11,7 @@ namespace _Scripts.Racer
         private Rigidbody2D racerRigidbody2d;
         private Collider2D collider2D;
         protected float scaledFixedDeltaTime;
+        private float respawnTimeRemaining;
 
         [Header("Card Components")]
         [SerializeField] protected CardDeck deck;
@@ -265,7 +266,7 @@ namespace _Scripts.Racer
 
             boost.RacerRespawned();
             brake.RacerRespawned();
-
+            
             yield return new WaitForSeconds(respawnStartDelay);
 
             if (positionOnTrackSpline == Vector3.zero)
@@ -282,9 +283,22 @@ namespace _Scripts.Racer
             currentHeading = transform.up;
             currentSpeed = 0f;
 
-            yield return new WaitForSeconds(respawnDuration);
+            respawnTimeRemaining = respawnDuration;
+            while (respawnTimeRemaining > 0)
+            {
+                // If the boost is used while respawning, immediately end the respawn for a recovery.
+                if (boost.IsActive)
+                {
+                    respawnTimeRemaining = 0;
+                }
+                respawnTimeRemaining -= Time.deltaTime;
+                yield return null;
+            }
+
+            respawnTimeRemaining = 0;
 
             isRespawning = false;
+            
             yield return null;
         }
 
