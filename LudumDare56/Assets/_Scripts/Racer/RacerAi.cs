@@ -161,6 +161,7 @@ public class RacerAi : RacerBase
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        base.OnTriggerEnter2D(collision);
         if (collision && collision.CompareTag("ShortcutPrep"))
         {
             TryUseCard<ShortcutCard>();
