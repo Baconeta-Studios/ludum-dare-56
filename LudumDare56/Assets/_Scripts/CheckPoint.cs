@@ -18,5 +18,13 @@ namespace _Scripts
                 }
             }
         }
+
+        public void JumpingRacerCrossedCheckpoint(RacerBase racer)
+        {
+            if (racer)
+            {
+                OnRacerCrossCheckPoint?.Invoke(racer);
+            }
+        }
     }
 }

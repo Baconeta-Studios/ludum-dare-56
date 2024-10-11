@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts;
 using _Scripts.Racer;
 using UnityEngine;
 
@@ -55,16 +56,22 @@ public class JumpComponent : MonoBehaviour
         }
 
         racer.DisableCollision();
+        
         float timeToReachJump = distanceToJump / racer.CurrentSpeed;
         float timeToClearObstacle = (4 / racer.CurrentSpeed) + ((CircleCollider2D)hitCollider).radius * hitCollider.transform.localScale.magnitude / racer.CurrentSpeed;
         float timeToEndJump = timeToReachJump + timeToClearObstacle;
         float t = 0;
         Vector3 originalSize = transform.localScale;
-        
+        bool hitCheckpointOrFinish = false;
         while (t < timeToEndJump)
         {
             transform.localScale = Vector3.Lerp(originalSize, originalSize * jumpScalePercent, jumpAnimationCurve.Evaluate(t / timeToEndJump));
             t += Time.deltaTime;
+
+            if (!hitCheckpointOrFinish)
+            {
+                hitCheckpointOrFinish = CheckForFinishOrCheckpoint();
+            }
             yield return null;
         }
 
@@ -73,6 +80,27 @@ public class JumpComponent : MonoBehaviour
         racer.EnableCollision();
         isJumping = false;
         yield return null;
+    }
+
+    private bool CheckForFinishOrCheckpoint()
+    {
+        // Band-aid for having no collision over finish line and checkpoints
+        var hits = Physics2D.OverlapBoxAll(transform.position, Vector2.one, 0);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Finish"))
+            {
+                hit.GetComponent<FinishLine>().JumpingRacerCrossedFinishLine(GetComponent<RacerBase>());
+                hit.GetComponent<CheckPoint>().JumpingRacerCrossedCheckpoint(GetComponent<RacerBase>());
+                return true;
+            }
+            else if (hit.CompareTag("Checkpoint"))
+            {
+                hit.GetComponent<CheckPoint>().JumpingRacerCrossedCheckpoint(GetComponent<RacerBase>());
+                return true;
+            }
+        }
+        return false;
     }
 
     private void OnDrawGizmosSelected()

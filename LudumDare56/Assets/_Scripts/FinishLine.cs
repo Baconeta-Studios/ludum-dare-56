@@ -17,4 +17,13 @@ public class FinishLine : MonoBehaviour
             }
         }
     }
+
+    public void JumpingRacerCrossedFinishLine(RacerBase racer)
+    {
+        if (racer)
+        {
+            Debug.Log($"Racer Crossed Finish Line: {racer.name}");
+            OnRacerCrossFinishLine?.Invoke(racer);
+        }
+    }
 }

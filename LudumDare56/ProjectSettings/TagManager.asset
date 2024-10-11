@@ -10,6 +10,7 @@ TagManager:
   - ShortcutPrep
   - SabotageObject
   - RacerAi
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
