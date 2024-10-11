@@ -100,7 +100,7 @@ namespace _Scripts.Racer
             {
                 return;
             }
-            if(!isRespawning && !shortcut.IsInShortcut && !jumpComponent.IsJumping && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth)
+            if(!isRespawning && !shortcut.IsInShortcut && !jumpComponent.IsJumping && Vector2.Distance(transform.position, positionOnTrackSpline) > track.TrackWidth / 2)
             {
                 // To far away from the center of the track (and not shortcutting). Lets respawn.
                 StartCoroutine(Respawn());
@@ -294,6 +294,7 @@ namespace _Scripts.Racer
                 {
                     respawnTimeRemaining = 0;
                 }
+                
                 respawnTimeRemaining -= Time.deltaTime;
                 yield return null;
             }

@@ -31,8 +31,17 @@ public class Track : MonoBehaviour
 
         if (trackSpline)
         {
+            // Evaluate position on the track
             Vector3 trackPosition = trackSpline.EvaluatePosition(positionOnTrackToShowWidth);
-            Gizmos.DrawLine(trackPosition + new Vector3(trackWidth/2,0,0), trackPosition + new Vector3(-trackWidth/2,0,0));
+        
+            // Evaluate tangent (direction) at the position
+            Vector3 trackTangent = trackSpline.EvaluateTangent(positionOnTrackToShowWidth);
+        
+            // Normalize tangent to get the direction
+            Vector3 trackRight = Vector3.Cross(trackTangent, Vector3.forward).normalized;
+        
+            // Draw line based on the tangent direction
+            Gizmos.DrawLine(trackPosition + trackRight * (trackWidth / 2), trackPosition - trackRight * (trackWidth / 2));
         }
 
     }
