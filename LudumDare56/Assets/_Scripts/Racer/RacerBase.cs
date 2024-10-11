@@ -178,7 +178,8 @@ namespace _Scripts.Racer
             // Execute the move and set the cart to look in the direction of movement.
             float angle = Mathf.Atan2(currentHeading.y, currentHeading.x) * Mathf.Rad2Deg;
 
-            racerRigidbody2d.MovePositionAndRotation(transform.position + currentHeading * (currentSpeed * scaledFixedDeltaTime), angle - 90f);
+            racerRigidbody2d.MovePosition(transform.position + currentHeading * (currentSpeed * scaledFixedDeltaTime));
+            racerRigidbody2d.MoveRotation(angle - 90f);
 
         }
 
