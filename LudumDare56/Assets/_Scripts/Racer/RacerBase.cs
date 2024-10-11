@@ -110,9 +110,12 @@ namespace _Scripts.Racer
 
         private void UpdateTrackPosition()
         {
-            distanceAlongTrack = track.GetDistanceToSpline(transform.position, out Vector3 positionOnSpline, out Vector3 tangentOnSpline);
-            positionOnTrackSpline = positionOnSpline;
-            tangentOnTrackSpline = tangentOnSpline.normalized;
+            if (!isRespawning)
+            {
+                distanceAlongTrack = track.GetDistanceToSpline(transform.position, out Vector3 positionOnSpline, out Vector3 tangentOnSpline);
+                positionOnTrackSpline = positionOnSpline;
+                tangentOnTrackSpline = tangentOnSpline.normalized;
+            }
         }
 
         private void FixedUpdate()
