@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2095721152522169935, guid: 1da4dfe64facb064a933a4fda864085f, type: 3}
+    - target: {fileID: 7818805357986110347, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_text
+      value: ACTIVE
+      objectReference: {fileID: 0}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: ShortcutCard
@@ -131,3 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useType: 1
   cardName: Shortcut
+  cardSound: {fileID: 0}
+  cardSoundVolume: 0.5

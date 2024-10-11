@@ -128,6 +128,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 4806686159077143660, guid: 1233df0b8fe59b243a7aec33bd60e1a8, type: 3}
+    - target: {fileID: 7818805357986110347, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_text
+      value: INSTANT
+      objectReference: {fileID: 0}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: BrakeCard

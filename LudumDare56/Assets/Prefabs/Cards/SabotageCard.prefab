@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 6505720495936728908, guid: a1eb3103ac456814eb2c01c00dd0247b, type: 3}
+    - target: {fileID: 7818805357986110347, guid: b38b806c50da86446a484000a105e386, type: 3}
+      propertyPath: m_text
+      value: INSTANT
+      objectReference: {fileID: 0}
     - target: {fileID: 8912767390299024613, guid: b38b806c50da86446a484000a105e386, type: 3}
       propertyPath: m_Name
       value: SabotageCard
